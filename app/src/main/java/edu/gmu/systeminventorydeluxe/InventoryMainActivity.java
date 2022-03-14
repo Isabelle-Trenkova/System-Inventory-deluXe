@@ -4,6 +4,10 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * This will be the main place inventory can viewed, keeping
+ * track of the inventory itself
+ */
 public class InventoryMainActivity extends AppCompatActivity {
 
     @Override
