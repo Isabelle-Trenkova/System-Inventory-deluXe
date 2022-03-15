@@ -35,7 +35,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_inventory);
+        setContentView(R.layout.activity_edit_inventoryView);
 
         define();
     }

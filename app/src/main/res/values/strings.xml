@@ -3,9 +3,5 @@
     <string name="inventory_name">Insert name of product here!</string>
     <string name="quant_of_item">Insert the quantity of your item here!</string>
     <string name="dynamic_message">Add Item</string>
-    <string name="very_long_string">jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjsddddddddddd
-    ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
-    ssssssssssssssssssssssssssssssssssssssssdj
-    ddddddddddddddddddddd d
-    ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</string>
+    <string name="recipe_string"> </string>
 </resources>
