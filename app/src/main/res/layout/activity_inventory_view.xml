@@ -7,23 +7,18 @@
 
     <!-- This is the grid view, which will allow us to add
     little icons of inventory showing each item individually and all together-->
-    <GridView
+    <ListView
         android:id="@+id/inventory_item_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp"
-        android:columnWidth="130dp"
-        android:gravity="center"
-        android:horizontalSpacing="8dp"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
 
-        android:verticalSpacing="8dp">
+        >
 
 
-    </GridView>
+    </ListView>
 
-    <!--There will be an error here when viewing design
+    <!--There may be an error here when viewing design
     view, it does not affect compilation. Leave it alone please <3
 
     This is the floating action button to add inventory items-->

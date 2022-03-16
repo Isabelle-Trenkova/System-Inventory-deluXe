@@ -1,6 +1,5 @@
 package edu.gmu.systeminventorydeluxe;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,8 +23,8 @@ import androidx.loader.content.Loader;
  * From any action that will edit an item all activity should be redirected
  * here and to the Activity_edit_inventory to actually edit an item
  */
-public class EditInventoryActivity extends AppCompatActivity implements
-        LoaderManager.LoaderCallbacks<Cursor>{
+public class EditInventoryActivity extends AppCompatActivity /*implements
+        LoaderManager.LoaderCallbacks<Cursor>*/{
 
     private TextView dynamicMessage;
     private EditText nameItem;
@@ -43,7 +42,10 @@ public class EditInventoryActivity extends AppCompatActivity implements
 
     //using intent class you can see if there had been any modifications
     //more specifically getIntent(); if it is null then it is a new product
-    private Uri inventoryItemStatus;
+
+    //NTS: see if this can be private later
+    public Uri inventoryItemStatus;
+
 
     /**
      * Upon new instnace;
@@ -52,20 +54,15 @@ public class EditInventoryActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_inventoryView);
+        setContentView(R.layout.activity_edit_inventory_view);
 
         define();
-
-
     }
-
 
     /**
      * Defines class fields
      */
     protected void define() {
-
-        //have a dynamic way to set text, figure out
 
         dynamicMessage = (TextView) findViewById(R.id.messageView);
         nameItem = (EditText) findViewById(R.id.name_item);
@@ -92,6 +89,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
      * in the grid view
      */
 
+    /*
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
@@ -107,4 +105,5 @@ public class EditInventoryActivity extends AppCompatActivity implements
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
 
     }
+    */
 }
