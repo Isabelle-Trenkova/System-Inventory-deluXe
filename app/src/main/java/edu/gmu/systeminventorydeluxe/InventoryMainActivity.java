@@ -98,7 +98,12 @@ public class InventoryMainActivity extends AppCompatActivity /*implements
                 startActivity(intent);
             }
         });
+
+
+        //add any more bottons in the inventory activity class here if need
     }
+
+
 
     /*
     @NonNull

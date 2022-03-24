@@ -1,11 +1,18 @@
 package edu.gmu.systeminventorydeluxe;
 
+import android.content.Intent;
+import android.content.CursorLoader;
+
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,12 +36,19 @@ public class EditInventoryActivity extends AppCompatActivity /*implements
     private TextView dynamicMessage;
     private EditText nameItem;
     private EditText itemQuantity;
+    private Button recipeButton;
     /**
      * item weight will be added in a little later
      */
     //private EditText itemWeight;
     private EditText itemDescription;
     private ImageButton productImage;
+
+    //********************************
+    /*********************************
+     * Add this functionality to the activity_edit_inventory
+     */
+    private Integer lowItemTreshold = 0;  //show be zero unless the user says otherwise
 
     //add recipe field right here and don't forget to include it in the
     //define() method
@@ -57,6 +71,7 @@ public class EditInventoryActivity extends AppCompatActivity /*implements
         setContentView(R.layout.activity_edit_inventory_view);
 
         define();
+        buttonHandler();
     }
 
     /**
@@ -69,10 +84,22 @@ public class EditInventoryActivity extends AppCompatActivity /*implements
         itemQuantity = (EditText) findViewById(R.id.quantity_item);
         itemDescription = (EditText) findViewById(R.id.decription_item);
         productImage = (ImageButton) findViewById(R.id.product_image);
+        recipeButton = (Button) findViewById(R.id.add_recipe_button);
 
-        inventoryItemStatus = ((getIntent()).getData());
+        //Since activies are being used they get switched by using
+        //intents, which can be nifty because he get get the data of
+        //that intent and if it is null then the message the is shown
+        //can change acordingly
 
-        if (inventoryItemStatus != null) {
+        //"The data to operate on, such as a person record in the contacts
+        // database, expressed as a Uri", from the android documentation page
+        //
+        //This can be expressed more simply, but for the sake of
+        //readability it makes more sense this way
+        inventoryItemStatus = (((Intent) getIntent()).getData());
+
+
+        if (inventoryItemStatus != null) { //it is not newly made
 
             dynamicMessage.setText("Edit Item");
         } else {
@@ -83,6 +110,21 @@ public class EditInventoryActivity extends AppCompatActivity /*implements
     }
 
 
+    protected void buttonHandler() {
+
+
+        recipeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //preforms some action
+                //show use intent to go to a new activity to get the recipe stuffs,
+                //then show integrate the information back in the
+                //database
+            }
+        });
+
+    }
     /**
      * Automatically generated loader methods
      * this will allow user defined objects to pop up
