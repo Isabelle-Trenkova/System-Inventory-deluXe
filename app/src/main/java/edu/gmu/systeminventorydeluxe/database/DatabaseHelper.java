@@ -10,40 +10,60 @@ import android.database.sqlite.SQLiteOpenHelper;
  * THe database helper class.
  * Its main purpose is to create and update the database
  */
-public class DbHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
 
     /**
      * Some sources:
+     *
+     *      General SQLite:
      *     //https://developer.android.com/training/data-storage/sqlite
+     *
+     *     SQLiteDatabase:
      *     //https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase
+     *
+     *     helpers, providers, contracts
      *     //https://riptutorial.com/android/example/9221/create-a-contract--helper-and-provider-for-sqlite-in-android
+     *
+     *     SQLiteQpenHelper:
      *     //https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper
+     *
+     *     General Database Tutorial:
      *     //https://www.youtube.com/watch?v=hDSVInZ2JCs&t=1628s
+     *
+     *     Base Columns:
+     *     https://developer.android.com/reference/android/provider/BaseColumns
+     *
+     *     URIs (uniform resource identifier):
+     *     https://developer.android.com/reference/android/net/Uri
+     *
+     *     Content Resolver/ Content Providers:
+     *     To be used with the cursor loaders and adaptors
+     *     https://developer.android.com/guide/topics/providers/content-providers
      */
 
     /**
      * The database name, this should not change
      */
-    public final static String DATABASE_NAME = "SIXinventory.dp";
+    public final static String DB_NAME = "SIXinventory.dp";
 
     /**
      * The database version, this always starts at 1
      */
-    public final static int DATABASE_VERSION = 1;
+    public final static int DB_VERSION = 1;
 
 
     /**
      * Constructor of the helper
      * @param context a reference to the application itself
      */
-    public DbHelper(Context context) {
+    public DatabaseHelper(Context context) {
 
         //context finds the path to the database,
         //DATABASE_NAME is the string name of the database
         //cursorfactory, to make cursors may need this later???
         //DATABASE_VERSION, which is just 1.
 
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DB_NAME, null, DB_VERSION);
     }
 
 
@@ -54,10 +74,13 @@ public class DbHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        String tableEntries = "";
 
         /*
         funcky code here
          */
+
+        sqLiteDatabase.execSQL(tableEntries);
     }
 
 
@@ -66,7 +89,7 @@ public class DbHelper extends SQLiteOpenHelper {
      * for security and forwards/backwards compataability
      * this should run, but it may and it required
      * @param sqLiteDatabase the database
-     * @param i the current version of the database
+     * @param i the current/old version of the database
      * @param i1 the new version of the database
      */
     @Override

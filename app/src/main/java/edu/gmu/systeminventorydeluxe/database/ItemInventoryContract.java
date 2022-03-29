@@ -8,11 +8,31 @@ public class ItemInventoryContract {
 
     /**
      * Some sources:
+     *
+     *      General SQLite:
      *     //https://developer.android.com/training/data-storage/sqlite
+     *
+     *     SQLiteDatabase:
      *     //https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase
+     *
+     *     helpers, providers, contracts
      *     //https://riptutorial.com/android/example/9221/create-a-contract--helper-and-provider-for-sqlite-in-android
+     *
+     *     SQLiteQpenHelper:
      *     //https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper
+     *
+     *     General Database Tutorial:
      *     //https://www.youtube.com/watch?v=hDSVInZ2JCs&t=1628s
+     *
+     *     Base Columns:
+     *     https://developer.android.com/reference/android/provider/BaseColumns
+     *
+     *     URIs (uniform resource identifier):
+     *     https://developer.android.com/reference/android/net/Uri
+     *
+     *     Content Resolver/ Content Providers:
+     *     To be used with the cursor loaders and adaptors
+     *     https://developer.android.com/guide/topics/providers/content-providers
      */
 
 
@@ -31,6 +51,8 @@ public class ItemInventoryContract {
     /**
      * Possible points of contact, this just prevents
      * improper paths invoking an inner class
+     *
+     * Maininventory is the path where all items show up
      */
     public static final String PATH_MAININVENTORY = "maininventory";
 
@@ -39,42 +61,40 @@ public class ItemInventoryContract {
 
     }
 
-    //For the main InventoryItems
-    //This class will define all values to go into the table
-
     /**
      * This class will define all values to go into the table
      * for main inventory
      */
-    public static class InventoryItem implements BaseColumns {
+    public static class MainInventoryItem implements BaseColumns {
 
 
+        /**
+         * This is the Android platform's base MIME type for a content: URI containing a Cursor of a single item.
+         */
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MAININVENTORY;
 
-        public static final String CONTENT_LIST_TYPE =
-                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MAININVENTORY;
-
         /**
-         * Content URI access
+         * Content URI access this specific path, we want no where else to
+         * to access this content
          */
-        public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_MAININVENTORY);
+        public final static Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_MAININVENTORY);
 
-        public static final String TABLE_NAME = "maininventory";
+        public final static String TABLE_NAME = "maininventory";
 
         //initalized all fields here as constants
 
-        public static final String _ID = BaseColumns._ID;
+        public final static String _ID = BaseColumns._ID;
 
-        public static final String ITEM_NAME = "name";
+        public final static String ITEM_NAME = "name";
 
-        public static final String ITEM_QUANTITY = "quantity";
+        public final static String ITEM_QUANTITY = "quantity";
 
-        public static final String ITEM_DESCRIPTION = "description";
+        public final static String ITEM_DESCRIPTION = "description";
 
-        public static final String ITEM_LOW_THRESHOLD = "threshold";
+        public final static String ITEM_LOW_THRESHOLD = "threshold";
 
-        public static final String ITEM_IMAGE = "image";
+        public final static String ITEM_IMAGE = "image";
 
         //add more constants/information for the database here
         //remember to adjust the specific helper and provider classes as well
