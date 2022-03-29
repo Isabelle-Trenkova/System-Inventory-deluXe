@@ -49,9 +49,6 @@ public class ItemInventoryContract {
     public static class InventoryItem implements BaseColumns {
 
 
-        /**
-         *
-         */
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MAININVENTORY;
 
@@ -66,6 +63,21 @@ public class ItemInventoryContract {
         public static final String TABLE_NAME = "maininventory";
 
         //initalized all fields here as constants
+
+        public static final String _ID = BaseColumns._ID;
+
+        public static final String ITEM_NAME = "name";
+
+        public static final String ITEM_QUANTITY = "quantity";
+
+        public static final String ITEM_DESCRIPTION = "description";
+
+        public static final String ITEM_LOW_THRESHOLD = "threshold";
+
+        public static final String ITEM_IMAGE = "image";
+
+        //add more constants/information for the database here
+        //remember to adjust the specific helper and provider classes as well
     }
 
 }
