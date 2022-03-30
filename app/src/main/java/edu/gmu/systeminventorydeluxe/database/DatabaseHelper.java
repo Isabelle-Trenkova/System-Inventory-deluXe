@@ -24,6 +24,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *     helpers, providers, contracts
      *     //https://riptutorial.com/android/example/9221/create-a-contract--helper-and-provider-for-sqlite-in-android
      *
+     *     THIS IS ALSO A GOOD SOURCE for helpers, providers, and contracts**********
+     *     ****************************************************************************
+     *     https://google-developer-training.github.io/android-developer-fundamentals-course-practicals/en/Unit%204/111b_p_add_a_content_provider_to_wordlistsql.html
+     *     ******************************************************************************
+     *     **************************************************************************
+     *
      *     SQLiteQpenHelper:
      *     //https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper
      *

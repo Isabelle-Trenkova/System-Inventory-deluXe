@@ -71,7 +71,7 @@ public class ItemInventoryContract {
         /**
          * This is the Android platform's base MIME type for a content: URI containing a Cursor of a single item.
          */
-        public static final String CONTENT_ITEM_TYPE =
+        public final static String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MAININVENTORY;
 
         /**
