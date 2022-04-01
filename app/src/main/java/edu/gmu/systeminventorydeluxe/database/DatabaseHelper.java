@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
+
 
 /**
  * THe database helper class.
@@ -80,18 +82,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String tableEntries = "";
 
         String SQL_CREATE_ENTRIES =
-                "CREATE TABLE " + ProductEntry.TABLE_NAME + " ("
-                        + ProductEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                        + ProductEntry.ITEM_NAME + "name"
-                        + ProductEntry.ITEM_QUANTITY + "quantity"
-                        + ProductEntry.ITEM_DESCRIPTION + "description"
-                        + ProductEntry.ITEM_LOW_THRESHOLD + "threshold"
-                        + ProductEntry.ITEM_IMAGE + "image)";
+                "CREATE TABLE " + MainInventoryItem.TABLE_NAME + " ("
+                        + MainInventoryItem._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + MainInventoryItem.ITEM_NAME + " TEXT NOT NULL, "
+                        + MainInventoryItem.ITEM_QUANTITY + " INTEGER DEFAULT 0, "
+                        + MainInventoryItem.ITEM_DESCRIPTION + " TEXT NOT NULL, "
+                        + MainInventoryItem.ITEM_LOW_THRESHOLD + " INTEGER DEFAULT 0, "
+                        + MainInventoryItem.ITEM_IMAGE + " BLOB, );";
 
-        sqLiteDatabase.execSQL(tableEntries);
+        sqLiteDatabase.execSQL(SQL_CREATE_ENTRIES);
     }
 
 
@@ -105,7 +106,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-      db.execSQL("DROP TABLE IF EXISTS " + ProductEntry.TABLE_NAME + ";");
-    onCreate(db);
+
+
+      sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MainInventoryItem.TABLE_NAME + ";");
+
+      onCreate(sqLiteDatabase);
     }
 }
