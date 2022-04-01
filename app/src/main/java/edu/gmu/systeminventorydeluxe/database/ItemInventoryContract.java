@@ -4,6 +4,19 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
+
+/**
+ * Code in the class is based off of code for outside sources
+ *
+ *
+ * Code written by Michał Kołnierzak, code is licenced using a MIT licence
+ * and free for commerical/private use and modifications
+ *
+ * https://github.com/kazdavegyms/Android-Inventory-Management-App-master
+ *
+ *
+ */
+
 public class ItemInventoryContract {
 
     /**
@@ -48,6 +61,10 @@ public class ItemInventoryContract {
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     //the path of the main inventory
+
+
+
+
     /**
      * Possible points of contact, this just prevents
      * improper paths invoking an inner class
@@ -74,6 +91,8 @@ public class ItemInventoryContract {
         public final static String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MAININVENTORY;
 
+        public static final String CONTENT_LIST_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MAININVENTORY;
         /**
          * Content URI access this specific path, we want no where else to
          * to access this content
