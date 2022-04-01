@@ -82,9 +82,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String tableEntries = "";
 
-        /*
-        funcky code here
-         */
+        String SQL_CREATE_ENTRIES =
+                "CREATE TABLE " + ProductEntry.TABLE_NAME + " ("
+                        + ProductEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + ProductEntry.ITEM_NAME + "name"
+                        + ProductEntry.ITEM_QUANTITY + "quantity"
+                        + ProductEntry.ITEM_DESCRIPTION + "description"
+                        + ProductEntry.ITEM_LOW_THRESHOLD + "threshold"
+                        + ProductEntry.ITEM_IMAGE + "image)";
 
         sqLiteDatabase.execSQL(tableEntries);
     }
@@ -100,6 +105,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        
+      db.execSQL("DROP TABLE IF EXISTS " + ProductEntry.TABLE_NAME + ";");
+    onCreate(db);
     }
 }
