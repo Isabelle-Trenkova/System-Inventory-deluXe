@@ -7,6 +7,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
 
+/**
+ * Code in the class is based off of code for outside sources
+ *
+ *
+ * Code written by Michał Kołnierzak, code is licenced using a MIT licence
+ * and free for commerical/private use and modifications
+ *
+ * https://github.com/kazdavegyms/Android-Inventory-Management-App-master
+ *
+ *
+ */
 
 /**
  * THe database helper class.
@@ -14,8 +25,9 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+
     /**
-     * Some sources:
+     * Some sources for understanding:
      *
      *      General SQLite:
      *     //https://developer.android.com/training/data-storage/sqlite
