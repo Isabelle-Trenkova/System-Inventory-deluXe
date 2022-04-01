@@ -9,7 +9,10 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button inventoryButton;
+    Button fullInventoryButton;
+    Button priorityInventoryButton;
+    Button lowInventoryButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,14 +25,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void define() {
 
-        inventoryButton = (Button) findViewById(R.id.button_invnetory);
+        fullInventoryButton = (Button) findViewById(R.id.button_full_inventory);
 
+        //two buttons are shells until InventoryMainActivity is finished
+        priorityInventoryButton = (Button) findViewById(R.id.button_priority_inventory);
+        lowInventoryButton = (Button) findViewById(R.id.button_low_inventory);
     }
 
     private void buttonHandler() {
 
-
-        inventoryButton.setOnClickListener(new View.OnClickListener() {
+        fullInventoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

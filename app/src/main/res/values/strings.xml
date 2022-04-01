@@ -1,7 +1,15 @@
 <resources>
     <string name="app_name">System Inventory deluXe</string>
+
+    //Edit Inventory
     <string name="inventory_name">Insert name of product here!</string>
     <string name="quant_of_item">Insert the quantity of your item here!</string>
     <string name="dynamic_message">Add Item</string>
     <string name="recipe_string"> </string>
+
+    //Main Menu
+    <string name="main_menu_title">Welcome to SIX</string>
+    <string name="full_inventory">Full Inventory</string>
+    <string name="priority_inventory">Priority Items</string>
+    <string name="low_inventory">Low Stock Items</string>
 </resources>
