@@ -38,12 +38,20 @@ public class DatabaseProvider extends ContentProvider {
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        sUriMatcher.addURI(ItemInventoryContract.CONTENT_AUTHORITY, ItemInventoryContract.PATH_MAININVENTORY, INVENTORY);
-        sUriMatcher.addURI(ItemInventoryContract.CONTENT_AUTHORITY, ItemInventoryContract.PATH_MAININVENTORY + "/#", INVENTORY_ID);
+        sUriMatcher.addURI(ItemInventoryContract.CONTENT_AUTHORITY,
+                ItemInventoryContract.PATH_MAININVENTORY, INVENTORY);
+
+        sUriMatcher.addURI(ItemInventoryContract.CONTENT_AUTHORITY,
+                ItemInventoryContract.PATH_MAININVENTORY + "/#", INVENTORY_ID);
     }
 
     private DatabaseHelper databaseHelper;
     ///////////////////////////////////////////////////////////////////////
+
+    /**
+     * Will attempt to create a database
+     * @return true if created, false if it fails for whatever reason
+     */
     @Override
     public boolean onCreate() {
 
@@ -60,6 +68,16 @@ public class DatabaseProvider extends ContentProvider {
 
 
     //////////////////////////////////////////////////////////////////////
+
+    /**
+     * Gets information from the database and returns that information as a cursor
+     * @param uri
+     * @param projection
+     * @param selection
+     * @param selectionArgs
+     * @param sortOrder
+     * @return cursor
+     */
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection,
@@ -87,6 +105,12 @@ public class DatabaseProvider extends ContentProvider {
     }
 
     //////////////////////////////////////////////////////////////////////
+
+    /**
+     * Gets the type of the URI
+     * @param uri
+     * @return The types
+     */
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
@@ -102,6 +126,14 @@ public class DatabaseProvider extends ContentProvider {
     }
 
     //////////////////////////////////////////////////////////////////
+
+    /**
+     * Inserts information into a new row
+     * an exception will be thrown if it cannot be completed
+     * @param uri
+     * @param values
+     * @return
+     */
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
@@ -116,6 +148,13 @@ public class DatabaseProvider extends ContentProvider {
 
 
     //////////////////////////////////////////////////////////////////////////
+
+    /**
+     *  Inserting the product
+     * @param uri
+     * @param values
+     * @return
+     */
     private Uri insertProduct(Uri uri, ContentValues values) {
 
         String productNameString = values.getAsString(MainInventoryItem.ITEM_NAME);
@@ -138,6 +177,8 @@ public class DatabaseProvider extends ContentProvider {
             throw new IllegalArgumentException("Product requires a valid price");
         }
 
+        /*FIGURE OUT IMAGE STUFF - NTS 4 IZZ*/
+
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         long id = db.insert(MainInventoryItem.TABLE_NAME, null, values);
         if (id == -1) {
@@ -150,6 +191,14 @@ public class DatabaseProvider extends ContentProvider {
     }
 
     ////////////////////////////////////////////////////////////
+
+    /**
+     * Deletes either a row or one piece of informaiton
+     * @param uri
+     * @param selection
+     * @param selectionArgs
+     * @return
+     */
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
@@ -175,6 +224,15 @@ public class DatabaseProvider extends ContentProvider {
 
 
     ////////////////////////////////////////////////////////////
+
+    /**
+     * Updates either the entire thing or one piece of the information in the table
+     * @param uri
+     * @param values
+     * @param selection
+     * @param selectionArgs
+     * @return
+     */
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
         final int match = sUriMatcher.match(uri);
@@ -192,6 +250,14 @@ public class DatabaseProvider extends ContentProvider {
 
     ///////////////////////////////////////////////////////////////
 
+    /**
+     * Updates individual lines in the item
+     * @param uri
+     * @param values
+     * @param selection
+     * @param selectionArgs
+     * @return
+     */
     private int updateInventory(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 
         String productNameString = values.getAsString(MainInventoryItem.ITEM_NAME);
@@ -212,6 +278,9 @@ public class DatabaseProvider extends ContentProvider {
         if (thresholdInteger != null && thresholdInteger < 0) {
             throw new IllegalArgumentException("Product requires a valid price");
         }
+
+        /*FIGURE OUT IMAGE STUFF - NST 4 IZZ*/
+
         if (values.size() == 0) {
             return 0;
         }
