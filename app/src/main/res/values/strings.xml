@@ -1,11 +1,25 @@
 <resources>
     <string name="app_name">System Inventory deluXe</string>
 
-    //Edit Inventory
+    //Edit Inventory XML
     <string name="inventory_name">Insert name of product here!</string>
     <string name="quant_of_item">Insert the quantity of your item here!</string>
     <string name="dynamic_message">Add Item</string>
     <string name="recipe_string"> </string>
+
+    //EDIT Inventory Class
+    <string name="threshold_string">Insert Low Item Threshold here!</string>
+    <string name="empty_field_toast">Please insert all information!</string>
+    <string name="insert_failed">Try again.</string>
+    <string name="insert_success">Save Successful</string>
+    <string name="update_failed">Try again.</string>
+    <string name="update_success">Save Successful</string>
+    <string name="remove_failed">Try again.</string>
+    <string name="remove_success">Delete Successful</string>
+    <string name="remove_product">Are you sure you want to delete this product?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
 
     //Main Menu
     <string name="main_menu_title">Welcome to SIX</string>

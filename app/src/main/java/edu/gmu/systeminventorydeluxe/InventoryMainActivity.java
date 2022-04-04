@@ -23,8 +23,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
  * This will be the main place inventory can viewed, keeping
  * track of the inventory itself
  */
-public class InventoryMainActivity extends AppCompatActivity /*implements
-        LoaderManager.LoaderCallbacks<Cursor>*/{
+public class InventoryMainActivity extends AppCompatActivity implements
+        LoaderManager.LoaderCallbacks<Cursor>{
+
+    // Note to self:
+    //  Handle searching function and
+    //  and image stuff
+    //  -Iz
 
     /**
      * The grid itself
@@ -36,7 +41,6 @@ public class InventoryMainActivity extends AppCompatActivity /*implements
      * potential searching function **not ready yet
      * (change the javadoc when this is finished)
      */
-    //????private SearchView searchItems;
 
 
     /**
@@ -104,7 +108,7 @@ public class InventoryMainActivity extends AppCompatActivity /*implements
 
 
 
-    /*
+
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
@@ -119,6 +123,6 @@ public class InventoryMainActivity extends AppCompatActivity /*implements
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
 
-    } */
+    }
 
 }

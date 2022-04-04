@@ -101,8 +101,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         + MainInventoryItem.ITEM_NAME + " TEXT NOT NULL, "
                         + MainInventoryItem.ITEM_QUANTITY + " INTEGER DEFAULT 0, "
                         + MainInventoryItem.ITEM_DESCRIPTION + " TEXT NOT NULL, "
-                        + MainInventoryItem.ITEM_LOW_THRESHOLD + " INTEGER DEFAULT 0, "
-                        + MainInventoryItem.ITEM_IMAGE + " TEXT);";
+                        + MainInventoryItem.ITEM_LOW_THRESHOLD + " INTEGER DEFAULT 0);";
+                        /*+ MainInventoryItem.ITEM_IMAGE + " TEXT);";*/
 
         sqLiteDatabase.execSQL(SQL_CREATE_ENTRIES);
     }
