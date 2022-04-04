@@ -35,7 +35,7 @@ public class AdaptorInventoryList extends CursorAdapter {
     private TextView productName;
     private TextView itemQuantity;
 
-    private ImageView itemImage; //NST 4 IZZ: handle the image stuff
+    //private ImageView itemImage; //NTS 4 IZZ: handle the image stuff
 
     //////////////////////////////////////////////////////////////
     //Items units will defult to having no units, functionallity

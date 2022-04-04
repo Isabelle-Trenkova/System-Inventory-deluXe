@@ -71,7 +71,7 @@ public class ItemInventoryContract {
      *
      * Maininventory is the path where all items show up
      */
-    public static final String PATH_MAININVENTORY = "maininventory";
+    public static final String PATH_MAININVENTORY = "mainInventory";
 
     //default constructor
     public ItemInventoryContract() {
@@ -84,6 +84,11 @@ public class ItemInventoryContract {
      */
     public static class MainInventoryItem implements BaseColumns {
 
+        /**
+         * Content URI access this specific path, we want no where else to
+         * to access this content
+         */
+        public final static Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_MAININVENTORY);
 
         /**
          * This is the Android platform's base MIME type for a content: URI containing a Cursor of a single item.
@@ -93,11 +98,7 @@ public class ItemInventoryContract {
 
         public static final String CONTENT_LIST_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MAININVENTORY;
-        /**
-         * Content URI access this specific path, we want no where else to
-         * to access this content
-         */
-        public final static Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_MAININVENTORY);
+
 
         public final static String TABLE_NAME = "maininventory";
 

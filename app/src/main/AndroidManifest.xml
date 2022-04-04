@@ -29,6 +29,12 @@
             android:exported="true">
 
         </activity>
+
+
+        <provider
+            android:name=".database.DatabaseProvider"
+            android:authorities="edu.gmu.systeminventorydeluxe"
+            android:exported="false" />
     </application>
 
 </manifest>

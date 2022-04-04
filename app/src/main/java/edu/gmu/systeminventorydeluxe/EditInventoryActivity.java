@@ -76,16 +76,6 @@ public class EditInventoryActivity extends AppCompatActivity implements
     public Uri inventoryItemStatus;
 
 
-    private boolean isProductEdited = false;
-
-    private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            isProductEdited = true;
-            return false;
-        }
-    };
-
     /**
      * Upon new instnace;
      * @param savedInstanceState a new instance state
@@ -120,11 +110,6 @@ public class EditInventoryActivity extends AppCompatActivity implements
         increment = (Button) findViewById(R.id.increment_button);
         decrement = (Button) findViewById(R.id.decrement_button);
 
-
-        nameItem.setOnTouchListener(onTouchListener);
-        itemQuantity.setOnTouchListener(onTouchListener);
-        itemDescription.setOnTouchListener(onTouchListener);
-        lowItemEditText.setOnTouchListener(onTouchListener);
 
         //Since activies are being used they get switched by using
         //intents, which can be nifty because he get get the data of
@@ -265,6 +250,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
          else {
             saveProduct();
             finish();
+
         }
         return true;
     }
@@ -312,6 +298,9 @@ public class EditInventoryActivity extends AppCompatActivity implements
                 Toast.makeText(this, getString(R.string.update_success), Toast.LENGTH_SHORT).show();
             }
         }
+
+
+        return;
     }
 
 
@@ -375,6 +364,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
                     Bitmap image = BitmapFactory.decodeByteArray(b, 0, b.length);
                     productImageView.setImageBitmap(image);
                 }*/
+
                 nameItem.setText(productNameString);
                 itemQuantity.setText(String.valueOf(quantityInteger));
                 lowItemEditText.setText(String.valueOf(thresholdInteger));

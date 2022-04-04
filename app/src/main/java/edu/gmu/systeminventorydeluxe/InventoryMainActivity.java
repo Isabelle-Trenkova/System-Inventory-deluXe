@@ -1,30 +1,37 @@
 package edu.gmu.systeminventorydeluxe;
 
+import android.app.LoaderManager;
 import android.content.ContentUris;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.content.Loader;
+import android.content.CursorLoader;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.Loader;
+import android.app.LoaderManager.LoaderCallbacks;
+
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
 
 /**
  * This will be the main place inventory can viewed, keeping
  * track of the inventory itself
  */
 public class InventoryMainActivity extends AppCompatActivity implements
-        LoaderManager.LoaderCallbacks<Cursor>{
+        LoaderManager.LoaderCallbacks<Cursor> {
 
     // Note to self:
     //  Handle searching function and
@@ -32,9 +39,10 @@ public class InventoryMainActivity extends AppCompatActivity implements
     //  -Iz
 
     /**
-     * The grid itself
+     * The List itself
      */
     private ListView inventoryList;
+    private static final int INVENTORY_LOADER = 0;
     private AdaptorInventoryList listAdaptor;
 
     /**
@@ -52,8 +60,50 @@ public class InventoryMainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory_view);
 
-        define();
-        buttonhandler();
+
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //when the floating action button is clicked this will un
+
+                Intent intent = new Intent(InventoryMainActivity.this,
+                        EditInventoryActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
+        inventoryList = (ListView) findViewById(R.id.inventory_item_view);
+        listAdaptor = new AdaptorInventoryList(this, null, 1);
+        inventoryList.setAdapter(listAdaptor);
+
+
+        /**
+         * Inventory grid cursor is clicked
+         *
+         * ***configure
+         */
+        inventoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(InventoryMainActivity.this, EditInventoryActivity.class);
+
+                Uri uri = ContentUris.withAppendedId(MainInventoryItem.CONTENT_URI, id);
+                intent.setData(uri);
+                startActivity(intent);
+            }
+        });
+
+        //android.app.LoaderManager loaderManager = this.getLoaderManager();
+        getLoaderManager().initLoader(INVENTORY_LOADER,null,this);
+
+        //define();
+        //buttonhandler();
+
+        //getLoaderManager().initLoader(INVENTORY_LOADER,null,(LoaderCallbacks)this);
     }
 
     /**
@@ -62,9 +112,12 @@ public class InventoryMainActivity extends AppCompatActivity implements
     private void define() {
 
         inventoryList = (ListView) findViewById(R.id.inventory_item_view);
+
         listAdaptor = new AdaptorInventoryList(this, null, 1);
+
         inventoryList.setAdapter(listAdaptor);
 
+        //getLoaderManager().initLoader(INVENTORY_LOADER, null, this);
 
     }
 
@@ -98,10 +151,14 @@ public class InventoryMainActivity extends AppCompatActivity implements
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(InventoryMainActivity.this, EditInventoryActivity.class);
 
+                Uri uri = ContentUris.withAppendedId(MainInventoryItem.CONTENT_URI, id);
+                intent.setData(uri);
                 startActivity(intent);
             }
         });
 
+        //android.app.LoaderManager loaderManager = this.getLoaderManager();
+        getLoaderManager().initLoader(INVENTORY_LOADER,null,this);
 
         //add any more bottons in the inventory activity class here if need
     }
@@ -112,17 +169,32 @@ public class InventoryMainActivity extends AppCompatActivity implements
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        return null;
+
+        String[] projection = {
+                MainInventoryItem._ID,
+                MainInventoryItem.ITEM_NAME,
+                MainInventoryItem.ITEM_QUANTITY
+
+                /*MainInventoryItem.ITEM_PHOTO*/
+        };
+        return new CursorLoader(this,
+                MainInventoryItem.CONTENT_URI,
+                projection,
+                null,
+                null,
+                null);
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
 
+        listAdaptor.swapCursor(data);
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
 
+        listAdaptor.swapCursor(null);
     }
 
 }
