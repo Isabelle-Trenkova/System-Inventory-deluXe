@@ -20,6 +20,9 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
 /**
  * Code in the class is based off of code from outside sources
  *
+ *  This class is almost entirely from this source. But addapted to
+ *  be used with the ItemInventoryContract.java and DatabaseHelper.java
+ *  which was created previously using the other sources in the file.
  *
  * Code written by Michał Kołnierzak, code is licenced using a MIT licence
  * and free for commerical/private use and modifications

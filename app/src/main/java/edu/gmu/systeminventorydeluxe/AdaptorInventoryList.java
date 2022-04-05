@@ -15,6 +15,7 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
 /**
  * Code in the class is based off of code for outside sources
  *
+ *  Used for the bindView();
  *
  * Code written by Michał Kołnierzak, code is licenced using a MIT licence
  * and free for commerical/private use and modifications

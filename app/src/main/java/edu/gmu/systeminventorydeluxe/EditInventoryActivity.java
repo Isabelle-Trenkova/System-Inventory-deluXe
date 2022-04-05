@@ -27,6 +27,19 @@ import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
 
+/**
+ * Code in the class is paritally based off of code for outside sources
+ * Only the adding and removing methods
+ * This code was also used as a resource for the loader methods imported
+ * from LoaderManager
+ *
+ * Code written by Michał Kołnierzak, code is licenced using a MIT licence
+ * and free for commerical/private use and modifications
+ *
+ * https://github.com/kazdavegyms/Android-Inventory-Management-App-master
+ *
+ *
+ */
 
 /**
  * This will be the class where items are actually edited AND ADDED

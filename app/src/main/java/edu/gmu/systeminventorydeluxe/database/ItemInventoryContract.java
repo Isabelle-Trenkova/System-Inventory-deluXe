@@ -6,13 +6,28 @@ import android.provider.BaseColumns;
 
 
 /**
- * Code in the class is based off of code for outside sources
+ * Code in the class is based off of code for outside sources:
  *
+ * ///////////////////////////////////////////////////////////////////////////
+ *
+ * Database configuration was started without the use of this source, but proved
+ * Laborious for the DatabaseProvider.java. citation is being added because of how close
+ * this relates to DatabaseProvider.java
  *
  * Code written by Michał Kołnierzak, code is licenced using a MIT licence
  * and free for commerical/private use and modifications
  *
  * https://github.com/kazdavegyms/Android-Inventory-Management-App-master
+ *
+ *
+ * /////////////////////////////////////////////////////////////////////////
+ * additionally
+ *
+ *
+ * The following source used is lisences under a  CC BY-SA 3.0 lisecence and is
+ * free for use and adaption
+ *
+ * https://riptutorial.com/android/example/9221/create-a-contract--helper-and-provider-for-sqlite-in-android
  *
  *
  */

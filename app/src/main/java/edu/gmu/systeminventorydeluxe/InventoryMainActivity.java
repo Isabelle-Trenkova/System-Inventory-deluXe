@@ -27,6 +27,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
 
 /**
+ * Code in the class is paritally based off of code for outside sources
+ * Used for the loader methods imported from LoaderManager
+ *
+ * Code written by Michał Kołnierzak, code is licenced using a MIT licence
+ * and free for commerical/private use and modifications
+ *
+ * https://github.com/kazdavegyms/Android-Inventory-Management-App-master
+ *
+ *
+ */
+
+/**
  * This will be the main place inventory can viewed, keeping
  * track of the inventory itself
  */
@@ -60,50 +72,8 @@ public class InventoryMainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory_view);
 
-
-        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //when the floating action button is clicked this will un
-
-                Intent intent = new Intent(InventoryMainActivity.this,
-                        EditInventoryActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
-
-        inventoryList = (ListView) findViewById(R.id.inventory_item_view);
-        listAdaptor = new AdaptorInventoryList(this, null, 1);
-        inventoryList.setAdapter(listAdaptor);
-
-
-        /**
-         * Inventory grid cursor is clicked
-         *
-         * ***configure
-         */
-        inventoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(InventoryMainActivity.this, EditInventoryActivity.class);
-
-                Uri uri = ContentUris.withAppendedId(MainInventoryItem.CONTENT_URI, id);
-                intent.setData(uri);
-                startActivity(intent);
-            }
-        });
-
-        //android.app.LoaderManager loaderManager = this.getLoaderManager();
-        getLoaderManager().initLoader(INVENTORY_LOADER,null,this);
-
-        //define();
-        //buttonhandler();
-
-        //getLoaderManager().initLoader(INVENTORY_LOADER,null,(LoaderCallbacks)this);
+        define();
+        buttonhandler();
     }
 
     /**
@@ -112,13 +82,8 @@ public class InventoryMainActivity extends AppCompatActivity implements
     private void define() {
 
         inventoryList = (ListView) findViewById(R.id.inventory_item_view);
-
         listAdaptor = new AdaptorInventoryList(this, null, 1);
-
         inventoryList.setAdapter(listAdaptor);
-
-        //getLoaderManager().initLoader(INVENTORY_LOADER, null, this);
-
     }
 
     /**
@@ -157,7 +122,6 @@ public class InventoryMainActivity extends AppCompatActivity implements
             }
         });
 
-        //android.app.LoaderManager loaderManager = this.getLoaderManager();
         getLoaderManager().initLoader(INVENTORY_LOADER,null,this);
 
         //add any more bottons in the inventory activity class here if need
