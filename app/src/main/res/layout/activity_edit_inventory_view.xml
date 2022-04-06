@@ -9,6 +9,8 @@ item name, weight, etc-->
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--Allows everything to extend past the bounds of the screen
+    as in makes this view scrollable-->
     <ScrollView
         android:id="@+id/edit_location_scrollView"
         android:layout_width="409dp"
@@ -29,6 +31,7 @@ item name, weight, etc-->
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!--The dynamic message test box-->
             <TextView
                 android:id="@+id/messageView"
                 android:layout_width="match_parent"
@@ -60,12 +63,14 @@ item name, weight, etc-->
 
             </LinearLayout>
 
+            <!--Name stuff-->
             <LinearLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <!--The name of the item input box-->
                 <EditText
                     android:id="@+id/name_item"
                     android:layout_width="match_parent"
@@ -81,6 +86,7 @@ item name, weight, etc-->
 
             </LinearLayout>
 
+            <!--QUANT STUFF-->
             <LinearLayout
                 android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
@@ -102,6 +108,7 @@ item name, weight, etc-->
 
             </LinearLayout>
 
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
@@ -109,6 +116,7 @@ item name, weight, etc-->
                 app:layout_constraintEnd_toEndOf="@+id/decrement_button"
                 app:layout_constraintStart_toEndOf="@+id/decrement_button">
 
+                <!--The following two buttons are decrementing and incrementing-->
                 <Button
                     android:id="@+id/decrement_button"
                     android:layout_width="89dp"
@@ -143,6 +151,7 @@ item name, weight, etc-->
                     tools:layout_conversion_absoluteHeight="48dp"
                     tools:layout_conversion_absoluteWidth="205dp" />
 
+                <!--The place to insert the item quant-->
                 <EditText
                     android:id="@+id/quantity_item"
                     android:layout_width="match_parent"
@@ -157,6 +166,7 @@ item name, weight, etc-->
                     tools:layout_conversion_absoluteWidth="333dp"
                     tools:layout_editor_absoluteX="0dp" />
 
+                <!--Should display the quantity-->
                 <TextView
                     android:id="@+id/quantity_display"
                     android:layout_width="184dp"
@@ -175,6 +185,7 @@ item name, weight, etc-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!--Threshold stuff-->
             <LinearLayout
                 android:id="@+id/linearLayout5.5"
                 android:layout_width="match_parent"
@@ -202,7 +213,7 @@ item name, weight, etc-->
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-
+                <!--Input place for threshold-->
                 <EditText
                     android:id="@+id/threshold_item"
                     android:layout_width="match_parent"
@@ -218,12 +229,14 @@ item name, weight, etc-->
 
             </LinearLayout>
 
+            <!--Description-->
             <LinearLayout
                 android:id="@+id/linearLayout5"
                 android:layout_width="match_parent"
                 android:layout_height="37dp"
                 android:orientation="horizontal">
 
+                <!---->
                 <TextView
                     android:id="@+id/decription_of_item"
                     android:layout_width="157dp"
@@ -245,6 +258,7 @@ item name, weight, etc-->
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <!--Input place for the desctiption of the item-->
                 <EditText
                     android:id="@+id/decription_item"
                     android:layout_width="match_parent"
@@ -260,6 +274,7 @@ item name, weight, etc-->
 
             </LinearLayout>
 
+            <!--RECIPE Stuff-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
                 android:layout_width="match_parent"
@@ -318,6 +333,7 @@ item name, weight, etc-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!--Image stuff-->
             <LinearLayout
                 android:id="@+id/linearLayout7"
                 android:layout_width="match_parent"
@@ -344,6 +360,7 @@ item name, weight, etc-->
                 android:id="@+id/linearLayout8"
                 android:orientation="horizontal">
 
+                <!--Place to input image-->
 
                 <ImageButton
                     android:id="@+id/product_image"
@@ -358,6 +375,7 @@ item name, weight, etc-->
                     android:scaleType="center" />
             </LinearLayout>
 
+            <!--Save and delete buttons-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/linearLayout9"
                 android:layout_width="match_parent"

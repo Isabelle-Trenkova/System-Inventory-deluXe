@@ -25,37 +25,43 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
  *
  */
 
-
 /**
  * Adaptor for the inventory items for when they go into the list view
  */
 public class AdaptorInventoryList extends CursorAdapter {
 
+    //Android documentation wanted this here
     public static final int FLAG_AUTO_REQUEREY = 0;
 
+    /**
+     * Text views for the name and quantity of the
+     * Item that is being adapted into the view
+     */
     private TextView productName;
     private TextView itemQuantity;
 
+    //Izzy wants images, Izzy will handle said images.
     //private ImageView itemImage; //NTS 4 IZZ: handle the image stuff
-
-    //////////////////////////////////////////////////////////////
-    //Items units will defult to having no units, functionallity
-    //will be added later on
-    //private TextView itemUnits;
-
-    //incase we want an image to show up on the list view
-    //for the item
 
 
     ///////////////////////////////////////////////////////////////////////
+    //Items units will defult to having no units, functionallity
+    //will be added later on
 
-    private InventoryMainActivity inventoryActivity = new InventoryMainActivity();
+    ///////////////////////////////////////////////////////////////////////
 
+
+    /**
+     * Constructor
+     * @param context the context of the action
+     * @param cursor the information of the item from the database
+     *               Not exactly an object, but can be throught of as such
+     *               This is a reference to a row in the database
+     * @param FLAG_AUTO_REQUERY
+     */
     public AdaptorInventoryList(Context context, Cursor cursor, int FLAG_AUTO_REQUERY) {
 
         super(context, cursor, FLAG_AUTO_REQUERY);
-        this.inventoryActivity = (InventoryMainActivity) context;
-
     }
 
     /**

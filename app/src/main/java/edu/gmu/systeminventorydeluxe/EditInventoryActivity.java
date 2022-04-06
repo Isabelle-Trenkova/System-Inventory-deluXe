@@ -54,39 +54,37 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
 public class EditInventoryActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>{
 
+    //NTS: add image functionality - IZ
+    // //private ImageButton productImage;
     private TextView dynamicMessage;
+    private TextView quantityMessage;
+
+
+    private EditText itemDescription;
     private EditText nameItem;
     private EditText itemQuantity;
     private EditText lowItemEditText;
 
-    //private Button recipeButton;
 
     private Button saveButton;
     private Button increment;
     private Button decrement;
     private Button deleteButton;
-    /**
-     * item weight will be added in a little later
-     */
-    //private EditText itemWeight;
-    private EditText itemDescription;
-    private ImageButton productImage;
 
-    //********************************
-    /*********************************
-     * Add this functionality to the activity_edit_inventory
-     */
+    ///////////////////////////////////////////////
+    //item weight will be added in a little later
+    //AND RECIPE STUFF
+
+    private Button recipeButton; // add function is defined and listener set up
+     ///////////////////////////////////////////////////
+
+    //not sure if this should be like this
     private Integer lowItemTreshold = 0;  //show be zero unless the user says otherwise
 
-    //add recipe field right here and don't forget to include it in the
-    //define() method
-    //add functionality later on
 
     //using intent class you can see if there had been any modifications
     //more specifically getIntent(); if it is null then it is a new product
-
-    //NTS: see if this can be private later
-    public Uri inventoryItemStatus;
+    private Uri inventoryItemStatus;
 
 
     /**
@@ -108,20 +106,24 @@ public class EditInventoryActivity extends AppCompatActivity implements
     protected void define() {
 
         dynamicMessage = (TextView) findViewById(R.id.messageView);
+        quantityMessage = (TextView) findViewById(R.id.quantity_display);
+
         nameItem = (EditText) findViewById(R.id.name_item);
         itemQuantity = (EditText) findViewById(R.id.quantity_item);
         itemDescription = (EditText) findViewById(R.id.decription_item);
         lowItemEditText = (EditText) findViewById(R.id.threshold_item);
 
-
+        //IZZY - right here
         //productImage = (ImageButton) findViewById(R.id.product_image);
 
-        //recipeButton = (Button) findViewById(R.id.add_recipe_button);
+
 
         saveButton = (Button) findViewById(R.id.save_button);
         deleteButton = (Button) findViewById(R.id.delete_button);
         increment = (Button) findViewById(R.id.increment_button);
         decrement = (Button) findViewById(R.id.decrement_button);
+
+        recipeButton = (Button) findViewById(R.id.add_recipe_button);
 
 
         //Since activies are being used they get switched by using
@@ -135,25 +137,24 @@ public class EditInventoryActivity extends AppCompatActivity implements
         //This can be expressed more simply, but for the sake of
         //readability it makes more sense this way
 
-
         Intent intent = getIntent();
         inventoryItemStatus = (intent.getData());
 
-
         if (inventoryItemStatus != null) { //it is not newly made
-
             dynamicMessage.setText("Edit Item");
+            ////////////////////////////////////////////////////////////
+            //NTS: see if you can set the hints to display the cursor information
+            // - IZZ
+            ///////////////////////////////////////////////////////////////
         } else {
 
             dynamicMessage.setText("Add Item");
         }
-
     }
 
 
     protected void buttonHandler() {
 
-    /*
         recipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -165,7 +166,6 @@ public class EditInventoryActivity extends AppCompatActivity implements
             }
         });
 
-     */
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -176,8 +176,8 @@ public class EditInventoryActivity extends AppCompatActivity implements
                 if (completed != true) {
 
                     //probably throw an exception here
+                    //THis shouldnt fail
                 }
-
             }
         });
 
@@ -190,6 +190,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
         });
 
 
+        //ADD FUNCTIONALITY *****************
         increment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -207,23 +208,28 @@ public class EditInventoryActivity extends AppCompatActivity implements
 
 
     private void showDeleteConfirmationDialog() {
-        // Create an Alert Dialog set the messages and click listeners
+
+        //Alert dialog sequence
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
         builder.setMessage(getString(R.string.remove_product));
+
         builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User confirmed removing the product, so remove the product.
+                //yes actually delete
                 removeProduct();
             }
         });
         builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // // User canceled removing the product, so dismiss the dialog
+
+                //Doesnt actually want to delete
                 if (dialog != null) {
                     dialog.dismiss();
                 }
             }
         });
+
         // Create and show the Alert Dialog
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
@@ -231,9 +237,12 @@ public class EditInventoryActivity extends AppCompatActivity implements
 
 
     private void removeProduct() {
+
         if (inventoryItemStatus != null) {
+
             int rowDeleted = getContentResolver().delete(inventoryItemStatus, null, null);
             // Show a toast message depending on whether or not the removal was successful
+
             if (rowDeleted == 0) {
                 // If no data was removed, then show the error message
                 Toast.makeText(this, getString(R.string.remove_failed), Toast.LENGTH_LONG).show();
@@ -242,6 +251,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
                 Toast.makeText(this, getString(R.string.remove_success),
                         Toast.LENGTH_SHORT).show();
             }
+
             finish();
         }
     }
@@ -261,9 +271,9 @@ public class EditInventoryActivity extends AppCompatActivity implements
             Toast.makeText(this, getString(R.string.empty_field_toast), Toast.LENGTH_LONG).show();
         }
          else {
+
             saveProduct();
             finish();
-
         }
         return true;
     }
@@ -312,7 +322,6 @@ public class EditInventoryActivity extends AppCompatActivity implements
             }
         }
 
-
         return;
     }
 
@@ -321,9 +330,8 @@ public class EditInventoryActivity extends AppCompatActivity implements
     /**
      * Automatically generated loader methods
      * this will allow user defined objects to pop up
-     * in the grid view
+     * in the list view
      */
-
 
     @NonNull
     @Override
@@ -397,6 +405,4 @@ public class EditInventoryActivity extends AppCompatActivity implements
         lowItemEditText.setText("");
         itemDescription.setText("");
     }
-
-
 }

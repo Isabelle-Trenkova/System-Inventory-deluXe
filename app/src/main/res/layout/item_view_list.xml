@@ -2,20 +2,27 @@
 
 <!--This is the template for list items that will show up in the inventory list view-->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="false"
+    android:descendantFocusability="blocksDescendants" >
+    <!--I HATE THIS, damn the lack of the previous line broke everything
+    I <3 stack overflow for niche things like this
+    https://stackoverflow.com/questions/5526198/onitemclicklistener-not-firing-on-custom-arrayadapter
+
+    Literally the comment that saved me was from 2012 - IZZ^^^^ -->
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:focusable="false">
 
 
+        <!-- An image of the item-->
         <ImageButton
             android:id="@+id/image_of_product"
             android:layout_width="80dp"
@@ -26,10 +33,12 @@
             android:layout_marginBottom="20dp"
             android:background="#eee"
             android:scaleType="center"
+            android:focusable="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- The name of the product -->
         <TextView
             android:id="@+id/name_product"
             android:layout_width="271dp"
@@ -39,10 +48,12 @@
             android:layout_marginEnd="19dp"
             android:text="TextView"
             android:textSize="20sp"
+            android:focusable="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_of_product"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- The quantity of the item -->
         <TextView
             android:id="@+id/quant_product"
             android:layout_width="98dp"
@@ -52,10 +63,11 @@
             android:layout_marginBottom="34dp"
             android:gravity="center"
             android:text="TextView"
+            android:focusable="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_of_product" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</LinearLayout>
+</RelativeLayout>

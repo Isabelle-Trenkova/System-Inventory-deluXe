@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context="edu.gmu.systeminventorydeluxe.InventoryMainActivity">
 
 
-    <!-- This is the grid view, which will allow us to add
+    <!-- This is the list view, which will allow us to add
     little icons of inventory showing each item individually and all together-->
     <ListView
         android:id="@+id/inventory_item_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp"
-
-        >
+        android:clickable="true"
+        android:drawSelectorOnTop="true">
 
 
     </ListView>
@@ -28,8 +31,8 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="end|bottom"
         android:layout_margin="8dp"
         android:clickable="true"

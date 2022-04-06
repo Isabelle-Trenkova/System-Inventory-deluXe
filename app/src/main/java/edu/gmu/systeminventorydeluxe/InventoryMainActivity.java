@@ -20,7 +20,9 @@ import android.content.CursorLoader;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
+//import androidx.appcompat.app.AppCompatActivity;
+//import androidx.appcompat.app.AppCompatActivity;
+//import android.support.v7.app.AppCompatActivity;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -50,18 +52,9 @@ public class InventoryMainActivity extends AppCompatActivity implements
     //  and image stuff
     //  -Iz
 
-    /**
-     * The List itself
-     */
-    private ListView inventoryList;
-    private static final int INVENTORY_LOADER = 0;
-    private AdaptorInventoryList listAdaptor;
-
-    /**
-     * potential searching function **not ready yet
-     * (change the javadoc when this is finished)
-     */
-
+    private ListView inventoryList; //The list itself
+    AdaptorInventoryList listAdaptor; //The adaptor to be used here
+    private static final int INVENTORY_LOADER = 0;//loader, its a param of the loader manager
 
     /**
      * Runs upon new instance of the app
@@ -77,13 +70,14 @@ public class InventoryMainActivity extends AppCompatActivity implements
     }
 
     /**
-     * defines the good stuff (gridview)
-     */
+     * defines the listview as well as setting the adaptor and focus
+     * * */
     private void define() {
 
         inventoryList = (ListView) findViewById(R.id.inventory_item_view);
         listAdaptor = new AdaptorInventoryList(this, null, 1);
         inventoryList.setAdapter(listAdaptor);
+        inventoryList.setItemsCanFocus(true);
     }
 
     /**
@@ -91,43 +85,49 @@ public class InventoryMainActivity extends AppCompatActivity implements
      */
     private void buttonhandler() {
 
+        //Folating action button
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                //when the floating action button is clicked this will un
+                //when the floating action button is clicked this will run
+                //the action to the add/edit page to add a new item
 
                 Intent intent = new Intent(InventoryMainActivity.this,
                         EditInventoryActivity.class);
-                startActivity(intent);
 
+                startActivity(intent);
             }
         });
+
 
 
         /**
-         * Inventory grid cursor is clicked
-         *
-         * ***configure
+         * Inventory list adapted cursor is clicked
          */
         inventoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                 Intent intent = new Intent(InventoryMainActivity.this, EditInventoryActivity.class);
 
-                Uri uri = ContentUris.withAppendedId(MainInventoryItem.CONTENT_URI, id);
+                //updates the fact that this activity in this instance still
+                //technially exists, i.e. it doesnt create a new item page
+                //it only revives the previous instance
+                Uri uri = ContentUris.withAppendedId(MainInventoryItem.CONTENT_URI, l);
                 intent.setData(uri);
+
                 startActivity(intent);
             }
         });
 
+        //loader manager
         getLoaderManager().initLoader(INVENTORY_LOADER,null,this);
 
         //add any more bottons in the inventory activity class here if need
     }
-
-
 
 
     @NonNull
