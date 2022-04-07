@@ -1,6 +1,5 @@
 package edu.gmu.systeminventorydeluxe.database;
 
-
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -16,21 +15,27 @@ import java.security.Provider;
 
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
 
-
 /**
  * Code in the class is based off of code from outside sources
  *
- *  This class is almost entirely from this source. But addapted to
+ *  This class is almost entirely from this source. But adapted to
  *  be used with the ItemInventoryContract.java and DatabaseHelper.java
  *  which was created previously using the other sources in the file.
  *
  * Code written by Michał Kołnierzak, code is licenced using a MIT licence
- * and free for commerical/private use and modifications
+ * and free for commercial/private use and modifications
  *
  * https://github.com/kazdavegyms/Android-Inventory-Management-App-master
  *
  *
  */
+
+//////////////////////////////////////////////////////////////////////////////////
+//PLEASE DON'T EDIT ANY IMAGE STUFF/NTS comments, IZZY WILL HANDLE LATER,I promise
+/////////////////////////////////////////////////////////////////////////////////
+
+    //Additionally, if you want more than 1 table, there will have to be
+    //stark differences here are switch statement control
 
 public class DatabaseProvider extends ContentProvider {
 

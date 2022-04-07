@@ -18,7 +18,7 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
  *  Used for the bindView();
  *
  * Code written by Michał Kołnierzak, code is licenced using a MIT licence
- * and free for commerical/private use and modifications
+ * and free for commercial/private use and modifications
  *
  * https://github.com/kazdavegyms/Android-Inventory-Management-App-master
  *
@@ -29,6 +29,10 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
  * Adaptor for the inventory items for when they go into the list view
  */
 public class AdaptorInventoryList extends CursorAdapter {
+
+    //////////////////////////////////////////////////////////////////////////////////
+    //PLEASE DON'T EDIT ANY IMAGE STUFF/NTS comments, IZZY WILL HANDLE LATER,I promise
+    /////////////////////////////////////////////////////////////////////////////////
 
     //Android documentation wanted this here
     public static final int FLAG_AUTO_REQUEREY = 0;
@@ -42,13 +46,6 @@ public class AdaptorInventoryList extends CursorAdapter {
 
     //Izzy wants images, Izzy will handle said images.
     //private ImageView itemImage; //NTS 4 IZZ: handle the image stuff
-
-
-    ///////////////////////////////////////////////////////////////////////
-    //Items units will defult to having no units, functionallity
-    //will be added later on
-
-    ///////////////////////////////////////////////////////////////////////
 
 
     /**

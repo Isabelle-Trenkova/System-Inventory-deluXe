@@ -1,6 +1,5 @@
 package edu.gmu.systeminventorydeluxe.database;
 
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -17,7 +16,7 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
  * this relates to DatabaseProvider.java
  *
  * Code written by Michał Kołnierzak, code is licenced using a MIT licence
- * and free for commerical/private use and modifications
+ * and free for commercial/private use and modifications
  *
  * https://github.com/kazdavegyms/Android-Inventory-Management-App-master
  *
@@ -26,13 +25,17 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
  *  additionally
  *
  *
- *  The following source used is lisences under a  CC BY-SA 3.0 lisecence and is
+ *  The following source used is licenses under a  CC BY-SA 3.0 license and is
  *  free for use and adaption
  *
  *  https://riptutorial.com/android/example/9221/create-a-contract--helper-and-provider-for-sqlite-in-android
  *
  *
  */
+
+//////////////////////////////////////////////////////////////////////////////////
+//PLEASE DON'T EDIT ANY IMAGE STUFF/NTS comments, IZZY WILL HANDLE LATER,I promise
+/////////////////////////////////////////////////////////////////////////////////
 
 /**
  * THe database helper class.
@@ -119,13 +122,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         + MainInventoryItem.ITEM_LOW_THRESHOLD + " INTEGER DEFAULT 0);";
                         /*+ MainInventoryItem.ITEM_IMAGE + " TEXT);";*/
 
+        //DON'T ADD ANY EXTRA COLUMNS TO THE ABOVE UNLESS YOU CAN CHANGE EVERY OTHER BIT OF CODE
+        //IN THE REST OF THE APP TO REFLECT THAT
+
+        //There can be more tables, have them down here
+
         sqLiteDatabase.execSQL(SQL_CREATE_ENTRIES);
     }
 
 
     /**
-     * Auto generated: updata and upgrades. Can be considered
-     * for security and forwards/backwards compataability
+     * Auto generated: update and upgrades. Can be considered
+     * for security and forwards/backwards compatibility
      * this should run, but it may and it required
      * @param sqLiteDatabase the database
      * @param i the current/old version of the database

@@ -22,19 +22,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
+import android.content.Loader;
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
 
 /**
- * Code in the class is paritally based off of code for outside sources
+ * Code in the class is partially based off of code for outside sources
  * Only the adding and removing methods
  * This code was also used as a resource for the loader methods imported
  * from LoaderManager
  *
  * Code written by Michał Kołnierzak, code is licenced using a MIT licence
- * and free for commerical/private use and modifications
+ * and free for commercial/private use and modifications
  *
  * https://github.com/kazdavegyms/Android-Inventory-Management-App-master
  *
@@ -53,6 +53,12 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
  */
 public class EditInventoryActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>{
+
+    //////////////////////////////////////////////////////////////////////////////////
+    //PLEASE DONT EDIT ANY IMAGE STUFF/NTS comments, IZZY WILL HANDLE LATER,I promise
+    /////////////////////////////////////////////////////////////////////////////////
+
+    private static final int PRODUCT_EXISTS = 1;
 
     //NTS: add image functionality - IZ
     // //private ImageButton productImage;
@@ -116,8 +122,6 @@ public class EditInventoryActivity extends AppCompatActivity implements
         //IZZY - right here
         //productImage = (ImageButton) findViewById(R.id.product_image);
 
-
-
         saveButton = (Button) findViewById(R.id.save_button);
         deleteButton = (Button) findViewById(R.id.delete_button);
         increment = (Button) findViewById(R.id.increment_button);
@@ -141,14 +145,17 @@ public class EditInventoryActivity extends AppCompatActivity implements
         inventoryItemStatus = (intent.getData());
 
         if (inventoryItemStatus != null) { //it is not newly made
+
             dynamicMessage.setText("Edit Item");
-            ////////////////////////////////////////////////////////////
-            //NTS: see if you can set the hints to display the cursor information
-            // - IZZ
-            ///////////////////////////////////////////////////////////////
+
+            //loads previous information of the item if the
+            //item has existed
+            getLoaderManager().initLoader(PRODUCT_EXISTS, null, this);
+
         } else {
 
             dynamicMessage.setText("Add Item");
+
         }
     }
 
@@ -159,10 +166,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
 
-                //preforms some action
-                //show use intent to go to a new activity to get the recipe stuffs,
-                //then show integrate the information back in the
-                //database
+                //IMPLEMENT RECIPE STUFF HERE
             }
         });
 
@@ -176,7 +180,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
                 if (completed != true) {
 
                     //probably throw an exception here
-                    //THis shouldnt fail
+                    //This shouldnt fail
                 }
             }
         });
@@ -223,7 +227,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
         builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
-                //Doesnt actually want to delete
+                //Doesn't actually want to delete
                 if (dialog != null) {
                     dialog.dismiss();
                 }
@@ -283,6 +287,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
         String stringQuantity = itemQuantity.getText().toString().trim();
         String stringDescription = itemDescription.getText().toString().trim();
         String stringThreshold = lowItemEditText.getText().toString().trim();
+
 
         //DO IMAGE STUFF
         //byte[] imageByte = getBytes(imageBitmap);

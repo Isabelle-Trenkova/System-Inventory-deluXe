@@ -2,15 +2,12 @@ package edu.gmu.systeminventorydeluxe;
 
 import android.app.LoaderManager;
 import android.content.ContentUris;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -20,20 +17,17 @@ import android.content.CursorLoader;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-//import androidx.appcompat.app.AppCompatActivity;
-//import androidx.appcompat.app.AppCompatActivity;
-//import android.support.v7.app.AppCompatActivity;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
 
 /**
- * Code in the class is paritally based off of code for outside sources
+ * Code in the class is partially based off of code for outside sources
  * Used for the loader methods imported from LoaderManager
  *
  * Code written by Michał Kołnierzak, code is licenced using a MIT licence
- * and free for commerical/private use and modifications
+ * and free for commercial/private use and modifications
  *
  * https://github.com/kazdavegyms/Android-Inventory-Management-App-master
  *
@@ -46,6 +40,10 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
  */
 public class InventoryMainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
+
+    //////////////////////////////////////////////////////////////////////////////////
+    //PLEASE DON'T EDIT ANY IMAGE STUFF/NTS comments, IZZY WILL HANDLE LATER,I promise
+    /////////////////////////////////////////////////////////////////////////////////
 
     // Note to self:
     //  Handle searching function and
@@ -85,7 +83,7 @@ public class InventoryMainActivity extends AppCompatActivity implements
      */
     private void buttonhandler() {
 
-        //Folating action button
+        //Floating action button
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +112,7 @@ public class InventoryMainActivity extends AppCompatActivity implements
                 Intent intent = new Intent(InventoryMainActivity.this, EditInventoryActivity.class);
 
                 //updates the fact that this activity in this instance still
-                //technially exists, i.e. it doesnt create a new item page
+                //technically exists, i.e. it doesn't create a new item page
                 //it only revives the previous instance
                 Uri uri = ContentUris.withAppendedId(MainInventoryItem.CONTENT_URI, l);
                 intent.setData(uri);
@@ -126,7 +124,7 @@ public class InventoryMainActivity extends AppCompatActivity implements
         //loader manager
         getLoaderManager().initLoader(INVENTORY_LOADER,null,this);
 
-        //add any more bottons in the inventory activity class here if need
+        //add any more buttons in the inventory activity class here if need
     }
 
 

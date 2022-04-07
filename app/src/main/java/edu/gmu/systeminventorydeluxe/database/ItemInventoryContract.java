@@ -4,7 +4,6 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-
 /**
  * Code in the class is based off of code for outside sources:
  *
@@ -15,22 +14,24 @@ import android.provider.BaseColumns;
  * this relates to DatabaseProvider.java
  *
  * Code written by Michał Kołnierzak, code is licenced using a MIT licence
- * and free for commerical/private use and modifications
+ * and free for commercial/private use and modifications
  *
  * https://github.com/kazdavegyms/Android-Inventory-Management-App-master
  *
- *
- * /////////////////////////////////////////////////////////////////////////
  * additionally
  *
  *
- * The following source used is lisences under a  CC BY-SA 3.0 lisecence and is
+ * The following source used is licenses under a  CC BY-SA 3.0 license and is
  * free for use and adaption
  *
  * https://riptutorial.com/android/example/9221/create-a-contract--helper-and-provider-for-sqlite-in-android
  *
  *
  */
+
+//////////////////////////////////////////////////////////////////////////////////
+//PLEASE DON'T EDIT ANY IMAGE STUFF/NTS comments, IZZY WILL HANDLE LATER,I promise
+/////////////////////////////////////////////////////////////////////////////////
 
 public class ItemInventoryContract {
 
@@ -117,7 +118,7 @@ public class ItemInventoryContract {
 
         public final static String TABLE_NAME = "maininventory";
 
-        //initalized all fields here as constants
+        //initialized all fields here as constants
 
         public final static String _ID = BaseColumns._ID;
 
@@ -133,6 +134,12 @@ public class ItemInventoryContract {
 
         //add more constants/information for the database here
         //remember to adjust the specific helper and provider classes as well
+        //and all other code to reflect the change
     }
+
+    //DON'T ADD ANY EXTRA COLUMNS TO THE ABOVE UNLESS YOU CAN CHANGE EVERY OTHER BIT OF CODE
+    //IN THE REST OF THE APP TO REFLECT THAT
+
+    //There can be more inner classes, have them down here
 
 }
