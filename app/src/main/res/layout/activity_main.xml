@@ -4,16 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#4EEDDE"
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/Test"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/test_string"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="33dp"
+        android:text="@string/main_menu_title"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_full_inventory"
+        android:layout_width="298dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="150dp"
+        android:text="@string/full_inventory"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.566"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/button_priority_inventory"
+        android:layout_width="298dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/priority_inventory"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/button_full_inventory"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/button_full_inventory"
+        app:layout_constraintTop_toBottomOf="@+id/button_full_inventory" />
+
+    <Button
+        android:id="@+id/button_low_inventory"
+        android:layout_width="298dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/low_inventory"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/button_priority_inventory"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/button_priority_inventory"
+        app:layout_constraintTop_toBottomOf="@+id/button_priority_inventory" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

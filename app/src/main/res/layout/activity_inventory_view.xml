@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context="edu.gmu.systeminventorydeluxe.InventoryMainActivity">
+
+
+    <!-- This is the list view, which will allow us to add
+    little icons of inventory showing each item individually and all together-->
+    <ListView
+        android:id="@+id/inventory_item_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:drawSelectorOnTop="true">
+
+
+    </ListView>
+
+
+    <!--There may be an error here when viewing design
+    view, it does not affect compilation. Leave it alone please <3
+
+    This is the floating action button to add inventory items-->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        app:srcCompat="@android:drawable/ic_input_add" />
+</RelativeLayout>
