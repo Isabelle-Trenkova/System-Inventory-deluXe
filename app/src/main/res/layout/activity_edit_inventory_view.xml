@@ -13,8 +13,8 @@ item name, weight, etc-->
     as in makes this view scrollable-->
     <ScrollView
         android:id="@+id/edit_location_scrollView"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
