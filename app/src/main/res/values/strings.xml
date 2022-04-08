@@ -3,9 +3,10 @@
 
     <!--Edit Inventory XML-->
     <string name="inventory_name">Insert name of product here!</string>
-    <string name="quant_of_item">Insert the quantity of your item here!</string>
+    <string name="quant_of_item">Quantity</string>
     <string name="dynamic_message">Add Item</string>
-    <string name="recipe_string"> </string>
+    <string name="item_description">Type a brief description here!</string>
+    <string name="threshold_string">Minimum quantity</string>
 
     <!--EDIT Inventory Class-->
 
