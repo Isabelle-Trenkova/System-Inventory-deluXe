@@ -18,7 +18,6 @@
         *
         * https://github.com/kazdavegyms/Android-Inventory-Management-App-master
         *-->
-    <string name="threshold_string">Insert Low Item Threshold here!</string>
     <string name="empty_field_toast">Please insert all information!</string>
     <string name="insert_failed">Try again.</string>
     <string name="insert_success">Save Successful</string>

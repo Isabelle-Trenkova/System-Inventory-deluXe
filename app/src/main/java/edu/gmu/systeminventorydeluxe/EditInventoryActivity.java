@@ -112,7 +112,6 @@ public class EditInventoryActivity extends AppCompatActivity implements
     protected void define() {
 
         dynamicMessage = (TextView) findViewById(R.id.messageView);
-        quantityMessage = (TextView) findViewById(R.id.quantity_display);
 
         nameItem = (EditText) findViewById(R.id.name_item);
         itemQuantity = (EditText) findViewById(R.id.quantity_item);
