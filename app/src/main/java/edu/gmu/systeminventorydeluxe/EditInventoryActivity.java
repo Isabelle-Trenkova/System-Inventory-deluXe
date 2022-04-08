@@ -49,7 +49,7 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
  * otherwise an edit message will be displayed.
  *
  * From any action that will edit an item all activity should be redirected
- * here and to the Activity_edit_inventory to actually edit an item
+ * here and to the activity_edit_inventory to actually edit an item
  */
 public class EditInventoryActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>{
@@ -112,7 +112,6 @@ public class EditInventoryActivity extends AppCompatActivity implements
     protected void define() {
 
         dynamicMessage = (TextView) findViewById(R.id.messageView);
-        quantityMessage = (TextView) findViewById(R.id.quantity_display);
 
         nameItem = (EditText) findViewById(R.id.name_item);
         itemQuantity = (EditText) findViewById(R.id.quantity_item);

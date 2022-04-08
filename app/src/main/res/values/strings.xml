@@ -3,9 +3,10 @@
 
     <!--Edit Inventory XML-->
     <string name="inventory_name">Insert name of product here!</string>
-    <string name="quant_of_item">Insert the quantity of your item here!</string>
+    <string name="quant_of_item">Quantity</string>
     <string name="dynamic_message">Add Item</string>
-    <string name="recipe_string"> </string>
+    <string name="item_description">Type a brief description here!</string>
+    <string name="threshold_string">Minimum quantity</string>
 
     <!--EDIT Inventory Class-->
 
@@ -17,7 +18,6 @@
         *
         * https://github.com/kazdavegyms/Android-Inventory-Management-App-master
         *-->
-    <string name="threshold_string">Insert Low Item Threshold here!</string>
     <string name="empty_field_toast">Please insert all information!</string>
     <string name="insert_failed">Try again.</string>
     <string name="insert_success">Save Successful</string>
