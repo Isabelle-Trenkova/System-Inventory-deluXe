@@ -54,7 +54,7 @@ public class InventoryMainActivity extends AppCompatActivity implements
     private static final int INVENTORY_LOADER = 0;//loader is a param of the loader manager
 
     /**
-     * Runs upon new instance of the InventoryMainActivity
+     * Runs upon each new instance of the InventoryMainActivity
      *
      * @param savedInstanceState configurations of any previous instance of this activity
      */
@@ -64,7 +64,7 @@ public class InventoryMainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_inventory_main_view);
 
         define(); //define local variables
-        buttonhandler(); //instantiate & activate activity_inventory_main_view buttons
+        buttonHandler(); //instantiate & activate activity_inventory_main_view buttons
     }
 
     /**
@@ -88,7 +88,7 @@ public class InventoryMainActivity extends AppCompatActivity implements
     /**
      * Instantiates and activates activity_inventory_main_view buttons
      */
-    private void buttonhandler() {
+    private void buttonHandler() {
 
         //floating action button
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
