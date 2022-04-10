@@ -349,6 +349,38 @@ public class EditInventoryActivity extends AppCompatActivity implements
     }
 
 
+    @Override
+    public void onBackPressed() {
+
+        //Alert dialog sequence
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(getString(R.string.backpress));
+
+        builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                //yes actually delete
+                finish();
+                dialog.dismiss();
+
+            }
+        });
+        builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+                //Doesn't actually want to delete
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        // Create and show the Alert Dialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+
+    }
 
     /**
      * Automatically generated loader methods
