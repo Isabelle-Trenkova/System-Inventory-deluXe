@@ -30,6 +30,11 @@
 
         </activity>
 
+        <activity
+            android:name=".EditRecipeActivity"
+            android:exported="true">
+
+        </activity>
 
         <provider
             android:name=".database.DatabaseProvider"

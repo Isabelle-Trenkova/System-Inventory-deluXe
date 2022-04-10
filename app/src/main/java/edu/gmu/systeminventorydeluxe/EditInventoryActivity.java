@@ -77,6 +77,9 @@ public class EditInventoryActivity extends AppCompatActivity implements
     private Button decrement;
     private Button deleteButton;
 
+
+    private double quantCount;
+
     ///////////////////////////////////////////////
     //item weight will be added in a little later
     //AND RECIPE STUFF
@@ -166,6 +169,9 @@ public class EditInventoryActivity extends AppCompatActivity implements
             public void onClick(View view) {
 
                 //IMPLEMENT RECIPE STUFF HERE
+                Intent intent = new Intent(EditInventoryActivity.this, EditRecipeActivity.class);
+
+                startActivity(intent);
             }
         });
 
@@ -198,12 +204,25 @@ public class EditInventoryActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
 
+                quantCount = Double.parseDouble(itemQuantity.getText().toString());
+
+                quantCount += 1;
+
+                itemQuantity.setText(Double.toString(quantCount));
+
+
             }
         });
 
         decrement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                quantCount = Double.parseDouble(itemQuantity.getText().toString());
+
+                quantCount -= 1;
+
+                itemQuantity.setText(Double.toString(quantCount));
 
             }
         });
@@ -377,8 +396,8 @@ public class EditInventoryActivity extends AppCompatActivity implements
 
 
                 String productNameString = cursor.getString(productNameIndex);
-                int quantityInteger = cursor.getInt(quantityIndex);
-                int thresholdInteger = cursor.getInt(thresholdIndex);
+                Double quantityInteger = cursor.getDouble(quantityIndex);
+                Double thresholdInteger = cursor.getDouble(thresholdIndex);
                 String descitptionString = cursor.getString(descriptionIndex);
 
                 /*byte[] b = cursor.getBlob(imageIndex);
@@ -391,8 +410,8 @@ public class EditInventoryActivity extends AppCompatActivity implements
                 }*/
 
                 nameItem.setText(productNameString);
-                itemQuantity.setText(String.valueOf(quantityInteger));
-                lowItemEditText.setText(String.valueOf(thresholdInteger));
+                itemQuantity.setText(Double.toString(quantityInteger));
+                lowItemEditText.setText(Double.toString(thresholdInteger));
                 itemDescription.setText(descitptionString);
             }
             while (cursor.moveToNext());
