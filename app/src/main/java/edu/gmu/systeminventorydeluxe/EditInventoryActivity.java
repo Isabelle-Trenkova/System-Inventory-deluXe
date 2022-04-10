@@ -63,8 +63,6 @@ public class EditInventoryActivity extends AppCompatActivity implements
     //NTS: add image functionality - IZ
     // //private ImageButton productImage;
     private TextView dynamicMessage;
-    private TextView quantityMessage;
-
 
     private EditText itemDescription;
     private EditText nameItem;
