@@ -35,4 +35,12 @@
     <string name="full_inventory">Full Inventory</string>
     <string name="priority_inventory">Priority Items</string>
     <string name="low_inventory">Low Stock Items</string>
+
+    <!--Recipe view-->
+    <string name="ingridients_required">Ingredients Required: </string>
+    <string name="input_ingrediants_here">Input ingredients here!</string>
+    <string name="recipe_steps">Recipe Steps:</string>
+    <string name="input_recipe_steps_here">Input recipe steps here!</string>
+    <string name="add_recipe">Add Recipe</string>
+    <string name="recipe_ingredients">Recipe Ingredients:</string>
 </resources>
