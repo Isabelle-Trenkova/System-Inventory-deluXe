@@ -12,22 +12,22 @@ import android.widget.Button;
  */
 public class MainActivity extends AppCompatActivity {
 
-    Button fullInventoryButton;
+    Button fullInventoryButton; //accesses InventoryMainActivity
     Button priorityInventoryButton;
     Button lowInventoryButton;
 
     /**
      * Runs upon each new instance of MainActivity.
      *
-     * @param savedInstanceState configurations of any previous instance of this activity
+     * @param savedInstanceState previous state of this activity
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_view);
 
-        define(); //define local variables
-        buttonHandler(); //instantiate & activate activity_main_view buttons
+        define(); //define activity_main_view buttons
+        buttonHandler(); //activate activity_main_view buttons
     }
 
     /**

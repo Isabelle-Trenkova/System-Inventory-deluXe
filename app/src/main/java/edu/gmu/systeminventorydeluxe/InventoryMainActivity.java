@@ -20,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
 
-/**
+/*
  * Code in the class is partially based off of code for outside sources
  * Used for the loader methods imported from LoaderManager
  *
@@ -32,31 +32,26 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
  */
 
 /**
- * InventoryMainActivity enables the user to view/edit their inventory by:
+ * InventoryMainActivity enables the user to dynamically view their inventory by:
  *      pulling existing data from database
  *      adapting that data to populate the activity_inventory_main_view layout
  *      tracking changes made by user to their inventory through EditInventoryActivity
+ *
+ * InventoryMainActivity is accessed through MainActivity
  */
 public class InventoryMainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
-    //////////////////////////////////////////////////////////////////////////////////
-    //PLEASE DON'T EDIT ANY IMAGE STUFF/NTS comments, IZZY WILL HANDLE LATER,I promise
-    /////////////////////////////////////////////////////////////////////////////////
-
-    // Note to self:
-    //  Handle searching function and
-    //  and image stuff
-    //  -Iz
+    //FIXME: handle searching function, handle image stuff (Izzy)
 
     private ListView inventoryList; //the GUI list view itself
     AdaptorInventoryList listAdaptor; //the adaptor to be used to populate the GUI list
     private static final int INVENTORY_LOADER = 0;//loader is a param of the loader manager
 
     /**
-     * Runs upon each new instance of the InventoryMainActivity
+     * Runs upon each new instance of InventoryMainActivity
      *
-     * @param savedInstanceState configurations of any previous instance of this activity
+     * @param savedInstanceState previous state of this activity
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +63,7 @@ public class InventoryMainActivity extends AppCompatActivity implements
     }
 
     /**
-     * Defines local variables
+     * Defines tools to populate inventory list:
      *      ListView from activity_inventory_main_view - displays inventory in GUI
      *      AdaptorInventoryList object - adapts data from database to fit GUI
      *
@@ -130,10 +125,10 @@ public class InventoryMainActivity extends AppCompatActivity implements
 
 
     /**
-     * Runs upon new instance of the InventoryMainActivity to populate ListView from database.
+     * Populates ListView from database.
      *
      * @param id ID of item row in database
-     * @param args not used
+     * @param args //FIXME: what is this?
      * @return CursorLoader points to item with given ID
      */
     @NonNull
@@ -145,6 +140,7 @@ public class InventoryMainActivity extends AppCompatActivity implements
                 MainInventoryItem.ITEM_NAME,
                 MainInventoryItem.ITEM_QUANTITY
 
+                //FIXME: add photo (Izzy)
                 //MainInventoryItem.ITEM_PHOTO
         };
 
@@ -178,5 +174,4 @@ public class InventoryMainActivity extends AppCompatActivity implements
 
         listAdaptor.swapCursor(null);
     }
-
 }

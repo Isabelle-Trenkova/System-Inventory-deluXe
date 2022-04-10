@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
 
-/**
+/*
  * Code in the class is based off of code for outside sources:
  *
  * ////////////////////////////////////////////////
@@ -44,7 +44,7 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
 public class DatabaseHelper extends SQLiteOpenHelper {
 
 
-    /**
+    /*
      * Some sources for understanding:
      *
      *      General SQLite:
