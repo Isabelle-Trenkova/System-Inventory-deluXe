@@ -146,7 +146,7 @@ public class EditRecipeActivity extends AppCompatActivity implements
 
             if (rowDeleted == 0) {
                 // If no data was removed, then show the error message
-                Toast.makeText(this, getString(R.string.remove_failed), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.fail_message), Toast.LENGTH_LONG).show();
             } else {
                 // If data was successfully removed, display a toast.
                 Toast.makeText(this, getString(R.string.remove_success),
@@ -193,16 +193,16 @@ public class EditRecipeActivity extends AppCompatActivity implements
         if (recipeStatus == null) {
             Uri newUri = getContentResolver().insert(ItemRecipes.CONTENT_URI, values);
             if (newUri == null) {
-                Toast.makeText(this, getString(R.string.insert_failed), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.fail_message), Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(this, getString(R.string.insert_success), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.save_successful), Toast.LENGTH_SHORT).show();
             }
         } else {
             int rowsAffected = getContentResolver().update(recipeStatus, values, null, null);
             if (rowsAffected == 0) {
-                Toast.makeText(this, getString(R.string.update_failed), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.fail_message), Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(this, getString(R.string.update_success), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.save_successful), Toast.LENGTH_SHORT).show();
             }
         }
 

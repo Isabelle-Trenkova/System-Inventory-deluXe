@@ -34,11 +34,6 @@
     <string name="no">No</string>
 
 
-    <!--Main Menu-->
-    <string name="main_menu_title">Welcome to SIX</string>
-    <string name="full_inventory">Full Inventory</string>
-    <string name="priority_inventory">Priority Items</string>
-    <string name="low_inventory">Low Stock Items</string>
 
     <!--Recipe view-->
     <string name="ingridients_required">Ingredients Required: </string>
@@ -49,7 +44,6 @@
     <string name="recipe_ingredients">Recipe Ingredients:</string>
     <string name="remove_recipe">Are you sure you want to delete this recipe?</string>
     <string name="empty_product">This item has not been saved</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
+
 
 </resources>

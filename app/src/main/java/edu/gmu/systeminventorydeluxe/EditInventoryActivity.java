@@ -68,6 +68,8 @@ public class EditInventoryActivity extends AppCompatActivity implements
     private Button decrement;
     private Button deleteButton;
 
+    private Double quantCount;
+
     //FIXME: add image functionality (Izzy)
     //private ImageButton productImage;
 
