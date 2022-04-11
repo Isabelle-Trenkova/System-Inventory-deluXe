@@ -16,7 +16,7 @@ import java.security.Provider;
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.ItemRecipes;
 
-/**
+/*
  * Code in the class is based off of code from outside sources
  *
  *  This class is almost entirely from this source. But adapted to

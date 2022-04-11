@@ -4,7 +4,7 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-/**
+/*
  * Code in the class is based off of code for outside sources:
  *
  * ///////////////////////////////////////////////////////////////////////////
@@ -35,7 +35,7 @@ import android.provider.BaseColumns;
 
 public class ItemInventoryContract {
 
-    /**
+    /*
      * Some sources:
      *
      *      General SQLite:

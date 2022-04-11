@@ -8,9 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.content.Loader;
 import android.content.CursorLoader;
 
@@ -22,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
 
-/**
+/*
  * Code in the class is partially based off of code for outside sources
  * Used for the loader methods imported from LoaderManager
  *
@@ -31,92 +29,90 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
  *
  * https://github.com/kazdavegyms/Android-Inventory-Management-App-master
  *
- *
  */
 
 /**
- * This will be the main place inventory can viewed, keeping
- * track of the inventory itself
+ * InventoryMainActivity enables the user to dynamically view their inventory by:
+ *      pulling existing data from database
+ *      adapting that data to populate the activity_inventory_main_view layout
+ *      tracking changes made by user to their inventory through EditInventoryActivity
+ *
+ * InventoryMainActivity is accessed through MainActivity
  */
 public class InventoryMainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
-    //////////////////////////////////////////////////////////////////////////////////
-    //PLEASE DON'T EDIT ANY IMAGE STUFF/NTS comments, IZZY WILL HANDLE LATER,I promise
-    /////////////////////////////////////////////////////////////////////////////////
+    //FIXME: handle searching function, handle image stuff (Izzy)
 
-    // Note to self:
-    //  Handle searching function and
-    //  and image stuff
-    //  -Iz
-
-    private ListView inventoryList; //The list itself
-    AdaptorInventoryList listAdaptor; //The adaptor to be used here
-    private static final int INVENTORY_LOADER = 0;//loader, its a param of the loader manager
+    private ListView inventoryList; //the GUI list view itself
+    AdaptorInventoryList listAdaptor; //the adaptor to be used to populate the GUI list
+    private static final int INVENTORY_LOADER = 0;//loader is a param of the loader manager
 
     /**
-     * Runs upon new instance of the app
-     * @param savedInstanceState
+     * Runs upon each new instance of InventoryMainActivity
+     *
+     * @param savedInstanceState previous state of this activity
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inventory_view);
+        setContentView(R.layout.activity_inventory_main_view);
 
-        define();
-        buttonhandler();
+        define(); //define local variables
+        buttonHandler(); //instantiate & activate activity_inventory_main_view buttons
     }
 
     /**
-     * defines the listview as well as setting the adaptor and focus
-     * * */
+     * Defines tools to populate inventory list:
+     *      ListView from activity_inventory_main_view - displays inventory in GUI
+     *      AdaptorInventoryList object - adapts data from database to fit GUI
+     *
+     * Sets ListView properties
+     */
     private void define() {
 
+        //define local variables
         inventoryList = (ListView) findViewById(R.id.inventory_item_view);
         listAdaptor = new AdaptorInventoryList(this, null, 1);
+
+        //set ListView properties
         inventoryList.setAdapter(listAdaptor);
         inventoryList.setItemsCanFocus(true);
     }
 
     /**
-     * Handles the buttons
+     * Instantiates and activates activity_inventory_main_view buttons
      */
-    private void buttonhandler() {
+    private void buttonHandler() {
 
-        //Floating action button
+        //floating action button
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                //when the floating action button is clicked this will run
-                //the action to the add/edit page to add a new item
-
+                //when clicked, floating action button starts EditInventoryActivity to add new item
                 Intent intent = new Intent(InventoryMainActivity.this,
                         EditInventoryActivity.class);
 
+                //start new activity (EditInventoryActivity)
                 startActivity(intent);
             }
         });
 
-
-
-        /**
-         * Inventory list adapted cursor is clicked
-         */
+        //clickable ListView
         inventoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                //when item in ListView is clicked, starts EditInventoryActivity to edit that item
                 Intent intent = new Intent(InventoryMainActivity.this, EditInventoryActivity.class);
 
-                //updates the fact that this activity in this instance still
-                //technically exists, i.e. it doesn't create a new item page
-                //it only revives the previous instance
+                //populates item edit page (activity_edit_inventory_view) with existing item data
                 Uri uri = ContentUris.withAppendedId(MainInventoryItem.CONTENT_URI, l);
                 intent.setData(uri);
 
+                //start new activity (EditInventoryActivity)
                 startActivity(intent);
             }
         });
@@ -124,10 +120,17 @@ public class InventoryMainActivity extends AppCompatActivity implements
         //loader manager
         getLoaderManager().initLoader(INVENTORY_LOADER,null,this);
 
-        //add any more buttons in the inventory activity class here if need
+        //add any more buttons in the inventory activity class here if needed
     }
 
 
+    /**
+     * Populates ListView from database.
+     *
+     * @param id ID of item row in database
+     * @param args //FIXME: what is this?
+     * @return CursorLoader points to item with given ID
+     */
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
@@ -137,8 +140,10 @@ public class InventoryMainActivity extends AppCompatActivity implements
                 MainInventoryItem.ITEM_NAME,
                 MainInventoryItem.ITEM_QUANTITY
 
-                /*MainInventoryItem.ITEM_PHOTO*/
+                //FIXME: add photo (Izzy)
+                //MainInventoryItem.ITEM_PHOTO
         };
+
         return new CursorLoader(this,
                 MainInventoryItem.CONTENT_URI,
                 projection,
@@ -147,16 +152,26 @@ public class InventoryMainActivity extends AppCompatActivity implements
                 null);
     }
 
+    /**
+     * Updates CursorLoader to point to next item in database.
+     *
+     * @param loader current CursorLoader
+     * @param data data from next cursor
+     */
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
 
         listAdaptor.swapCursor(data);
     }
 
+    /**
+     * Sets CursorLoader to null after ListView populated from database
+     *
+     * @param loader current CursorLoader
+     */
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
 
         listAdaptor.swapCursor(null);
     }
-
 }
