@@ -19,12 +19,14 @@
             android:id="@+id/greetingMessage"
             android:layout_width="225dp"
             android:layout_height="67dp"
+            android:layout_marginStart="73dp"
             android:layout_marginEnd="73dp"
             android:gravity="center"
             android:text="@string/add_recipe"
             android:textColor="#2196F3"
             android:textSize="34sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -32,12 +34,15 @@
             android:id="@+id/ingridients"
             android:layout_width="209dp"
             android:layout_height="32dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="146dp"
+            android:gravity="center"
             android:text="@string/recipe_ingredients"
             android:textColor="#5627AA"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/greetingMessage" />
 
 
@@ -60,10 +65,12 @@
             android:layout_height="32dp"
             android:layout_marginTop="26dp"
             android:layout_marginEnd="146dp"
+            android:gravity="center"
             android:text="@string/recipe_steps"
             android:textColor="#5627AA"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ingridients_list" />
 
         <EditText
@@ -84,22 +91,22 @@
             android:id="@+id/save_button_recp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
-            android:layout_marginEnd="73dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="96dp"
             android:foregroundGravity="center"
             android:gravity="center"
             android:padding="8dp"
             android:text="Save"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/delete_button_recp"
             app:layout_constraintTop_toBottomOf="@+id/stepsList" />
 
         <Button
             android:id="@+id/delete_button_recp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="73dp"
-            android:layout_marginTop="56dp"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="96dp"
             android:gravity="center"
             android:padding="8dp"
             android:text="Delete"

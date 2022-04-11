@@ -175,14 +175,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
             }
         });
 
-        recipeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //FIXME: add recipe implementatin (Izzy)
-            }
-        });
-
+        
         //FIXME: add increment functionality!
         increment.setOnClickListener(new View.OnClickListener() {
             @Override
