@@ -175,32 +175,54 @@ public class EditInventoryActivity extends AppCompatActivity implements
             }
         });
 
-        
-        //FIXME: add increment functionality!
         increment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                quantCount = Double.parseDouble(itemQuantity.getText().toString());
+                String quantString = itemQuantity.getText().toString().trim();
 
-                quantCount += 1;
+                if (TextUtils.isEmpty(quantString)) {
 
-                itemQuantity.setText(Double.toString(quantCount));
+                    quantCount = 1.0;
+                    itemQuantity.setText(Double.toString(quantCount));
+                }
+                else {
 
+                    quantCount = Double.parseDouble(itemQuantity.getText().toString());
+
+                    quantCount += 1;
+                    itemQuantity.setText(Double.toString(quantCount));
+                }
 
             }
         });
 
-        //FIXME: add decrement functionality!
         decrement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                quantCount = Double.parseDouble(itemQuantity.getText().toString());
+                String quantString = itemQuantity.getText().toString().trim();
 
-                quantCount -= 1;
+                if (TextUtils.isEmpty(quantString)) {
 
-                itemQuantity.setText(Double.toString(quantCount));
+                    Toast.makeText(EditInventoryActivity.this, getString(R.string.neg_string),
+                            Toast.LENGTH_LONG).show();
+                }
+                else {
+
+                    quantCount = Double.parseDouble(itemQuantity.getText().toString());
+
+                    if (quantCount > 0.0) {
+
+                        quantCount -= 1;
+                        itemQuantity.setText(Double.toString(quantCount));
+                    }
+                    else {
+
+                        Toast.makeText(EditInventoryActivity.this, getString(R.string.neg_string),
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
 
             }
         });

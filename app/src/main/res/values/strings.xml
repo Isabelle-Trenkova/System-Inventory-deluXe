@@ -33,8 +33,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
-
-
+    
     <!--Recipe view-->
     <string name="ingridients_required">Ingredients Required: </string>
     <string name="input_ingrediants_here">Input ingredients here!</string>
@@ -44,6 +43,7 @@
     <string name="recipe_ingredients">Recipe Ingredients:</string>
     <string name="remove_recipe">Are you sure you want to delete this recipe?</string>
     <string name="empty_product">This item has not been saved</string>
+    <string name="neg_string">Quantity cannot be negative!</string>
 
 
 </resources>
