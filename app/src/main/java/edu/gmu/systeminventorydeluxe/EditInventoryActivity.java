@@ -98,6 +98,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
         //dynamic header
         dynamicMessage = (TextView) findViewById(R.id.messageView);
 
+        //FIXME: have itemName auto capitalize like itemDescription
         //item fields
         itemName = (EditText) findViewById(R.id.name_item);
         itemQuantity = (EditText) findViewById(R.id.quantity_item);
@@ -424,7 +425,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
     }
 
     /**
-     * Populates ListView from database.
+     * Populates edit/add page from database.
      *
      * @param id ID of item row in database
      * @param args //FIXME: what is this?
@@ -503,7 +504,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
     }
 
     /**
-     * Sets CursorLoader to null after ListView populated from database
+     * Sets CursorLoader to null after edit/add page populated from database
      *
      * @param loader current CursorLoader
      */
