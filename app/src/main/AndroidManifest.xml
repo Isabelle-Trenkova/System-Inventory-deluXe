@@ -36,6 +36,12 @@
 
         </activity>
 
+        <activity
+            android:name=".RecipeMainActivity"
+            android:exported="true">
+
+        </activity>
+
         <provider
             android:name=".database.DatabaseProvider"
             android:authorities="edu.gmu.systeminventorydeluxe"

@@ -160,11 +160,13 @@ public class ItemInventoryContract {
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_RECIPEITEM;
 
 
-        public final static String TABLE_NAME = "itemRecipe";
+        public final static String TABLE_NAME_RECIPE = "itemRecipe";
 
         //initialized all fields here as constants
 
         public final static String _ID = BaseColumns._ID;
+
+        public final static String RECIPE_NAME = "recipe";
 
         public final static String ITEM_INGREDIENTS = "ingredients";
 

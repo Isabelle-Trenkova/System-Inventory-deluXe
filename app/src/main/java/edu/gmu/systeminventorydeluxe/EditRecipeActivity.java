@@ -2,6 +2,7 @@ package edu.gmu.systeminventorydeluxe;
 
 import android.app.LoaderManager;
 import android.content.ContentValues;
+import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
@@ -15,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,6 +33,7 @@ public class EditRecipeActivity extends AppCompatActivity implements
 
     private EditText ingredients;
     private EditText steps;
+    private EditText nameRecipe;
 
     private TextView dynamicMessage;
 
@@ -51,13 +55,13 @@ public class EditRecipeActivity extends AppCompatActivity implements
 
     private void define() {
 
-
-
         saveButton = (Button) findViewById(R.id.save_button_recp);
         deleteButton = (Button) findViewById(R.id.delete_button_recp);
 
         ingredients = (EditText) findViewById(R.id.ingridients_list);
         steps = (EditText) findViewById(R.id.stepsList);
+        nameRecipe = (EditText) findViewById(R.id.name_of_recipe);
+
 
         dynamicMessage = (TextView) findViewById(R.id.greetingMessage);
 
@@ -85,12 +89,12 @@ public class EditRecipeActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
 
-                boolean completed = checkandsave();
+                boolean completed = check();
 
-                if (completed != true) {
+                if (completed) {
 
-                    //probably throw an exception here
-                    //This shouldnt fail
+                    saveProduct();
+                    finish();
                 }
             }
         });
@@ -103,10 +107,7 @@ public class EditRecipeActivity extends AppCompatActivity implements
             }
         });
 
-
     }
-
-
 
     private void showDeleteConfirmationDialog() {
 
@@ -158,19 +159,19 @@ public class EditRecipeActivity extends AppCompatActivity implements
     }
 
 
-    boolean checkandsave() {
+    boolean check() {
 
         String ingredientsString = ingredients.getText().toString().trim();
         String stepsString = steps.getText().toString().trim();
+        String nameString = nameRecipe.getText().toString().trim();
 
-        if (TextUtils.isEmpty(ingredientsString) || TextUtils.isEmpty(stepsString)) {
+        if (TextUtils.isEmpty(ingredientsString) || TextUtils.isEmpty(stepsString) ||
+                TextUtils.isEmpty(nameString)) {
             Toast.makeText(this, getString(R.string.empty_field_toast), Toast.LENGTH_LONG).show();
-        }
-        else {
 
-            saveProduct();
-            finish();
+            return false;
         }
+
         return true;
     }
 
@@ -178,10 +179,12 @@ public class EditRecipeActivity extends AppCompatActivity implements
 
         String ingredientsString = ingredients.getText().toString().trim();
         String stepsString = steps.getText().toString().trim();
+        String nameString = nameRecipe.getText().toString().trim();
 
         if (recipeStatus == null &&
                 TextUtils.isEmpty(ingredientsString)
-                && TextUtils.isEmpty(stepsString)) {
+                && TextUtils.isEmpty(stepsString)
+                && TextUtils.isEmpty(nameString)) {
 
             return;
         }
@@ -189,6 +192,7 @@ public class EditRecipeActivity extends AppCompatActivity implements
         ContentValues values = new ContentValues();
         values.put(ItemRecipes.ITEM_INGREDIENTS, ingredientsString);
         values.put(ItemRecipes.ITEM_STEPS, stepsString);
+        values.put(ItemRecipes.RECIPE_NAME, nameString);
 
         if (recipeStatus == null) {
             Uri newUri = getContentResolver().insert(ItemRecipes.CONTENT_URI, values);
@@ -243,18 +247,77 @@ public class EditRecipeActivity extends AppCompatActivity implements
 
     }
 
+    /**
+     * Populates ListView from database.
+     *
+     * @param id ID of item row in database
+     * @param args //FIXME: what is this?
+     * @return CursorLoader points to item with given ID
+     */
+    @NonNull
     @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return null;
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+
+        String[] projection =
+                {
+                        ItemRecipes._ID,
+                        ItemRecipes.RECIPE_NAME,
+                        ItemRecipes.ITEM_INGREDIENTS,
+                        ItemRecipes.ITEM_STEPS
+
+
+                };
+
+        return new CursorLoader(this,
+                recipeStatus,
+                projection,
+                null,
+                null,
+                null);
     }
 
+    /**
+     * Updates CursorLoader to point to next item in database.
+     *
+     * @param loader current CursorLoader
+     * @param cursor data from next cursor
+     */
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
 
+        if (cursor == null || cursor.getCount() < 1) {
+            return;
+        }
+
+        if (cursor.moveToFirst()) {
+            do {
+                int recipeNameIndex = cursor.getColumnIndex(ItemRecipes.RECIPE_NAME);
+                int stepsIndex = cursor.getColumnIndex(ItemRecipes.ITEM_STEPS);
+                int ingredientsIndex = cursor.getColumnIndex(ItemRecipes.ITEM_INGREDIENTS);
+
+
+                String productNameString = cursor.getString(recipeNameIndex);
+                String stepsString = cursor.getString(stepsIndex);
+                String ingredientsString = cursor.getString(ingredientsIndex);
+
+                nameRecipe.setText(productNameString);
+                ingredients.setText(ingredientsString);
+                steps.setText(stepsString);
+            }
+            while (cursor.moveToNext());
+        }
     }
 
+    /**
+     * Sets CursorLoader to null after ListView populated from database
+     *
+     * @param loader current CursorLoader
+     */
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
 
+        nameRecipe.setText("");
+        ingredients.setText("");
+        steps.setText("");;
     }
 }

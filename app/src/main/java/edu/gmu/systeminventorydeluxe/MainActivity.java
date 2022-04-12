@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     Button fullInventoryButton; //accesses InventoryMainActivity
     Button priorityInventoryButton;
     Button lowInventoryButton;
+    Button fullRecipesButton;
 
     /**
      * Runs upon each new instance of MainActivity.
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private void define() {
 
         fullInventoryButton = (Button) findViewById(R.id.button_full_inventory);
+        fullRecipesButton = (Button) findViewById(R.id.button_full_recipes);
 
         //two buttons are shells until InventoryMainActivity is finished
         priorityInventoryButton = (Button) findViewById(R.id.button_priority_inventory);
@@ -58,6 +60,16 @@ public class MainActivity extends AppCompatActivity {
                 //start new activity (InventoryMainActivity)
                 startActivity(intent);
 
+            }
+        });
+
+        fullRecipesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent( MainActivity.this, RecipeMainActivity.class);
+
+                startActivity(intent);
             }
         });
     }

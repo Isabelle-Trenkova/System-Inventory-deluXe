@@ -45,8 +45,8 @@ public class DatabaseProvider extends ContentProvider {
     private static final int INVENTORY = 100;
     private static final int INVENTORY_ID = 101;
 
-    private static final int RECIPE = 102;
-    private static final int RECIPE_ID = 103;
+    private static final int RECIPE = 200;
+    private static final int RECIPE_ID = 201;
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
@@ -107,20 +107,20 @@ public class DatabaseProvider extends ContentProvider {
         int match = sUriMatcher.match(uri);
         switch (match) {
             case INVENTORY:
-                cursor = db.query(MainInventoryItem.TABLE_NAME, projection, selection, selectionArgs, null, null, "name ASC");
+                cursor = db.query(MainInventoryItem.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             case INVENTORY_ID:
                 selection = MainInventoryItem._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                cursor = db.query(MainInventoryItem.TABLE_NAME, projection, selection, selectionArgs, null, null, "name ASC");
+                cursor = db.query(MainInventoryItem.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             case RECIPE:
-                cursor = db.query(ItemRecipes.TABLE_NAME, projection, selection, selectionArgs, null, null, "name ASC");
+                cursor = db.query(ItemRecipes.TABLE_NAME_RECIPE, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             case RECIPE_ID:
                 selection = ItemRecipes._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                cursor = db.query(ItemRecipes.TABLE_NAME, projection, selection, selectionArgs, null, null, "name ASC");
+                cursor = db.query(ItemRecipes.TABLE_NAME_RECIPE, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             default:
                 throw new IllegalArgumentException("Cannot Resolve URI " + uri);
@@ -230,6 +230,12 @@ public class DatabaseProvider extends ContentProvider {
      */
     private Uri insertRecipe(Uri uri, ContentValues values) {
 
+        String recipeNameString = values.getAsString(ItemRecipes.RECIPE_NAME);
+        if (recipeNameString == null) {
+
+            throw new IllegalArgumentException("Recipe Requires an Ingredients List");
+        }
+
         String recipeIngredientString = values.getAsString(ItemRecipes.ITEM_INGREDIENTS);
         if (recipeIngredientString == null) {
             throw new IllegalArgumentException("Recipe Requires an Ingredients List");
@@ -244,7 +250,7 @@ public class DatabaseProvider extends ContentProvider {
 
 
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
-        long id = db.insert(ItemRecipes.TABLE_NAME, null, values);
+        long id = db.insert(ItemRecipes.TABLE_NAME_RECIPE, null, values);
         if (id == -1) {
             Log.e(LOG_TAG, "Failed to insert row for " + uri);
             return null;
@@ -278,12 +284,12 @@ public class DatabaseProvider extends ContentProvider {
                 rowsDeleted = db.delete(MainInventoryItem.TABLE_NAME, selection, selectionArgs);
                 break;
             case RECIPE:
-                rowsDeleted = db.delete(ItemRecipes.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = db.delete(ItemRecipes.TABLE_NAME_RECIPE, selection, selectionArgs);
                 break;
             case RECIPE_ID:
                 selection = ItemRecipes._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                rowsDeleted = db.delete(ItemRecipes.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = db.delete(ItemRecipes.TABLE_NAME_RECIPE, selection, selectionArgs);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown Uri " + uri + "with match " + match);
@@ -383,6 +389,12 @@ public class DatabaseProvider extends ContentProvider {
      */
     private int updateRecipes(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 
+        String recipeNameString = values.getAsString(ItemRecipes.RECIPE_NAME);
+        if (recipeNameString == null) {
+
+            throw new IllegalArgumentException("Recipe Requires an Ingredients List");
+        }
+
         String recipeIngredientString = values.getAsString(ItemRecipes.ITEM_INGREDIENTS);
         if (recipeIngredientString == null) {
             throw new IllegalArgumentException("Recipe Requires an Ingredients List");
@@ -401,7 +413,7 @@ public class DatabaseProvider extends ContentProvider {
         }
 
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
-        int rowsUpdated = db.update(ItemRecipes.TABLE_NAME, values, selection, selectionArgs);
+        int rowsUpdated = db.update(ItemRecipes.TABLE_NAME_RECIPE, values, selection, selectionArgs);
         if (rowsUpdated != 0) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
