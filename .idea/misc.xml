@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Michael/Documents/School/GMU/Spring 2022/CS 321/Group Project/SIX/System-Inventory-deluXe/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/System-Inventory-deluXe/app/src/main/res/layout/activity_edit_inventory_view.xml" value="0.22" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/System-Inventory-deluXe/app/src/main/res/layout/activity_inventory_main_view.xml" value="0.153125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/System-Inventory-deluXe/app/src/main/res/layout/activity_inventory_view.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/System-Inventory-deluXe/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/System-Inventory-deluXe/app/src/main/res/layout/activity_scroll_test.xml" value="0.22" />
@@ -12,8 +13,6 @@
         <entry key="..\:/Users/izzyt/StudioProjects/System-Inventory-deluXe/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2025" />
         <entry key="..\:/Users/izzyt/StudioProjects/System-Inventory-deluXe/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2025" />
         <entry key="..\:/Users/izzyt/StudioProjects/System-Inventory-deluXe/app/src/main/res/layout/activity_edit_inventory_view.xml" value="0.275" />
-        <entry key="..\:/Users/izzyt/StudioProjects/System-Inventory-deluXe/app/src/main/res/layout/activity_edit_recipe.xml" value="0.275" />
-        <entry key="..\:/Users/izzyt/StudioProjects/System-Inventory-deluXe/app/src/main/res/layout/activity_inventory_main_view.xml" value="0.22962962962962963" />
         <entry key="..\:/Users/izzyt/StudioProjects/System-Inventory-deluXe/app/src/main/res/layout/activity_inventory_view.xml" value="0.27076923076923076" />
         <entry key="..\:/Users/izzyt/StudioProjects/System-Inventory-deluXe/app/src/main/res/layout/activity_main.xml" value="0.27076923076923076" />
         <entry key="..\:/Users/izzyt/StudioProjects/System-Inventory-deluXe/app/src/main/res/layout/item_view_list.xml" value="0.259375" />
