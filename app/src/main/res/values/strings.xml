@@ -29,8 +29,21 @@
     <string name="save_successful">Save Successful</string>
     <string name="remove_success">Delete Successful</string>
     <string name="remove_product">Are you sure you want to delete this product?</string>
-    <string name="empty_product">This item has not been saved</string>
+    <string name="backpress">"Are you sure you want to exit? \n Your data may be lost."</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+
+
+
+    <!--Recipe view-->
+    <string name="ingridients_required">Ingredients Required: </string>
+    <string name="input_ingrediants_here">Input ingredients here!</string>
+    <string name="recipe_steps">Recipe Steps:</string>
+    <string name="input_recipe_steps_here">Input recipe steps here!</string>
+    <string name="add_recipe">Add Recipe</string>
+    <string name="recipe_ingredients">Recipe Ingredients:</string>
+    <string name="remove_recipe">Are you sure you want to delete this recipe?</string>
+    <string name="empty_product">This item has not been saved</string>
+
 
 </resources>

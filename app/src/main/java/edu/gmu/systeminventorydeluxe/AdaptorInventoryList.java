@@ -45,7 +45,8 @@ public class AdaptorInventoryList extends CursorAdapter {
     private TextView itemQuantity;
 
     //Izzy wants images, Izzy will handle said images.
-    //private ImageView itemImage; //NTS 4 IZZ: handle the image stuff
+    //FIXME: add photo (Izzy)
+    //private ImageView itemImage;
 
 
     /**
@@ -92,7 +93,7 @@ public class AdaptorInventoryList extends CursorAdapter {
         productName = (TextView) view.findViewById(R.id.name_product);
         itemQuantity = (TextView) view.findViewById(R.id.quant_product);
 
-        //HANDLE IMAGE STUFF - NTS 4 IZZ
+        //FIXME: add photo (Izzy)
         //itemImage = (ImageView) view.findViewById(R.id.image_of_product);
 
         //will get the column index of the any information that will be
@@ -104,7 +105,7 @@ public class AdaptorInventoryList extends CursorAdapter {
         String nameString = cursor.getString(nameIndex);
         String quantString = cursor.getString(quantityIndex);
 
-        /*HANDLE THE IMAGE STUFF*/
+        ///FIXME: add photo (Izzy)
 
 
         //will be setting those views in item_view_list.xml

@@ -88,6 +88,8 @@ public class ItemInventoryContract {
      * Maininventory is the path where all items show up
      */
     public static final String PATH_MAININVENTORY = "mainInventory";
+    public static final String PATH_RECIPEITEM = "recipeItem";
+
 
     //default constructor
     public ItemInventoryContract() {
@@ -142,4 +144,32 @@ public class ItemInventoryContract {
 
     //There can be more inner classes, have them down here
 
+    public static class ItemRecipes implements BaseColumns{
+
+
+
+        public final static Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_RECIPEITEM);
+
+        /**
+         * This is the Android platform's base MIME type for a content: URI containing a Cursor of a single item.
+         */
+        public final static String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_RECIPEITEM;
+
+        public static final String CONTENT_LIST_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_RECIPEITEM;
+
+
+        public final static String TABLE_NAME = "itemRecipe";
+
+        //initialized all fields here as constants
+
+        public final static String _ID = BaseColumns._ID;
+
+        public final static String ITEM_INGREDIENTS = "ingredients";
+
+        public final static String ITEM_STEPS = "steps";
+
+
+    }
 }

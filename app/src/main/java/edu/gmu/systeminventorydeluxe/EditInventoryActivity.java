@@ -68,6 +68,8 @@ public class EditInventoryActivity extends AppCompatActivity implements
     private Button decrement;
     private Button deleteButton;
 
+    private Double quantCount;
+
     //FIXME: add image functionality (Izzy)
     //private ImageButton productImage;
 
@@ -136,6 +138,17 @@ public class EditInventoryActivity extends AppCompatActivity implements
      */
     protected void buttonHandler() {
 
+        recipeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //IMPLEMENT RECIPE STUFF HERE
+                Intent intent = new Intent(EditInventoryActivity.this, EditRecipeActivity.class);
+
+                startActivity(intent);
+            }
+        });
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,18 +175,18 @@ public class EditInventoryActivity extends AppCompatActivity implements
             }
         });
 
-        recipeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //FIXME: add recipe implementatin (Izzy)
-            }
-        });
-
+        
         //FIXME: add increment functionality!
         increment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                quantCount = Double.parseDouble(itemQuantity.getText().toString());
+
+                quantCount += 1;
+
+                itemQuantity.setText(Double.toString(quantCount));
+
 
             }
         });
@@ -182,6 +195,12 @@ public class EditInventoryActivity extends AppCompatActivity implements
         decrement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                quantCount = Double.parseDouble(itemQuantity.getText().toString());
+
+                quantCount -= 1;
+
+                itemQuantity.setText(Double.toString(quantCount));
 
             }
         });
@@ -348,6 +367,40 @@ public class EditInventoryActivity extends AppCompatActivity implements
         }
     }
 
+
+    @Override
+    public void onBackPressed() {
+
+        //Alert dialog sequence
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(getString(R.string.backpress));
+
+        builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                //yes actually delete
+                finish();
+                dialog.dismiss();
+
+            }
+        });
+        builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+                //Doesn't actually want to delete
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        // Create and show the Alert Dialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+
+    }
+
     /**
      * Populates edit/add page from database.
      *
@@ -404,8 +457,8 @@ public class EditInventoryActivity extends AppCompatActivity implements
 
 
                 String productNameString = cursor.getString(productNameIndex);
-                int quantityInteger = cursor.getInt(quantityIndex);
-                int thresholdInteger = cursor.getInt(thresholdIndex);
+                Double quantityInteger = cursor.getDouble(quantityIndex);
+                Double thresholdInteger = cursor.getDouble(thresholdIndex);
                 String descitptionString = cursor.getString(descriptionIndex);
 
                 //FIXME: add image (Izzy)
