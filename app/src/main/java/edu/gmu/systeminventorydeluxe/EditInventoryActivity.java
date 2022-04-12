@@ -98,6 +98,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
         //dynamic header
         dynamicMessage = (TextView) findViewById(R.id.messageView);
 
+        //FIXME: have itemName auto capitalize like itemDescription
         //item fields
         itemName = (EditText) findViewById(R.id.name_item);
         itemQuantity = (EditText) findViewById(R.id.quantity_item);
@@ -176,7 +177,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
         });
 
         
-        //FIXME: add increment functionality!
+        //FIXME: increment nothing bug (Carolyn to Izzy)
         increment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -191,7 +192,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
             }
         });
 
-        //FIXME: add decrement functionality!
+        //FIXME: decrement nothing bug (Carolyn to Izzy)
         decrement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
