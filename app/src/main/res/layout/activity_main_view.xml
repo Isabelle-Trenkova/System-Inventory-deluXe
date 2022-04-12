@@ -47,6 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="88dp"
         android:layout_marginTop="30dp"
+        android:layout_marginBottom="33dp"
         android:text="@string/low_inventory"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,15 +56,11 @@
 
     <Button
         android:id="@+id/button_full_recipes"
-        android:layout_width="0dp"
+        android:layout_width="220dp"
         android:layout_height="88dp"
-        android:layout_marginStart="96dp"
         android:layout_marginTop="33dp"
-        android:layout_marginEnd="97dp"
-        android:layout_marginBottom="123dp"
-        android:text = "@string/recipe_button"
+        android:text="@string/recipe_button"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_low_inventory" />

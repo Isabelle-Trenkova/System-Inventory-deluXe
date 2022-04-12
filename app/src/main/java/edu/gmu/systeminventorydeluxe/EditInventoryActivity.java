@@ -185,13 +185,14 @@ public class EditInventoryActivity extends AppCompatActivity implements
                 if (TextUtils.isEmpty(quantString)) {
 
                     quantCount = 1.0;
+
                     itemQuantity.setText(Double.toString(quantCount));
                 }
                 else {
 
                     quantCount = Double.parseDouble(itemQuantity.getText().toString());
+                    quantCount = incrementQuantity(quantCount);
 
-                    quantCount += 1;
                     itemQuantity.setText(Double.toString(quantCount));
                 }
 
@@ -215,7 +216,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
 
                     if (quantCount > 0.0) {
 
-                        quantCount -= 1;
+                        quantCount = decrementQuantity(quantCount);
                         itemQuantity.setText(Double.toString(quantCount));
                     }
                     else {
@@ -224,9 +225,24 @@ public class EditInventoryActivity extends AppCompatActivity implements
                                 Toast.LENGTH_LONG).show();
                     }
                 }
-
             }
         });
+    }
+
+    //FIXME: THIS FEELS SO DIRTY AND WRONG (Izzy to Carolyn)
+    private Double decrementQuantity(Double itemQuantity) {
+
+        itemQuantity -= 1;
+
+        return itemQuantity;
+    }
+
+    //FIXME: THIS FEELS SO DIRTY AND WRONG (Izzy to Carolyn)
+    private Double incrementQuantity(Double itemQuantity) {
+
+        itemQuantity += 1;
+
+        return itemQuantity;
     }
 
     /**
