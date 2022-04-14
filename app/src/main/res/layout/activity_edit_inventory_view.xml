@@ -5,7 +5,6 @@ item name, weight, etc-->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
 
     android:id="@+id/edit_location_scrollView"
     android:layout_width="match_parent"
@@ -14,7 +13,8 @@ item name, weight, etc-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="14dp">
 
 
         <TextView
@@ -47,12 +47,12 @@ item name, weight, etc-->
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            android:layout_marginEnd="14dp"
             android:gravity="center"
             android:hint="@string/inventory_name"
             android:inputType="text"
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/name_of_item" />
 
         <TextView
@@ -71,6 +71,7 @@ item name, weight, etc-->
             android:id="@+id/decrement_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
             android:layout_marginStart="14dp"
             android:padding="8dp"
             android:text="-"
@@ -86,25 +87,21 @@ item name, weight, etc-->
             android:padding="8dp"
             android:text="+"
             android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/quantity_of_item" />
+            app:layout_constraintTop_toTopOf="@id/decrement_button"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <EditText
             android:id="@+id/quantity_item"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="47dp"
             android:gravity="center"
             android:hint="@string/quant_of_item"
             android:inputType="numberDecimal"
             android:padding="8dp"
             android:textSize="22sp"
             app:layout_constraintEnd_toStartOf="@+id/increment_button"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/decrement_button"
-            app:layout_constraintTop_toBottomOf="@+id/quantity_of_item" />
+            app:layout_constraintBottom_toBottomOf="@id/decrement_button" />
 
         <TextView
             android:id="@+id/item_threshold"
@@ -123,12 +120,12 @@ item name, weight, etc-->
             android:id="@+id/threshold_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
             android:layout_marginTop="14dp"
             android:gravity="center"
             android:hint="@string/threshold_string"
             android:inputType="numberDecimal"
             android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_threshold" />
 
@@ -217,12 +214,12 @@ item name, weight, etc-->
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="63dp"
             android:foregroundGravity="center"
             android:gravity="center"
             android:padding="8dp"
             android:text="Save"
             android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/delete_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/product_image" />
 
@@ -230,12 +227,12 @@ item name, weight, etc-->
             android:id="@+id/delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="74dp"
             android:layout_marginTop="30dp"
             android:gravity="center"
             android:padding="8dp"
             android:text="Delete"
             android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/save_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/product_image" />
 

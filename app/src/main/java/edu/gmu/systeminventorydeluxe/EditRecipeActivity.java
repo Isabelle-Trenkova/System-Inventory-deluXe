@@ -155,6 +155,11 @@ public class EditRecipeActivity extends AppCompatActivity implements
             }
 
             finish();
+
+        } else { //recipe does not exist in database
+
+            //toast for empty recipe
+            Toast.makeText(this, getString(R.string.empty_product), Toast.LENGTH_LONG).show();
         }
     }
 
