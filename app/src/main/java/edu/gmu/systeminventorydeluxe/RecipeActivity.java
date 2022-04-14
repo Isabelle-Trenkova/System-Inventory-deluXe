@@ -18,7 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.ItemRecipes;
 
-public class RecipeMainActivity extends AppCompatActivity implements
+public class RecipeActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>  {
 
 
@@ -64,7 +64,7 @@ public class RecipeMainActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(RecipeMainActivity.this, EditRecipeActivity.class);
+                Intent intent = new Intent(RecipeActivity.this, EditRecipeActivity.class);
 
                 startActivity(intent);
 
@@ -77,7 +77,7 @@ public class RecipeMainActivity extends AppCompatActivity implements
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 //when item in ListView is clicked, starts EditInventoryActivity to edit that item
-                Intent intent = new Intent(RecipeMainActivity.this, EditRecipeActivity.class);
+                Intent intent = new Intent(RecipeActivity.this, EditRecipeActivity.class);
 
                 Uri uri = ContentUris.withAppendedId(ItemRecipes.CONTENT_URI, l);
                 intent.setData(uri);

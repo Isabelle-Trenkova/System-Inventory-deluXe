@@ -69,10 +69,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //when clicked, button starts RecipeMainActivity to view recipes
-                Intent intent = new Intent( MainActivity.this, RecipeMainActivity.class);
+                //when clicked, button starts RecipeActivity to view recipes
+                Intent intent = new Intent( MainActivity.this, RecipeActivity.class);
 
-                //start new activity (RecipeMainActivity)
+                //start new activity (RecipeActivity)
                 startActivity(intent);
             }
         });

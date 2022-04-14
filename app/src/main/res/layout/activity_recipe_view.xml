@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    tools:context="edu.gmu.systeminventorydeluxe.RecipeMainActivity">
+    tools:context="edu.gmu.systeminventorydeluxe.RecipeActivity">
 
 
     <!-- This is the list view, which will allow us to add

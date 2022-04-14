@@ -47,7 +47,7 @@ public class EditRecipeActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_recipe);
+        setContentView(R.layout.activity_edit_recipe_view);
 
         define();
         buttonHandler();
