@@ -11,6 +11,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,9 +20,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
+
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
+
+import android.view.MenuItem;
+import android.view.Menu;
+
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
 
 /*
@@ -439,6 +447,59 @@ public class EditInventoryActivity extends AppCompatActivity implements
 
 
     }
+
+    /**
+     * Inflates menu view and handles searching function
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_edit_header, menu);
+
+        return true;
+    }
+
+    /**
+     * Operations running from menu bar
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case (R.id.delete_item):
+
+                showDeleteConfirmationDialog();
+                break;
+
+            case (R.id.return_button):
+
+                finish();
+                break;
+            case (R.id.save_item):
+
+                //when clicked, check if all fields filled out, then save
+                boolean completed;
+
+                //check if all fields are filled out
+                completed = checkEmptyFields();
+
+                if (completed) {
+                    saveProduct();
+                    finish();
+                }
+
+                break;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     /**
      * Populates edit/add page from database.
