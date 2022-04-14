@@ -5,8 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
+import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.ItemRecipes;
 
-/**
+/*
  * Code in the class is based off of code for outside sources:
  *
  * ////////////////////////////////////////////////
@@ -44,7 +45,7 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
 public class DatabaseHelper extends SQLiteOpenHelper {
 
 
-    /**
+    /*
      * Some sources for understanding:
      *
      *      General SQLite:
@@ -126,8 +127,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //IN THE REST OF THE APP TO REFLECT THAT
 
         //There can be more tables, have them down here
-
         sqLiteDatabase.execSQL(SQL_CREATE_ENTRIES);
+
+        String SQL_RECIPE_ENTRIES =
+                "CREATE TABLE " + ItemRecipes.TABLE_NAME_RECIPE + " ("
+                        + ItemRecipes._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                        + ItemRecipes.RECIPE_NAME + " TEXT NOT NULL, "
+                        + ItemRecipes.ITEM_INGREDIENTS + " TEXT NOT NULL, "
+                        + ItemRecipes.ITEM_STEPS + " TEXT NOT NULL);";
+
+        sqLiteDatabase.execSQL(SQL_RECIPE_ENTRIES);
+
     }
 
 
@@ -144,6 +154,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
       sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MainInventoryItem.TABLE_NAME + ";");
+
+      onCreate(sqLiteDatabase);
+
+      sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ItemRecipes.TABLE_NAME_RECIPE + ";");
 
       onCreate(sqLiteDatabase);
     }

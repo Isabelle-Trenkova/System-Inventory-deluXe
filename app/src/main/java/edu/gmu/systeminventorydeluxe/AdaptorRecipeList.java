@@ -7,10 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
+import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.ItemRecipes;
 
 /**
  * Code in the class is based off of code for outside sources
@@ -28,7 +27,7 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
 /**
  * Adaptor for the inventory items for when they go into the list view
  */
-public class AdaptorInventoryList extends CursorAdapter {
+public class AdaptorRecipeList extends CursorAdapter {
 
     //////////////////////////////////////////////////////////////////////////////////
     //PLEASE DON'T EDIT ANY IMAGE STUFF/NTS comments, IZZY WILL HANDLE LATER,I promise
@@ -41,13 +40,7 @@ public class AdaptorInventoryList extends CursorAdapter {
      * Text views for the name and quantity of the
      * Item that is being adapted into the view
      */
-    private TextView productName;
-    private TextView itemQuantity;
-
-    //Izzy wants images, Izzy will handle said images.
-    //FIXME: add photo (Izzy)
-    //private ImageView itemImage;
-
+    private TextView recipeName;
 
     /**
      * Constructor
@@ -57,10 +50,11 @@ public class AdaptorInventoryList extends CursorAdapter {
      *               This is a reference to a row in the database
      * @param FLAG_AUTO_REQUERY
      */
-    public AdaptorInventoryList(Context context, Cursor cursor, int FLAG_AUTO_REQUERY) {
+    public AdaptorRecipeList(Context context, Cursor cursor, int FLAG_AUTO_REQUERY) {
 
         super(context, cursor, FLAG_AUTO_REQUERY);
     }
+
 
     /**
      * Automatically generated methods from cursoradaptor
@@ -77,7 +71,7 @@ public class AdaptorInventoryList extends CursorAdapter {
          * will inflate the view with an icon design predefined in item_view_list.xml
          *
          */
-        return LayoutInflater.from(context).inflate(R.layout.item_view_list, viewGroup, false);
+        return LayoutInflater.from(context).inflate(R.layout.recipe_view_list  , viewGroup, false);
     }
 
     /**
@@ -90,26 +84,18 @@ public class AdaptorInventoryList extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
 
         //These will get the id's of the fields/views in the item_view_list.xml
-        productName = (TextView) view.findViewById(R.id.name_product);
-        itemQuantity = (TextView) view.findViewById(R.id.quant_product);
-
-        //FIXME: add photo (Izzy)
-        //itemImage = (ImageView) view.findViewById(R.id.image_of_product);
+        recipeName = (TextView) view.findViewById(R.id.recipe_name);
 
         //will get the column index of the any information that will be
         //added by this adaptor class
-        int nameIndex = cursor.getColumnIndex(MainInventoryItem.ITEM_NAME);
-        int quantityIndex = cursor.getColumnIndex(MainInventoryItem.ITEM_QUANTITY);
+        int nameIndex = cursor.getColumnIndex(ItemRecipes.RECIPE_NAME);
+
 
         //Will get the string item at that index
         String nameString = cursor.getString(nameIndex);
-        String quantString = cursor.getString(quantityIndex);
-
-        ///FIXME: add photo (Izzy)
 
 
-        //will be setting those views in item_view_list.xml
-        productName.setText(nameString);
-        itemQuantity.setText(String.valueOf(quantString));
+        recipeName.setText(nameString);
+
     }
 }
