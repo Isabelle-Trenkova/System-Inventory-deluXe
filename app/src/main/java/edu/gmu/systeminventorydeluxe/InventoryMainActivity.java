@@ -178,18 +178,10 @@ public class InventoryMainActivity extends AppCompatActivity implements
                 return true;
             }
 
-            //FIXME: Not fully working just get, Izzy will fix later
             @Override
             public boolean onQueryTextChange(String s) {
-
-                //FIXME:addimage stuff??
-
-                Cursor likeItems = cursorReturner(s);
-
-                listAdaptor = new AdaptorInventoryList(InventoryMainActivity.this,
-                        likeItems, 0);
-
-                return true;
+                //FIXME: Only if you want search suggestions
+                return false;
             }
         });
 
