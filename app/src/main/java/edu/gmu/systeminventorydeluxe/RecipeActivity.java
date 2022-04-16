@@ -33,7 +33,7 @@ public class RecipeActivity extends AppCompatActivity implements
 
 
     /**
-     * Runs upon each new instance of InventoryMainActivity
+     * Runs upon each new instance of RecipeActivity
      *
      * @param savedInstanceState previous state of this activity
      */
@@ -46,20 +46,37 @@ public class RecipeActivity extends AppCompatActivity implements
         buttonHandler(); //instantiate & activate activity_inventory_main_view buttons
     }
 
+    /**
+     * Defines tools to populate recipe list:
+     *      ListView from activity_inventory_main_view - displays inventory in GUI
+     *      AdaptorInventoryList object - adapts data from database to fit GUI
+     *      add button
+     *      loaderManager - loads existing recipe data
+     *
+     * Sets ListView properties
+     */
     private void define() {
 
+        //instantiate add button
         recipeAdd = findViewById(R.id.floatingActionButtonRecipe);
-        recipesList = (ListView) findViewById(R.id.recipe_item_view);
 
+        //set ListView properties
+        recipesList = (ListView) findViewById(R.id.recipe_item_view);
         recipeAdaptor = new AdaptorRecipeList( this, null, 0);
 
         recipesList.setAdapter(recipeAdaptor);
         recipesList.setItemsCanFocus(true);
 
+        //loaderManager
         getLoaderManager().initLoader(RECIPE_LOADER,null,this);
     }
+
+    /**
+     * Activates activity_recipe_view buttons
+     */
     private void buttonHandler() {
 
+        //add button
         recipeAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,12 +102,15 @@ public class RecipeActivity extends AppCompatActivity implements
                 startActivity(intent);
             }
         });
-
-        //loader manager
-        //getLoaderManager().initLoader(RECIPE_LOADER,null,this);
-
     }
 
+    //must have following methods because implemented LoaderManager
+
+    /**
+     * Returns a cursor from a database
+     * @param i
+     * @return
+     */
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
 
@@ -108,12 +128,22 @@ public class RecipeActivity extends AppCompatActivity implements
 
     }
 
+    /**
+     * Updates CursorLoader to point to next item in database.
+     *
+     * @param loader current CursorLoader
+     * @param cursor data from next cursor
+     */
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 
         recipeAdaptor.swapCursor(cursor);
     }
-
+    /**
+     * Sets CursorLoader to null after ListView populated from database
+     *
+     * @param loader current CursorLoader
+     */
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 

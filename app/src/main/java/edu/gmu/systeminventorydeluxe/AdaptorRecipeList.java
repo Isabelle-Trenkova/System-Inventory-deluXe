@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.ItemRecipes;
 
-/**
+/*
  * Code in the class is based off of code for outside sources
  *
  *  Used for the bindView();
@@ -20,12 +20,10 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.ItemRecipes;
  * and free for commercial/private use and modifications
  *
  * https://github.com/kazdavegyms/Android-Inventory-Management-App-master
- *
- *
  */
 
 /**
- * Adaptor for the inventory items for when they go into the list view
+ * Adapts recipe data from database to fit ListView in GUI (activity_recipe_view)
  */
 public class AdaptorRecipeList extends CursorAdapter {
 
@@ -36,14 +34,12 @@ public class AdaptorRecipeList extends CursorAdapter {
     //Android documentation wanted this here
     public static final int FLAG_AUTO_REQUEREY = 0;
 
-    /**
-     * Text views for the name and quantity of the
-     * Item that is being adapted into the view
-     */
-    private TextView recipeName;
+
+    private TextView recipeName; //GUI text view for recipe name
 
     /**
      * Constructor
+     *
      * @param context the context of the action
      * @param cursor the information of the item from the database
      *               Not exactly an object, but can be throught of as such
@@ -55,11 +51,10 @@ public class AdaptorRecipeList extends CursorAdapter {
         super(context, cursor, FLAG_AUTO_REQUERY);
     }
 
-
     /**
-     * Automatically generated methods from cursoradaptor
-     *
+     * Automatically generated methods from CursorAdaptor
      * Creates a new view
+     *
      * @param context
      * @param cursor
      * @param viewGroup
@@ -67,10 +62,8 @@ public class AdaptorRecipeList extends CursorAdapter {
      */
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-        /**
-         * will inflate the view with an icon design predefined in item_view_list.xml
-         *
-         */
+
+        //inflates the view with an icon design predefined in recipe_view_list.xml
         return LayoutInflater.from(context).inflate(R.layout.recipe_view_list  , viewGroup, false);
     }
 
@@ -83,18 +76,16 @@ public class AdaptorRecipeList extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
-        //These will get the id's of the fields/views in the item_view_list.xml
+        //gets the id of the fields/views in the recipe_view_list.xml
         recipeName = (TextView) view.findViewById(R.id.recipe_name);
 
-        //will get the column index of the any information that will be
-        //added by this adaptor class
+        //gets the column index of the any information that will be added by this adaptor class
         int nameIndex = cursor.getColumnIndex(ItemRecipes.RECIPE_NAME);
 
-
-        //Will get the string item at that index
+        //gets the string recipe name at that index
         String nameString = cursor.getString(nameIndex);
 
-
+        //sets text view to string recipe name
         recipeName.setText(nameString);
 
     }

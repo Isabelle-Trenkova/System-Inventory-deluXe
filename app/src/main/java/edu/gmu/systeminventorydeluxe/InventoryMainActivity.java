@@ -55,8 +55,8 @@ public class InventoryMainActivity extends AppCompatActivity implements
     private AdaptorInventoryList listAdaptor; //the adaptor to be used to populate the GUI list
     private static final int INVENTORY_LOADER = 0;//loader is a param of the loader manager
 
-    private SearchView inventorySearch;
-    private FloatingActionButton fab;
+    private SearchView inventorySearch; //search bar
+    private FloatingActionButton fab; //add button
 
     /**
      * Runs upon each new instance of InventoryMainActivity
@@ -76,6 +76,8 @@ public class InventoryMainActivity extends AppCompatActivity implements
      * Defines tools to populate inventory list:
      *      ListView from activity_inventory_main_view - displays inventory in GUI
      *      AdaptorInventoryList object - adapts data from database to fit GUI
+     *      add button
+     *      loaderManager - loads existing inventory item data
      *
      * Sets ListView properties
      */
@@ -89,11 +91,15 @@ public class InventoryMainActivity extends AppCompatActivity implements
         inventoryList.setAdapter(listAdaptor);
         inventoryList.setItemsCanFocus(true);
 
+        //instantiate add button
         fab = findViewById(R.id.floatingActionButton);
+
+        //loader manager
+        getLoaderManager().initLoader(INVENTORY_LOADER,null,this);
     }
 
     /**
-     * Instantiates and activates activity_inventory_main_view buttons
+     * Activates activity_inventory_main_view buttons
      */
     private void buttonHandler() {
 
@@ -128,15 +134,13 @@ public class InventoryMainActivity extends AppCompatActivity implements
             }
         });
 
-        //loader manager
-        getLoaderManager().initLoader(INVENTORY_LOADER,null,this);
-
         //add any more buttons in the inventory activity class here if needed
     }
 
 
     /**
      * Inflates menu view and handles searching function
+     *
      * @param menu
      * @return
      */
@@ -197,7 +201,10 @@ public class InventoryMainActivity extends AppCompatActivity implements
     }
 
     /**
-     * Operations running from menu bar
+     * Instantiate options on menu bar elipsis
+     *      add item
+     *      delete all
+     *
      * @param item
      * @return
      */
@@ -223,6 +230,7 @@ public class InventoryMainActivity extends AppCompatActivity implements
         return super.onOptionsItemSelected(item);
     }
 
+    //must have following methods because implemented LoaderManager
 
     /**
      * Returns a cursor from a database
