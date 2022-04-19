@@ -118,9 +118,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "CREATE TABLE " + MainInventoryItem.TABLE_NAME + " ("
                         + MainInventoryItem._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                         + MainInventoryItem.ITEM_NAME + " TEXT NOT NULL, "
-                        + MainInventoryItem.ITEM_QUANTITY + " INTEGER DEFAULT 0, "
+                        + MainInventoryItem.ITEM_QUANTITY + " REAL DEFAULT 0, "
                         + MainInventoryItem.ITEM_DESCRIPTION + " TEXT NOT NULL, "
-                        + MainInventoryItem.ITEM_LOW_THRESHOLD + " INTEGER DEFAULT 0);";
+                        + MainInventoryItem.ITEM_LOW_THRESHOLD + " REAL DEFAULT 0);";
                         /*+ MainInventoryItem.ITEM_IMAGE + " TEXT);";*/
 
         //DON'T ADD ANY EXTRA COLUMNS TO THE ABOVE UNLESS YOU CAN CHANGE EVERY OTHER BIT OF CODE

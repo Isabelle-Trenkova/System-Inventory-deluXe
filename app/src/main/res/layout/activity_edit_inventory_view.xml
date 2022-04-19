@@ -163,7 +163,7 @@ item name, weight, etc-->
             android:layout_marginEnd="14dp"
             android:gravity="center"
             android:padding="8dp"
-            android:text="Add/Edit Recipe"
+            android:text="Add Recipe"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/add_recipe"

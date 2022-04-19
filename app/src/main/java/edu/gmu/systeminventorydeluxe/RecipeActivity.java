@@ -1,6 +1,7 @@
 package edu.gmu.systeminventorydeluxe;
 
 import android.app.LoaderManager;
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -8,11 +9,17 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -85,9 +92,109 @@ public class RecipeActivity extends AppCompatActivity implements
                 startActivity(intent);
             }
         });
+    }
 
-        //loader manager
-        //getLoaderManager().initLoader(RECIPE_LOADER,null,this);
+
+
+    /**
+     * Inflates menu view and handles searching function
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_inventory_main, menu);
+
+        MenuItem searchButton = menu.findItem(R.id.app_bar_search);
+        SearchView searchview = (SearchView) MenuItemCompat.getActionView(searchButton);
+
+        searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            //search submitted from keyboard
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+
+
+                Cursor likeItems = cursorReturner(s);
+
+                if (likeItems == null ) {
+
+                    Toast.makeText(RecipeActivity.this, "Not found, try again!", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    String[] tableColumns = {ItemRecipes.RECIPE_NAME};
+
+                    SimpleCursorAdapter simpleAdapter = new SimpleCursorAdapter(RecipeActivity.this,
+                            R.layout.recipe_view_list,
+                            likeItems,
+                            tableColumns,
+                            new int[]{R.id.recipe_name},
+                            0);
+
+                    recipesList.setAdapter(simpleAdapter);
+                }
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                //FIXME: Only if you want search suggestions
+                return false;
+            }
+        });
+
+        return true;
+    }
+
+    /**
+     * Operations running from menu bar
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            //will go to the add item page
+            case R.id.add_an_item:
+
+                Intent intent = new Intent(RecipeActivity.this, EditRecipeActivity.class);
+
+                startActivity(intent);
+
+                break;
+
+            //will delete all items from table ( may get rid of later)
+            case R.id.delete_all_items:
+                //FIXME:Have a way to drop all item tables;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    /**
+     * Returns a cursor from a database
+     * @param string
+     * @return
+     */
+    private Cursor cursorReturner(String string) {
+
+        string = string.toLowerCase();
+
+        ContentResolver contentResolver = getContentResolver();
+
+        String[] tableColumns = {ItemRecipes._ID,
+                ItemRecipes.RECIPE_NAME};
+
+        Cursor likeItems = contentResolver.query(ItemRecipes.CONTENT_URI, tableColumns,
+                ItemRecipes.RECIPE_NAME + " Like ?",
+                new String[] {"%"+string+"%"}, null);
+
+        return likeItems;
 
     }
 

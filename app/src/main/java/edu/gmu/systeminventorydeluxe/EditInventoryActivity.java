@@ -557,8 +557,8 @@ public class EditInventoryActivity extends AppCompatActivity implements
 
 
                 String productNameString = cursor.getString(productNameIndex);
-                Double quantityInteger = cursor.getDouble(quantityIndex);
-                Double thresholdInteger = cursor.getDouble(thresholdIndex);
+                Double quantityDouble = cursor.getDouble(quantityIndex);
+                Double thresholdDouble = cursor.getDouble(thresholdIndex);
                 String descitptionString = cursor.getString(descriptionIndex);
 
                 //FIXME: add image (Izzy)
@@ -572,8 +572,8 @@ public class EditInventoryActivity extends AppCompatActivity implements
                 }*/
 
                 itemName.setText(productNameString);
-                itemQuantity.setText(String.valueOf(quantityInteger));
-                itemThreshold.setText(String.valueOf(thresholdInteger));
+                itemQuantity.setText(String.valueOf(quantityDouble));
+                itemThreshold.setText(String.valueOf(thresholdDouble));
                 itemDescription.setText(descitptionString);
             }
             while (cursor.moveToNext());

@@ -189,12 +189,15 @@ public class DatabaseProvider extends ContentProvider {
      */
     private Uri insertProduct(Uri uri, ContentValues values) {
 
-        String productNameString = values.getAsString(MainInventoryItem.ITEM_NAME);
+        //FIXME: I dont think this is needed here
+        /*String productNameString = values.getAsString(MainInventoryItem.ITEM_NAME);
         if (productNameString == null) {
             throw new IllegalArgumentException("Product requires a name");
         }
-        Integer quantityInteger = values.getAsInteger(MainInventoryItem.ITEM_QUANTITY);
-        if (quantityInteger != null && quantityInteger < 0) {
+
+
+        Double quantityDouble = values.getAsDouble(MainInventoryItem.ITEM_QUANTITY);
+        if (quantityDouble != null && quantityDouble < 0) {
             throw new IllegalArgumentException("Product requires a valid quantity: Insert a positive value.");
         }
 
@@ -207,7 +210,7 @@ public class DatabaseProvider extends ContentProvider {
        Integer thresholdInteger = values.getAsInteger(MainInventoryItem.ITEM_LOW_THRESHOLD);
         if (thresholdInteger != null && thresholdInteger < 0) {
             throw new IllegalArgumentException("Product requires a valid price");
-        }
+        }*/
 
         /*FIGURE OUT IMAGE STUFF - NTS 4 IZZ*/
 
@@ -230,7 +233,8 @@ public class DatabaseProvider extends ContentProvider {
      */
     private Uri insertRecipe(Uri uri, ContentValues values) {
 
-        String recipeNameString = values.getAsString(ItemRecipes.RECIPE_NAME);
+        //FIXME: I dont think this is needed
+        /*String recipeNameString = values.getAsString(ItemRecipes.RECIPE_NAME);
         if (recipeNameString == null) {
 
             throw new IllegalArgumentException("Recipe Requires an Ingredients List");
@@ -246,7 +250,7 @@ public class DatabaseProvider extends ContentProvider {
         if (recipeStepsString == null) {
 
             throw new IllegalArgumentException("Recipe Requires an Ingredients List");
-        }
+        }*/
 
 
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
@@ -344,7 +348,7 @@ public class DatabaseProvider extends ContentProvider {
      */
     private int updateInventory(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 
-        String productNameString = values.getAsString(MainInventoryItem.ITEM_NAME);
+        /*String productNameString = values.getAsString(MainInventoryItem.ITEM_NAME);
         if (productNameString == null) {
             throw new IllegalArgumentException("Product requires a name");
         }
@@ -362,7 +366,7 @@ public class DatabaseProvider extends ContentProvider {
         if (thresholdInteger != null && thresholdInteger < 0) {
             throw new IllegalArgumentException("Product requires a valid price");
         }
-
+        */
         /*FIGURE OUT IMAGE STUFF - NST 4 IZZ*/
 
         if (values.size() == 0) {
@@ -389,7 +393,7 @@ public class DatabaseProvider extends ContentProvider {
      */
     private int updateRecipes(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 
-        String recipeNameString = values.getAsString(ItemRecipes.RECIPE_NAME);
+        /*String recipeNameString = values.getAsString(ItemRecipes.RECIPE_NAME);
         if (recipeNameString == null) {
 
             throw new IllegalArgumentException("Recipe Requires an Ingredients List");
@@ -405,8 +409,7 @@ public class DatabaseProvider extends ContentProvider {
         if (recipeStepsString == null) {
 
             throw new IllegalArgumentException("Recipe Requires an Ingredients List");
-        }
-
+        }*/
 
         if (values.size() == 0) {
             return 0;
