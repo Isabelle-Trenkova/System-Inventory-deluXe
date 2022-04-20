@@ -76,5 +76,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        priorityInventoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent (MainActivity.this, PriorityActivity.class);
+
+                startActivity(intent);
+            }
+        });
+
+        lowInventoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, LowThresholdActivity.class);
+
+                startActivity(intent);
+            }
+        });
     }
 }

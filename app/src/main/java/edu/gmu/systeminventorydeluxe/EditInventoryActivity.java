@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
@@ -75,14 +76,17 @@ public class EditInventoryActivity extends AppCompatActivity implements
     private Button increment;
     private Button decrement;
     private Button deleteButton;
+    private Button recipeButton;
+
+    //check boxes
+    private CheckBox isPriority;
+    private CheckBox isLow;
 
     private Double quantCount;
 
     //FIXME: add image functionality (Izzy)
     //private ImageButton productImage;
 
-    //FIXME: item weight, recipe stuff (Izzy)
-    private Button recipeButton; // add function is defined and listener set up
 
     /**
      * Runs upon each new instance of EditInventoryActivity
@@ -118,11 +122,15 @@ public class EditInventoryActivity extends AppCompatActivity implements
         deleteButton = (Button) findViewById(R.id.delete_button);
         increment = (Button) findViewById(R.id.increment_button);
         decrement = (Button) findViewById(R.id.decrement_button);
+        recipeButton = (Button) findViewById(R.id.add_recipe_button);
+
 
         //FIXME: image button here (Izzy)
         //productImage = (ImageButton) findViewById(R.id.product_image);
 
-        recipeButton = (Button) findViewById(R.id.add_recipe_button);
+        //checkboxes
+        isPriority = (CheckBox) findViewById(R.id.is_priority);
+        isLow = (CheckBox) findViewById(R.id.is_low_stock);
 
 
         //check if item has already been made and set header accordingly
@@ -351,11 +359,18 @@ public class EditInventoryActivity extends AppCompatActivity implements
      */
     private void saveProduct() {
 
-        //collect item fields
+        //FIXME: CHECK IS QUANTITY IS LESS THAN THRESHOLD
+        //FIXME: SWITCH CHECKED BOX ACCORDINGLY
+
+        // collect item fields
         String stringProductName = itemName.getText().toString().trim();
         String stringQuantity = itemQuantity.getText().toString().trim();
         String stringDescription = itemDescription.getText().toString().trim();
         String stringThreshold = itemThreshold.getText().toString().trim();
+
+        String stringPriority = new Boolean(isPriority.isChecked()).toString();
+        String stringLow = new Boolean(isLow.isChecked()).toString();
+
 
         //FIXME: DO IMAGE STUFF (Izzy)
         //byte[] imageByte = getBytes(imageBitmap);
@@ -377,6 +392,8 @@ public class EditInventoryActivity extends AppCompatActivity implements
         values.put(MainInventoryItem.ITEM_QUANTITY, stringQuantity);
         values.put(MainInventoryItem.ITEM_DESCRIPTION, stringDescription);
         values.put(MainInventoryItem.ITEM_LOW_THRESHOLD, stringThreshold);
+        values.put(MainInventoryItem.ITEM_ISPRIORITY, stringPriority);
+        values.put(MainInventoryItem.ITEM_ISLOW, stringLow);
 
         //FIXME: add image stuff
         /*
@@ -519,6 +536,8 @@ public class EditInventoryActivity extends AppCompatActivity implements
                         MainInventoryItem.ITEM_QUANTITY,
                         MainInventoryItem.ITEM_DESCRIPTION,
                         MainInventoryItem.ITEM_LOW_THRESHOLD,
+                        MainInventoryItem.ITEM_ISPRIORITY,
+                        MainInventoryItem.ITEM_ISLOW
 
                         //FIXME: add image (Izzy)
                         //MainInventoryItem.ITEM_IMAGE
@@ -551,6 +570,8 @@ public class EditInventoryActivity extends AppCompatActivity implements
                 int quantityIndex = cursor.getColumnIndex(MainInventoryItem.ITEM_QUANTITY);
                 int descriptionIndex = cursor.getColumnIndex(MainInventoryItem.ITEM_DESCRIPTION);
                 int thresholdIndex = cursor.getColumnIndex(MainInventoryItem.ITEM_LOW_THRESHOLD);
+                int priorityIndex = cursor.getColumnIndex(MainInventoryItem.ITEM_ISPRIORITY);
+                int lowIndex = cursor.getColumnIndex(MainInventoryItem.ITEM_ISLOW);
 
                 //FIXME: add image (Izzy)
                 //int imageIndex = cursor.getColumnIndex(ProductEntry.IMAGE);
@@ -560,6 +581,12 @@ public class EditInventoryActivity extends AppCompatActivity implements
                 Double quantityDouble = cursor.getDouble(quantityIndex);
                 Double thresholdDouble = cursor.getDouble(thresholdIndex);
                 String descitptionString = cursor.getString(descriptionIndex);
+
+                String isPriorityString = cursor.getString(priorityIndex);
+                String isLowString = cursor.getString(lowIndex);
+
+                Boolean priorityBool = Boolean.parseBoolean(isPriorityString);
+                Boolean lowBool = Boolean.parseBoolean(isLowString);
 
                 //FIXME: add image (Izzy)
                 /*byte[] b = cursor.getBlob(imageIndex);
@@ -575,6 +602,9 @@ public class EditInventoryActivity extends AppCompatActivity implements
                 itemQuantity.setText(String.valueOf(quantityDouble));
                 itemThreshold.setText(String.valueOf(thresholdDouble));
                 itemDescription.setText(descitptionString);
+
+                isPriority.setChecked(priorityBool);
+                isLow.setChecked(lowBool);
             }
             while (cursor.moveToNext());
         }
@@ -594,5 +624,8 @@ public class EditInventoryActivity extends AppCompatActivity implements
         itemQuantity.setText("");
         itemThreshold.setText("");
         itemDescription.setText("");
+
+        isPriority.setChecked(false);
+        isLow.setChecked(false);
     }
 }

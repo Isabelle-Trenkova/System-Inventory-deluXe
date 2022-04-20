@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import edu.gmu.systeminventorydeluxe.MainActivity;
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.ItemRecipes;
 
@@ -120,6 +121,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         + MainInventoryItem.ITEM_NAME + " TEXT NOT NULL, "
                         + MainInventoryItem.ITEM_QUANTITY + " REAL DEFAULT 0, "
                         + MainInventoryItem.ITEM_DESCRIPTION + " TEXT NOT NULL, "
+                        + MainInventoryItem.ITEM_ISPRIORITY + " TEXT NOT NULL, "
+                        + MainInventoryItem.ITEM_ISLOW + " TEXT NOT NULL, "
                         + MainInventoryItem.ITEM_LOW_THRESHOLD + " REAL DEFAULT 0);";
                         /*+ MainInventoryItem.ITEM_IMAGE + " TEXT);";*/
 

@@ -132,6 +132,10 @@ public class ItemInventoryContract {
 
         public final static String ITEM_LOW_THRESHOLD = "threshold";
 
+        public final static String ITEM_ISPRIORITY = "isPriority";
+
+        public final static String ITEM_ISLOW = "isLow";
+
         /*public final static String ITEM_IMAGE = "image"*/;
 
         //add more constants/information for the database here
