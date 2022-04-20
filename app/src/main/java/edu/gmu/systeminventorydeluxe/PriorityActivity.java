@@ -86,6 +86,7 @@ public class PriorityActivity extends AppCompatActivity implements
             String[] tableColumns = {MainInventoryItem.ITEM_NAME,
                     MainInventoryItem.ITEM_QUANTITY};
 
+            //FIXME: ADD IMAGES
             SimpleCursorAdapter simpleAdapter = new SimpleCursorAdapter(PriorityActivity.this,
                     R.layout.item_view_list,
                     likeItems,
@@ -111,11 +112,12 @@ public class PriorityActivity extends AppCompatActivity implements
 
         String[] tableColumns = {MainInventoryItem._ID,
                 MainInventoryItem.ITEM_NAME,
-                MainInventoryItem.ITEM_QUANTITY};
-        //FIXME:addimage stuff??
+                MainInventoryItem.ITEM_QUANTITY,
+                MainInventoryItem.ITEM_ISPRIORITY};
+
 
         Cursor likeItems = contentResolver.query(MainInventoryItem.CONTENT_URI, tableColumns,
-                MainInventoryItem.ITEM_NAME + " Like ?",
+                MainInventoryItem.ITEM_ISPRIORITY + "=?",
                 new String[] {"%"+string+"%"}, null);
 
         return likeItems;

@@ -115,6 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
+        //for reference: https://www.sqlite.org/datatype3.html
         String SQL_CREATE_ENTRIES =
                 "CREATE TABLE " + MainInventoryItem.TABLE_NAME + " ("
                         + MainInventoryItem._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
