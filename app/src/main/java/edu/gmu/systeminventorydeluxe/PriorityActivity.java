@@ -48,6 +48,8 @@ public class PriorityActivity extends AppCompatActivity implements
 
         priorityList.setAdapter(listAdaptor);
         priorityList.setItemsCanFocus(true);
+
+        getLoaderManager().initLoader(PRIORITY_LOADER,null,this);
     }
 
     private void buttonHandler() {
@@ -117,7 +119,7 @@ public class PriorityActivity extends AppCompatActivity implements
 
 
         Cursor likeItems = contentResolver.query(MainInventoryItem.CONTENT_URI, tableColumns,
-                MainInventoryItem.ITEM_ISPRIORITY + "=?",
+                MainInventoryItem.ITEM_ISPRIORITY + " Like ?",
                 new String[] {"%"+string+"%"}, null);
 
         return likeItems;
