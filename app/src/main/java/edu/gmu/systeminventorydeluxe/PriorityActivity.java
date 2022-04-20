@@ -67,6 +67,8 @@ public class PriorityActivity extends AppCompatActivity implements
 
                 //start new activity (EditInventoryActivity)
                 startActivity(intent);
+
+                //FIXME: Try having another call to the load manager here too???
             }
         });
 
