@@ -248,7 +248,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
             }
         });
 
-        isLow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        /*isLow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
@@ -267,7 +267,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
 
                 }
             }
-        });
+        });*/
     }
 
     private void showAlertLowStock() {
