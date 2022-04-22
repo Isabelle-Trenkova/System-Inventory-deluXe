@@ -247,48 +247,10 @@ public class EditInventoryActivity extends AppCompatActivity implements
             }
         });
 
-        /*isLow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-                String quantityString = String.valueOf(itemQuantity.getText());
-                String thresholdString = String.valueOf(itemThreshold.getText());
-
-                Double intQuantity = Double.parseDouble(quantityString);
-                Double intThreshold = Double.parseDouble(thresholdString);
-
-                String stringLow = new Boolean(isLow.isChecked()).toString();
-
-                if ((intQuantity <= intThreshold) && (stringLow.equals("false"))) {
-
-                    showAlertLowStock();
-                    isLow.setChecked(true);
-
-                }
-            }
-        });*/
+        
     }
 
-    private void showAlertLowStock() {
 
-        //Alert dialog sequence
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage(getString(R.string.lowthresError));
-
-        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-
-                dialog.dismiss();
-
-            }
-        });
-
-        // Create and show the Alert Dialog
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-
-    }
     //FIXME: THIS FEELS SO DIRTY AND WRONG (Izzy to Carolyn)
     private Double decrementQuantity(Double itemQuantity) {
 

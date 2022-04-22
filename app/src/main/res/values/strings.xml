@@ -33,8 +33,6 @@
     <string name="backpress">"Are you sure you want to exit? \n Your data may be lost."</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="ok">OK</string>
-    <string name="lowthresError">This item is in low quantity, cannot uncheck this box.</string>
 
 
     <!--Recipe view-->

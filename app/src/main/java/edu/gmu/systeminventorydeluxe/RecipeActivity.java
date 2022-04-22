@@ -167,7 +167,7 @@ public class RecipeActivity extends AppCompatActivity implements
                 break;
 
             //will delete all items from table ( may get rid of later)
-            case R.id.delete_all_items:
+            //case R.id.delete_all_items:
                 //FIXME:Have a way to drop all item tables;
 
         }

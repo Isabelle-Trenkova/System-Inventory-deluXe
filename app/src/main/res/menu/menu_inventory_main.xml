@@ -5,9 +5,9 @@
     <item
         android:id="@+id/add_an_item"
         android:title="Add Item" />
-    <item
+    <!--<item
         android:id="@+id/delete_all_items"
-        android:title="Delete all items" />
+        android:title="Delete all items" />-->
 
     <item
         android:id="@+id/app_bar_search"
