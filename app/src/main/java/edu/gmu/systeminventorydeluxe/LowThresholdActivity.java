@@ -1,6 +1,5 @@
 package edu.gmu.systeminventorydeluxe;
 
-import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -20,8 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.List;
-
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
 
 public class LowThresholdActivity extends AppCompatActivity implements
@@ -36,7 +33,7 @@ public class LowThresholdActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_priority_view);
+        setContentView(R.layout.activity_filtered_view);
 
         define(); //define local variables
         buttonHandler(); //instantiate buttons

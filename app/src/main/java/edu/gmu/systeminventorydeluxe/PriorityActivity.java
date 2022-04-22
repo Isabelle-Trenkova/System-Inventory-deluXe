@@ -1,6 +1,5 @@
 package edu.gmu.systeminventorydeluxe;
 
-import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -33,7 +32,7 @@ public class PriorityActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_priority_view);
+        setContentView(R.layout.activity_filtered_view);
 
         define(); //define local variables
         buttonHandler(); //instantiate buttons

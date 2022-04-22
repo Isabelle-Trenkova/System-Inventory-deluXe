@@ -11,9 +11,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.SearchView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +20,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MenuItemCompat;
 
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -132,6 +130,10 @@ public class EditInventoryActivity extends AppCompatActivity implements
         isPriority = (CheckBox) findViewById(R.id.is_priority);
         isLow = (CheckBox) findViewById(R.id.is_low_stock);
 
+        //////////////////////////////
+        //DON'T TOUCH THIS please
+        isLow.setVisibility(View.GONE);
+        //////////////////////////////
 
         //check if item has already been made and set header accordingly
         Intent intent = getIntent();
@@ -159,7 +161,6 @@ public class EditInventoryActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
 
-                //IMPLEMENT RECIPE STUFF HERE
                 Intent intent = new Intent(EditInventoryActivity.this, EditRecipeActivity.class);
 
                 startActivity(intent);
@@ -177,7 +178,10 @@ public class EditInventoryActivity extends AppCompatActivity implements
                 completed = checkEmptyFields();
 
                 if (completed) {
+
+                    switchLowCheckbox();
                     saveProduct();
+
                     finish();
                 }
             }
@@ -243,8 +247,49 @@ public class EditInventoryActivity extends AppCompatActivity implements
                 }
             }
         });
+
+        isLow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                String quantityString = String.valueOf(itemQuantity.getText());
+                String thresholdString = String.valueOf(itemThreshold.getText());
+
+                Double intQuantity = Double.parseDouble(quantityString);
+                Double intThreshold = Double.parseDouble(thresholdString);
+
+                String stringLow = new Boolean(isLow.isChecked()).toString();
+
+                if ((intQuantity <= intThreshold) && (stringLow.equals("false"))) {
+
+                    showAlertLowStock();
+                    isLow.setChecked(true);
+
+                }
+            }
+        });
     }
 
+    private void showAlertLowStock() {
+
+        //Alert dialog sequence
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(getString(R.string.lowthresError));
+
+        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+                dialog.dismiss();
+
+            }
+        });
+
+        // Create and show the Alert Dialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+    }
     //FIXME: THIS FEELS SO DIRTY AND WRONG (Izzy to Carolyn)
     private Double decrementQuantity(Double itemQuantity) {
 
@@ -343,14 +388,44 @@ public class EditInventoryActivity extends AppCompatActivity implements
         //FIXME: DO THE IMAGE STUFFS (Izzy)
         //getBytes(imageBitmap);
 
+        if (TextUtils.isEmpty(thresholdString)){
+
+            itemThreshold.setText(String.valueOf(0.0));
+        }
         if (TextUtils.isEmpty(productNameString) || TextUtils.isEmpty(descriptionString) ||
-                TextUtils.isEmpty(quantityString) || TextUtils.isEmpty(thresholdString)) {
+                TextUtils.isEmpty(quantityString)) {
 
             Toast.makeText(this, getString(R.string.empty_field_toast), Toast.LENGTH_LONG).show();
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * Will programmatically set the low threshold box to be checked if
+     * the quantity is less than or equal to the threshold
+     */
+    private void switchLowCheckbox() {
+
+        String quantityString = String.valueOf(itemQuantity.getText());
+        String thresholdString = String.valueOf(itemThreshold.getText());
+
+        Double intQuantity = Double.parseDouble(quantityString);
+        Double intThreshold = Double.parseDouble(thresholdString);
+
+        if (intQuantity <= intThreshold) {
+
+            isLow.setChecked(true);
+        }
+        else {
+
+            //This may seem pointless but this will uncheck an item automatically
+            //Once the quantity is no longer less than the threshold
+            //SO LEAVE IT <3
+            isLow.setChecked(false);
+        }
+
     }
 
     /**
@@ -375,17 +450,6 @@ public class EditInventoryActivity extends AppCompatActivity implements
         //FIXME: DO IMAGE STUFF (Izzy)
         //byte[] imageByte = getBytes(imageBitmap);
 
-        //FIXME: Do we need this? Think it is unreachable (Carolyn to Izzy)
-        /*
-        if (inventoryItemStatus == null &&
-                TextUtils.isEmpty(stringProductName)
-                && TextUtils.isEmpty(stringDescription)
-                && TextUtils.isEmpty(stringQuantity)
-                && TextUtils.isEmpty(stringThreshold)) {
-
-            return;
-        }*/
-
         //add item fields to single ContentValues variable
         ContentValues values = new ContentValues();
         values.put(MainInventoryItem.ITEM_NAME, stringProductName);
@@ -401,7 +465,6 @@ public class EditInventoryActivity extends AppCompatActivity implements
             values.put(ProductEntry.IMAGE, imageByte);
         } */
 
-        //FIXME: think fail_message is unreachable (Carolyn to Izzy)
 
         //checks if item is new or edited
         if (inventoryItemStatus == null) { //new item
