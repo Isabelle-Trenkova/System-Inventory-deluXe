@@ -73,10 +73,10 @@ item name, weight, etc-->
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            android:layout_marginStart="14dp"
             android:padding="8dp"
             android:text="-"
             android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/quantity_item"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/quantity_of_item" />
 
@@ -84,12 +84,12 @@ item name, weight, etc-->
             android:id="@+id/increment_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="14dp"
             android:padding="8dp"
             android:text="+"
             android:textSize="24sp"
-            app:layout_constraintTop_toTopOf="@id/decrement_button"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/quantity_item"
+            app:layout_constraintTop_toTopOf="@id/decrement_button" />
 
         <EditText
             android:id="@+id/quantity_item"
@@ -100,9 +100,9 @@ item name, weight, etc-->
             android:inputType="numberDecimal"
             android:padding="8dp"
             android:textSize="22sp"
-            app:layout_constraintEnd_toStartOf="@+id/increment_button"
-            app:layout_constraintStart_toEndOf="@+id/decrement_button"
-            app:layout_constraintBottom_toBottomOf="@id/decrement_button" />
+            app:layout_constraintBottom_toBottomOf="@id/decrement_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/item_threshold"
@@ -215,10 +215,8 @@ item name, weight, etc-->
             android:id="@+id/save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="73dp"
             android:layout_marginTop="124dp"
-            android:layout_marginEnd="80dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginEnd="45dp"
             android:foregroundGravity="center"
             android:gravity="center"
             android:padding="8dp"
@@ -226,35 +224,32 @@ item name, weight, etc-->
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/delete_button"
             app:layout_constraintTop_toBottomOf="@+id/product_image" />
 
         <Button
             android:id="@+id/delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="82dp"
-            android:layout_marginBottom="14dp"
+            android:layout_marginStart="45dp"
             android:gravity="center"
             android:padding="8dp"
             android:text="Delete"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/save_button" />
 
         <CheckBox
             android:id="@+id/is_priority"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="38dp"
-            android:layout_marginTop="152dp"
-            android:layout_marginBottom="48dp"
+            android:layout_marginStart="14dp"
             android:text="Priority Item"
             android:textColor="#5627AA"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/delete_button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_of_item" />
+            app:layout_constraintTop_toBottomOf="@+id/product_image" />
 
         <CheckBox
             android:id="@+id/is_low_stock"

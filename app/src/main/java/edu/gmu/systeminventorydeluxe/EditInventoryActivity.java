@@ -108,7 +108,6 @@ public class EditInventoryActivity extends AppCompatActivity implements
         //dynamic header
         dynamicMessage = (TextView) findViewById(R.id.messageView);
 
-        //FIXME: have itemName auto capitalize like itemDescription
         //item fields
         itemName = (EditText) findViewById(R.id.name_item);
         itemQuantity = (EditText) findViewById(R.id.quantity_item);
