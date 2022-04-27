@@ -11,7 +11,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.security.Provider;
 
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.ItemRecipes;
@@ -42,6 +41,8 @@ public class DatabaseProvider extends ContentProvider {
 
 
     public static final String LOG_TAG = DatabaseProvider.class.getSimpleName();
+
+    //All ids must be unique otherwise a runtime exceptions will occur
     private static final int INVENTORY = 100;
     private static final int INVENTORY_ID = 101;
 
@@ -83,7 +84,6 @@ public class DatabaseProvider extends ContentProvider {
 
         return true;
     }
-
 
     //////////////////////////////////////////////////////////////////////
 

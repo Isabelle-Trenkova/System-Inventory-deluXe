@@ -55,7 +55,6 @@ public class InventoryMainActivity extends AppCompatActivity implements
     private AdaptorInventoryList listAdaptor; //the adaptor to be used to populate the GUI list
     private static final int INVENTORY_LOADER = 0;//loader is a param of the loader manager
 
-    private SearchView inventorySearch;
     private FloatingActionButton fab;
 
     /**
@@ -134,6 +133,31 @@ public class InventoryMainActivity extends AppCompatActivity implements
         //add any more buttons in the inventory activity class here if needed
     }
 
+    /**
+     * Returns a cursor from a database
+     * @param string
+     * @return
+     */
+    private Cursor cursorReturner(String string) {
+
+        string = string.toLowerCase();
+
+        ContentResolver contentResolver = getContentResolver();
+
+        String[] tableColumns = {MainInventoryItem._ID,
+                MainInventoryItem.ITEM_NAME,
+                MainInventoryItem.ITEM_QUANTITY};
+        //FIXME:addimage stuff??
+
+        //public Cursor query(@NonNull Uri uri, @Nullable String[] projection,
+        //                        @Nullable String selection, @Nullable String[] selectionArgs,
+        //                        @Nullable String sortOrder) {
+        Cursor likeItems = contentResolver.query(MainInventoryItem.CONTENT_URI, tableColumns,
+                MainInventoryItem.ITEM_NAME + " Like ?",
+                new String[] {"%"+string+"%"}, null);
+
+        return likeItems;
+    }
 
     /**
      * Inflates menu view and handles searching function
@@ -153,7 +177,6 @@ public class InventoryMainActivity extends AppCompatActivity implements
             //search submitted from keyboard
             @Override
             public boolean onQueryTextSubmit(String s) {
-
 
                 Cursor likeItems = cursorReturner(s);
 
@@ -205,39 +228,9 @@ public class InventoryMainActivity extends AppCompatActivity implements
                 startActivity(intent);
 
                 break;
-
-                //will delete all items from table ( may get rid of later)
-            //case R.id.delete_all_items:
-                //FIXME:Have a way to drop all item tables;
-
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-
-    /**
-     * Returns a cursor from a database
-     * @param string
-     * @return
-     */
-    private Cursor cursorReturner(String string) {
-
-        string = string.toLowerCase();
-
-        ContentResolver contentResolver = getContentResolver();
-
-        String[] tableColumns = {MainInventoryItem._ID,
-                MainInventoryItem.ITEM_NAME,
-                MainInventoryItem.ITEM_QUANTITY};
-        //FIXME:addimage stuff??
-
-        Cursor likeItems = contentResolver.query(MainInventoryItem.CONTENT_URI, tableColumns,
-                MainInventoryItem.ITEM_NAME + " Like ?",
-                new String[] {"%"+string+"%"}, null);
-
-        return likeItems;
-
     }
 
     /**

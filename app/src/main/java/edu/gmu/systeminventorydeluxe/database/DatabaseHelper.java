@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import edu.gmu.systeminventorydeluxe.MainActivity;
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
 import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.ItemRecipes;
 
@@ -158,11 +157,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
       sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MainInventoryItem.TABLE_NAME + ";");
-
       onCreate(sqLiteDatabase);
 
       sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ItemRecipes.TABLE_NAME_RECIPE + ";");
-
       onCreate(sqLiteDatabase);
     }
 }

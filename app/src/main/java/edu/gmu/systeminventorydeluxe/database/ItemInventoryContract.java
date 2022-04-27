@@ -76,10 +76,6 @@ public class ItemInventoryContract {
      */
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
-    //the path of the main inventory
-
-
-
 
     /**
      * Possible points of contact, this just prevents
@@ -175,7 +171,6 @@ public class ItemInventoryContract {
         public final static String ITEM_INGREDIENTS = "ingredients";
 
         public final static String ITEM_STEPS = "steps";
-
 
     }
 }

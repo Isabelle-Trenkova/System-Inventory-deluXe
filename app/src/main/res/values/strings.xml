@@ -17,14 +17,6 @@
 
     <!--EDIT Inventory Class-->
 
-    <!--* Code in this class is partially based off of code for outside sources
-        * Some of the string values were reused from the following
-        *
-        * Code written by Michał Kołnierzak, code is licenced using a MIT licence
-        * and free for commercial/private use and modifications
-        *
-        * https://github.com/kazdavegyms/Android-Inventory-Management-App-master
-        *-->
     <string name="empty_field_toast">Please insert all information!</string>
     <string name="fail_message">Try again</string>
     <string name="save_successful">Save Successful</string>

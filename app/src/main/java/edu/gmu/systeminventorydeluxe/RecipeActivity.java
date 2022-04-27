@@ -27,16 +27,13 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.ItemRecipes;
 
 public class RecipeActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>  {
-
-
+    
     private static final int RECIPE_LOADER = 0;
 
     private ListView recipesList;
     private FloatingActionButton recipeAdd;
 
     private AdaptorRecipeList recipeAdaptor;
-
-    //private Uri recipeItemStatus;
 
 
     /**
