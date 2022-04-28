@@ -19,8 +19,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
+import edu.gmu.systeminventorydeluxe.database.DatabaseContract.MainInventoryItem;
 
+//FIXME: image stuff
 public class PriorityActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 

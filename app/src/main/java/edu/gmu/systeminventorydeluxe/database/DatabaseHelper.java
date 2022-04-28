@@ -4,8 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
-import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.ItemRecipes;
+import edu.gmu.systeminventorydeluxe.database.DatabaseContract.MainInventoryItem;
+import edu.gmu.systeminventorydeluxe.database.DatabaseContract.ItemRecipes;
 
 /*
  * Code in the class is based off of code for outside sources:
@@ -42,6 +42,7 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.ItemRecipes;
  * THe database helper class.
  * Its main purpose is to create and update the database
  */
+//FIXME: image stuff
 public class DatabaseHelper extends SQLiteOpenHelper {
 
 

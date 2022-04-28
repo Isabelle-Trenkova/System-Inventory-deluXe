@@ -7,10 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
+import edu.gmu.systeminventorydeluxe.database.DatabaseContract.MainInventoryItem;
 
 /**
  * Code in the class is based off of code for outside sources
@@ -30,6 +29,7 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
  */
 public class AdaptorInventoryList extends CursorAdapter {
 
+    //FIXME: image stuff
     //////////////////////////////////////////////////////////////////////////////////
     //PLEASE DON'T EDIT ANY IMAGE STUFF/NTS comments, IZZY WILL HANDLE LATER,I promise
     /////////////////////////////////////////////////////////////////////////////////

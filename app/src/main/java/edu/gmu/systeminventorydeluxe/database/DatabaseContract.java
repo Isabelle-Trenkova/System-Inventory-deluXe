@@ -33,10 +33,11 @@ import android.provider.BaseColumns;
 //PLEASE DON'T EDIT ANY IMAGE STUFF/NTS comments, IZZY WILL HANDLE LATER,I promise
 /////////////////////////////////////////////////////////////////////////////////
 
-public class ItemInventoryContract {
+//FIXME: image stuff
+public class DatabaseContract {
 
     /*
-     * Some sources:
+     * Some resources:
      *
      *      General SQLite:
      *     //https://developer.android.com/training/data-storage/sqlite
@@ -88,7 +89,7 @@ public class ItemInventoryContract {
 
 
     //default constructor
-    public ItemInventoryContract() {
+    public DatabaseContract() {
 
     }
 

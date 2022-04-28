@@ -23,11 +23,11 @@ import androidx.core.view.MenuItemCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.ItemRecipes;
+import edu.gmu.systeminventorydeluxe.database.DatabaseContract.ItemRecipes;
 
 public class RecipeActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>  {
-    
+
     private static final int RECIPE_LOADER = 0;
 
     private ListView recipesList;
@@ -91,6 +91,28 @@ public class RecipeActivity extends AppCompatActivity implements
         });
     }
 
+
+    /**
+     * Returns a cursor from a database
+     * @param string
+     * @return
+     */
+    private Cursor cursorReturner(String string) {
+
+        string = string.toLowerCase();
+
+        ContentResolver contentResolver = getContentResolver();
+
+        String[] tableColumns = {ItemRecipes._ID,
+                ItemRecipes.RECIPE_NAME};
+
+        Cursor likeItems = contentResolver.query(ItemRecipes.CONTENT_URI, tableColumns,
+                ItemRecipes.RECIPE_NAME + " Like ?",
+                new String[] {"%"+string+"%"}, null);
+
+        return likeItems;
+
+    }
 
 
     /**
@@ -172,28 +194,6 @@ public class RecipeActivity extends AppCompatActivity implements
         return super.onOptionsItemSelected(item);
     }
 
-
-    /**
-     * Returns a cursor from a database
-     * @param string
-     * @return
-     */
-    private Cursor cursorReturner(String string) {
-
-        string = string.toLowerCase();
-
-        ContentResolver contentResolver = getContentResolver();
-
-        String[] tableColumns = {ItemRecipes._ID,
-                ItemRecipes.RECIPE_NAME};
-
-        Cursor likeItems = contentResolver.query(ItemRecipes.CONTENT_URI, tableColumns,
-                ItemRecipes.RECIPE_NAME + " Like ?",
-                new String[] {"%"+string+"%"}, null);
-
-        return likeItems;
-
-    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {

@@ -23,7 +23,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.ItemRecipes;
+import edu.gmu.systeminventorydeluxe.database.DatabaseContract.ItemRecipes;
+
 
 public class EditRecipeActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>{

@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 
-import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
-import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.ItemRecipes;
+import edu.gmu.systeminventorydeluxe.database.DatabaseContract.MainInventoryItem;
+import edu.gmu.systeminventorydeluxe.database.DatabaseContract.ItemRecipes;
 
 /*
  * Code in the class is based off of code from outside sources
@@ -51,17 +51,17 @@ public class DatabaseProvider extends ContentProvider {
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        sUriMatcher.addURI(ItemInventoryContract.CONTENT_AUTHORITY,
-                ItemInventoryContract.PATH_MAININVENTORY, INVENTORY);
+        sUriMatcher.addURI(DatabaseContract.CONTENT_AUTHORITY,
+                DatabaseContract.PATH_MAININVENTORY, INVENTORY);
 
-        sUriMatcher.addURI(ItemInventoryContract.CONTENT_AUTHORITY,
-                ItemInventoryContract.PATH_MAININVENTORY + "/#", INVENTORY_ID);
+        sUriMatcher.addURI(DatabaseContract.CONTENT_AUTHORITY,
+                DatabaseContract.PATH_MAININVENTORY + "/#", INVENTORY_ID);
 
-        sUriMatcher.addURI(ItemInventoryContract.CONTENT_AUTHORITY,
-                ItemInventoryContract.PATH_RECIPEITEM, RECIPE);
+        sUriMatcher.addURI(DatabaseContract.CONTENT_AUTHORITY,
+                DatabaseContract.PATH_RECIPEITEM, RECIPE);
 
-        sUriMatcher.addURI(ItemInventoryContract.CONTENT_AUTHORITY,
-                ItemInventoryContract.PATH_RECIPEITEM + "/#", RECIPE_ID);
+        sUriMatcher.addURI(DatabaseContract.CONTENT_AUTHORITY,
+                DatabaseContract.PATH_RECIPEITEM + "/#", RECIPE_ID);
     }
 
     private DatabaseHelper databaseHelper;

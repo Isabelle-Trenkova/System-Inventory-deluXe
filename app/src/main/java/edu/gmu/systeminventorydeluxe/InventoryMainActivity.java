@@ -25,7 +25,7 @@ import androidx.core.view.MenuItemCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
+import edu.gmu.systeminventorydeluxe.database.DatabaseContract.MainInventoryItem;
 
 /*
  * Code in the class is partially based off of code for outside sources
@@ -49,7 +49,7 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
 public class InventoryMainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>{
 
-    //FIXME: handle searching function, handle image stuff (Izzy)
+    //FIXME: handle image stuff (Izzy)
 
     private ListView inventoryList; //the GUI list view itself
     private AdaptorInventoryList listAdaptor; //the adaptor to be used to populate the GUI list

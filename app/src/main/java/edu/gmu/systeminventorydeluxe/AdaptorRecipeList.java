@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
-import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.ItemRecipes;
+import edu.gmu.systeminventorydeluxe.database.DatabaseContract.ItemRecipes;
 
 /**
  * Code in the class is based off of code for outside sources

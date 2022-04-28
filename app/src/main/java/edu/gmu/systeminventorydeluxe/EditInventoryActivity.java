@@ -27,7 +27,7 @@ import android.content.Loader;
 import android.view.MenuItem;
 import android.view.Menu;
 
-import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventoryItem;
+import edu.gmu.systeminventorydeluxe.database.DatabaseContract.MainInventoryItem;
 
 /*
  * Code in the class is partially based off of code for outside sources
@@ -50,6 +50,7 @@ import edu.gmu.systeminventorydeluxe.database.ItemInventoryContract.MainInventor
  *
  * Both capabilities are accessed through InventoryMainActivity
  */
+//FIXME: image stuff
 public class EditInventoryActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>{
 
