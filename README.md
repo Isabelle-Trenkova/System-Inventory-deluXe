@@ -2,6 +2,7 @@
 Mobile Inventory Management App
  
 //////////////////////////////////////////////////////////////////////////////
+
 Code in this project is based off of code from outside sources
 
 Code written by Michał Kołnierzak, code is licenced using a MIT licence
