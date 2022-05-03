@@ -32,7 +32,6 @@ import edu.gmu.systeminventorydeluxe.database.DatabaseContract.MainInventoryItem
  */
 public class AdaptorInventoryList extends CursorAdapter {
 
-    //FIXME: image stuff
     //////////////////////////////////////////////////////////////////////////////////
     //PLEASE DON'T EDIT ANY IMAGE STUFF/NTS comments, IZZY WILL HANDLE LATER,I promise
     /////////////////////////////////////////////////////////////////////////////////
@@ -47,9 +46,7 @@ public class AdaptorInventoryList extends CursorAdapter {
     private TextView productName;
     private TextView itemQuantity;
 
-    //Izzy wants images, Izzy will handle said images.
-    //FIXME: add photo (Izzy)
-     private ImageView itemImage;
+    private ImageView itemImage;
 
 
     /**
@@ -76,10 +73,9 @@ public class AdaptorInventoryList extends CursorAdapter {
      */
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-        /**
-         * will inflate the view with an icon design predefined in item_view_list.xml
-         *
-         */
+
+        //will inflate the view with an icon design predefined in item_view_list.xml
+
         return LayoutInflater.from(context).inflate(R.layout.item_view_list, viewGroup, false);
     }
 
@@ -118,7 +114,7 @@ public class AdaptorInventoryList extends CursorAdapter {
             itemImage.setImageResource(R.drawable.greyimage);
         }
 
-        //will be setting those views in item_view_list.xml
+        //will be setting those views in item_view_list.xml and in the priority and low stock views
         productName.setText(nameString);
         itemQuantity.setText(String.valueOf(quantString));
     }

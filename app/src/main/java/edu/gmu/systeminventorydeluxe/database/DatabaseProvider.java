@@ -30,15 +30,8 @@ import edu.gmu.systeminventorydeluxe.database.DatabaseContract.ItemRecipes;
  *
  */
 
-//////////////////////////////////////////////////////////////////////////////////
-//PLEASE DON'T EDIT ANY IMAGE STUFF/NTS comments, IZZY WILL HANDLE LATER,I promise
-/////////////////////////////////////////////////////////////////////////////////
-
-    //Additionally, if you want more than 1 table, there will have to be
-    //stark differences here are switch statement control
 
 public class DatabaseProvider extends ContentProvider {
-
 
     public static final String LOG_TAG = DatabaseProvider.class.getSimpleName();
 
@@ -65,7 +58,6 @@ public class DatabaseProvider extends ContentProvider {
     }
 
     private DatabaseHelper databaseHelper;
-    ///////////////////////////////////////////////////////////////////////
 
     /**
      * Will attempt to create a database
@@ -129,7 +121,6 @@ public class DatabaseProvider extends ContentProvider {
         return cursor;
 
     }
-
     //////////////////////////////////////////////////////////////////////
 
     /**
@@ -177,7 +168,6 @@ public class DatabaseProvider extends ContentProvider {
                 throw new IllegalArgumentException("Insertion is not supported for " + uri);
         }
     }
-
 
     //////////////////////////////////////////////////////////////////////////
 
@@ -312,13 +302,12 @@ public class DatabaseProvider extends ContentProvider {
 
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
         int rowsUpdated = db.update(MainInventoryItem.TABLE_NAME, values, selection, selectionArgs);
+
         if (rowsUpdated != 0) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
-
         return rowsUpdated;
     }
-
 
     /**
      * Updates individual lines in the item

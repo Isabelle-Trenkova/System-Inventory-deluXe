@@ -15,7 +15,6 @@ import android.content.CursorLoader;
 import android.view.MenuItem;
 import android.view.Menu;
 import android.widget.SearchView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -173,7 +172,6 @@ public class InventoryMainActivity extends AppCompatActivity implements
 
         searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
-            //search submitted from keyboard
             @Override
             public boolean onQueryTextSubmit(String s) {
 

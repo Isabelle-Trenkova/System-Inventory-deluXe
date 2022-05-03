@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import edu.gmu.systeminventorydeluxe.database.DatabaseContract.MainInventoryItem;
 
-//FIXME: image stuff
 public class LowThresholdActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>{
 
@@ -125,7 +123,6 @@ public class LowThresholdActivity extends AppCompatActivity implements
                 MainInventoryItem.ITEM_NAME,
                 MainInventoryItem.ITEM_QUANTITY,
                 MainInventoryItem.ITEM_IMAGE
-
         };
 
         return new CursorLoader(this,

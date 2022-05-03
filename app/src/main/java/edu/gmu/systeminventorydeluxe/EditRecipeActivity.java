@@ -302,9 +302,7 @@ public class EditRecipeActivity extends AppCompatActivity implements
                 }
 
                 break;
-
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -327,8 +325,6 @@ public class EditRecipeActivity extends AppCompatActivity implements
                         ItemRecipes.RECIPE_NAME,
                         ItemRecipes.ITEM_INGREDIENTS,
                         ItemRecipes.ITEM_STEPS
-
-
                 };
 
         return new CursorLoader(this,

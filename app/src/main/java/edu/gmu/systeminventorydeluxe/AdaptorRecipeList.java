@@ -29,10 +29,6 @@ import edu.gmu.systeminventorydeluxe.database.DatabaseContract.ItemRecipes;
  */
 public class AdaptorRecipeList extends CursorAdapter {
 
-    //////////////////////////////////////////////////////////////////////////////////
-    //PLEASE DON'T EDIT ANY IMAGE STUFF/NTS comments, IZZY WILL HANDLE LATER,I promise
-    /////////////////////////////////////////////////////////////////////////////////
-
     //Android documentation wanted this here
     public static final int FLAG_AUTO_REQUEREY = 0;
 
@@ -67,10 +63,7 @@ public class AdaptorRecipeList extends CursorAdapter {
      */
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-        /**
-         * will inflate the view with an icon design predefined in item_view_list.xml
-         *
-         */
+
         return LayoutInflater.from(context).inflate(R.layout.recipe_view_list  , viewGroup, false);
     }
 
@@ -90,12 +83,9 @@ public class AdaptorRecipeList extends CursorAdapter {
         //added by this adaptor class
         int nameIndex = cursor.getColumnIndex(ItemRecipes.RECIPE_NAME);
 
-
         //Will get the string item at that index
         String nameString = cursor.getString(nameIndex);
 
-
         recipeName.setText(nameString);
-
     }
 }

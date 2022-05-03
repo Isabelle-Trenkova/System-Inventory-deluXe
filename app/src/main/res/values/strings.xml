@@ -28,6 +28,10 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="gallery">Pick photo from gallery</string>
+    <string name="camera">Take a photo with camera</string>
+    <string name="picmess">From where would you like to select an image?</string>
 
 
     <!--Recipe view-->

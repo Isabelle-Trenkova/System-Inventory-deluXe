@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //FIXME: this button causes system to crash (Carolyn to Izzy)
         //button to view all recipes
         fullRecipesButton.setOnClickListener(new View.OnClickListener() {
             @Override

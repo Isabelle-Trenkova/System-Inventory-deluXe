@@ -1,7 +1,6 @@
 package edu.gmu.systeminventorydeluxe;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,7 +13,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -37,9 +35,7 @@ import android.view.MenuItem;
 import android.view.Menu;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 
 import edu.gmu.systeminventorydeluxe.database.DatabaseContract.MainInventoryItem;
 
@@ -70,10 +66,10 @@ public class EditInventoryActivity extends AppCompatActivity implements
 
     //token to denote if item does not exist and is being added or does exist and is being edited
     private static final int PRODUCT_EXISTS = 1;
-    //To denote which permission to ask for
-    private static final int PICK_FROM_GALLERY = 101;
-    //private static final int TAKE_PHOTO = 102;
 
+    //To denote which permission to ask for adding an image
+    private static final int PICK_FROM_GALLERY = 101;
+    private static final int TAKE_PHOTO = 102;
 
     //dynamic header for edit/add page (reads "Add Item" or "Edit Item)
     private TextView dynamicMessage;
@@ -93,7 +89,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
     private Button decrement;
     private Button deleteButton;
     private Button recipeButton;
-    private ImageButton addImageButton;
+
 
     //check boxes
     private CheckBox isPriority;
@@ -101,7 +97,11 @@ public class EditInventoryActivity extends AppCompatActivity implements
 
     //local count of the quantity, used as a temp var
     private Double quantCount;
+
+    //for the images, bitmap scales, and imagebutton is the button
     private Bitmap imageBitmap;
+    private ImageButton addImageButton;
+
 
     /**
      * Runs upon each new instance of EditInventoryActivity
@@ -223,7 +223,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
                 else {
 
                     quantCount = Double.parseDouble(itemQuantity.getText().toString());
-                    quantCount = incrementQuantity(quantCount);
+                    quantCount += 1;
 
                     itemQuantity.setText(Double.toString(quantCount));
                 }
@@ -248,7 +248,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
 
                     if (quantCount > 0.0) {
 
-                        quantCount = decrementQuantity(quantCount);
+                        quantCount -= 1;
                         itemQuantity.setText(Double.toString(quantCount));
                     }
                     else {
@@ -264,21 +264,19 @@ public class EditInventoryActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
 
-                //https://stackoverflow.com/questions/39866869/how-to-ask-permission-to-access-gallery-on-android-m
-
-                if (ActivityCompat.checkSelfPermission(EditInventoryActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(EditInventoryActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PICK_FROM_GALLERY);
-                }
-                else {
-                    Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(galleryIntent, PICK_FROM_GALLERY);
-                }
-
+                typeofimage();
             }
         });
     }
 
-    //https://stackoverflow.com/questions/39866869/how-to-ask-permission-to-access-gallery-on-android-m
+    /**
+     * Permissions initiation for camera and gallery
+     * ttps://stackoverflow.com/questions/39866869/how-to-ask-permission-to-access-gallery-on-android-m
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -292,9 +290,77 @@ public class EditInventoryActivity extends AppCompatActivity implements
                     permissionsDenied();
                 }
                 break;
+            case TAKE_PHOTO:
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, TAKE_PHOTO);
+                } else {
+                    permissionsDenied();
+                }
+                break;
+
         }
     }
 
+    /**
+     * from where will the image be added from, gallery or camera
+     */
+    private void typeofimage() {
+        //Alert dialog sequence
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(getString(R.string.picmess));
+
+        //take photo with camera
+        builder.setPositiveButton(getString(R.string.camera), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                if (dialog != null) {
+
+                    if (ActivityCompat.checkSelfPermission(EditInventoryActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(EditInventoryActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, TAKE_PHOTO);
+                    }
+                    else {
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(intent, TAKE_PHOTO);
+                    }
+                }
+            }
+        });
+
+        //pick photo from gallery
+        builder.setNegativeButton(getString(R.string.gallery), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                if (dialog != null) {
+
+                    //https://stackoverflow.com/questions/39866869/how-to-ask-permission-to-access-gallery-on-android-m
+
+                    if (ActivityCompat.checkSelfPermission(EditInventoryActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                         ActivityCompat.requestPermissions(EditInventoryActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PICK_FROM_GALLERY);
+                    }
+                    else {
+                        Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                            startActivityForResult(galleryIntent, PICK_FROM_GALLERY);
+                    }
+                }
+            }
+        });
+
+        //cancel
+        builder.setNeutralButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    //permission denied
     private void permissionsDenied() {
         //Alert dialog sequence
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -314,16 +380,23 @@ public class EditInventoryActivity extends AppCompatActivity implements
     }
 
 
+    /**
+     * after selecting the image and converting into a useable form
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            /*case CAMERA_REQUEST:
+
+            case TAKE_PHOTO:
                 if (resultCode == RESULT_OK) {
                     imageBitmap = (Bitmap) data.getExtras().get("data");
-                    productImageView.setImageBitmap(imageBitmap);
+                    addImageButton.setImageBitmap(imageBitmap);
                 }
-                break;*/
+                break;
             case PICK_FROM_GALLERY:
                 if (resultCode == RESULT_OK && data != null) {
                     Uri imageUri = data.getData();
@@ -339,22 +412,6 @@ public class EditInventoryActivity extends AppCompatActivity implements
     }
 
 
-    /////////////////////////////////////
-    //For imcrementing and decrementing
-    private Double decrementQuantity(Double itemQuantity) {
-
-        itemQuantity -= 1;
-
-        return itemQuantity;
-    }
-
-    private Double incrementQuantity(Double itemQuantity) {
-
-        itemQuantity += 1;
-
-        return itemQuantity;
-    }
-    //////////////////////////////////////
 
     /**
      * Method confirms user really wants to delete item.
@@ -400,24 +457,20 @@ public class EditInventoryActivity extends AppCompatActivity implements
         if (inventoryItemStatus != null) { //item exists in database
 
             //delete
-            int rowDeleted = getContentResolver().delete(inventoryItemStatus,
-                    null, null);
+            int rowDeleted = getContentResolver().delete(inventoryItemStatus, null, null);
 
             if (rowDeleted == 0) { //toast for failed deletion
 
-                Toast.makeText(this, getString(R.string.fail_message),
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.fail_message), Toast.LENGTH_LONG).show();
+            }
+            else { //toast for successful deletion
 
-            } else { //toast for successful deletion
-
-                Toast.makeText(this, getString(R.string.remove_success),
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.remove_success), Toast.LENGTH_SHORT).show();
             }
 
             finish();
-
-        } else { //item does not exist in database
-
+        }
+        else { //item does not exist in database
             //toast for empty item
             Toast.makeText(this, getString(R.string.empty_product), Toast.LENGTH_LONG).show();
         }
@@ -434,9 +487,6 @@ public class EditInventoryActivity extends AppCompatActivity implements
         String quantityString = itemQuantity.getText().toString().trim();
         String descriptionString = itemDescription.getText().toString().trim();
         String thresholdString = itemThreshold.getText().toString().trim();
-
-        //FIXME: DO THE IMAGE STUFFS (Izzy)
-        //getBytes(imageBitmap);
 
         if (TextUtils.isEmpty(thresholdString)){
 
@@ -539,6 +589,11 @@ public class EditInventoryActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * converts image into a processable form for the database
+     * @param bitmap
+     * @return
+     */
     public static byte[] getBytes(Bitmap bitmap) {
         if (bitmap != null) {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -549,6 +604,9 @@ public class EditInventoryActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * On back press will alert user that inforamtion may be lost
+     */
     @Override
     public void onBackPressed() {
 

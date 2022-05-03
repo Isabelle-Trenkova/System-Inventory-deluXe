@@ -1,6 +1,5 @@
 package edu.gmu.systeminventorydeluxe;
 
-import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -16,7 +15,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -78,7 +76,6 @@ public class RecipeActivity extends AppCompatActivity implements
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                //when item in ListView is clicked, starts EditInventoryActivity to edit that item
                 Intent intent = new Intent(RecipeActivity.this, EditRecipeActivity.class);
 
                 Uri uri = ContentUris.withAppendedId(ItemRecipes.CONTENT_URI, l);
@@ -125,10 +122,8 @@ public class RecipeActivity extends AppCompatActivity implements
 
         searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
-            //search submitted from keyboard
             @Override
             public boolean onQueryTextSubmit(String s) {
-
 
                 Cursor likeItems = cursorReturner(s);
 
