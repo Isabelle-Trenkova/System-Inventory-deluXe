@@ -13,10 +13,11 @@ import android.widget.Button;
  */
 public class MainActivity extends AppCompatActivity {
 
-    Button fullInventoryButton; //accesses InventoryMainActivity
-    Button priorityInventoryButton;
-    Button lowInventoryButton;
-    Button fullRecipesButton;
+    private Button fullInventoryButton; //accesses InventoryMainActivity
+    private Button priorityInventoryButton;
+    private Button lowInventoryButton;
+    private Button fullRecipesButton;
+    private Button helpButton;
 
     /**
      * Runs upon each new instance of MainActivity.
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         //two buttons are shells until InventoryMainActivity is finished
         priorityInventoryButton = (Button) findViewById(R.id.button_priority_inventory);
         lowInventoryButton = (Button) findViewById(R.id.button_low_inventory);
+
+        helpButton = (Button) findViewById(R.id.help_button);
     }
 
     /**
@@ -93,6 +96,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(MainActivity.this, LowThresholdActivity.class);
+
+                startActivity(intent);
+            }
+        });
+
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, HelpActivity.class);
 
                 startActivity(intent);
             }

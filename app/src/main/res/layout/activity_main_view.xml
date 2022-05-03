@@ -63,4 +63,15 @@
         app:layout_constraintStart_toStartOf="@id/button_low_inventory"
         app:layout_constraintTop_toBottomOf="@+id/button_low_inventory" />
 
+    <Button
+        android:id="@+id/help_button"
+        android:layout_width="0dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/Help_button"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/button_full_recipes"
+        app:layout_constraintStart_toStartOf="@+id/button_full_recipes"
+        app:layout_constraintTop_toBottomOf="@+id/button_full_recipes" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

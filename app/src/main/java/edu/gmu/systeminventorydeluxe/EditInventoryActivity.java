@@ -1,17 +1,25 @@
 package edu.gmu.systeminventorydeluxe;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -26,6 +35,11 @@ import android.content.Loader;
 
 import android.view.MenuItem;
 import android.view.Menu;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 import edu.gmu.systeminventorydeluxe.database.DatabaseContract.MainInventoryItem;
 
@@ -56,6 +70,10 @@ public class EditInventoryActivity extends AppCompatActivity implements
 
     //token to denote if item does not exist and is being added or does exist and is being edited
     private static final int PRODUCT_EXISTS = 1;
+    //To denote which permission to ask for
+    private static final int PICK_FROM_GALLERY = 101;
+    private static final int TAKE_PHOTO = 102;
+
 
     //dynamic header for edit/add page (reads "Add Item" or "Edit Item)
     private TextView dynamicMessage;
@@ -75,16 +93,15 @@ public class EditInventoryActivity extends AppCompatActivity implements
     private Button decrement;
     private Button deleteButton;
     private Button recipeButton;
+    private ImageButton addImageButton;
 
     //check boxes
     private CheckBox isPriority;
     private CheckBox isLow;
 
+    //local count of the quantity, used as a temp var
     private Double quantCount;
-
-    //FIXME: add image functionality (Izzy)
-    //private ImageButton productImage;
-
+    private Bitmap imageBitmap;
 
     /**
      * Runs upon each new instance of EditInventoryActivity
@@ -120,17 +137,14 @@ public class EditInventoryActivity extends AppCompatActivity implements
         increment = (Button) findViewById(R.id.increment_button);
         decrement = (Button) findViewById(R.id.decrement_button);
         recipeButton = (Button) findViewById(R.id.add_recipe_button);
-
-
-        //FIXME: image button here (Izzy)
-        //productImage = (ImageButton) findViewById(R.id.product_image);
+        addImageButton = (ImageButton) findViewById(R.id.product_image);
 
         //checkboxes
         isPriority = (CheckBox) findViewById(R.id.is_priority);
         isLow = (CheckBox) findViewById(R.id.is_low_stock);
 
         //////////////////////////////
-        //DON'T TOUCH THIS please
+        //DON'T TOUCH THIS please, sets visibility to be invisible
         isLow.setVisibility(View.GONE);
         //////////////////////////////
 
@@ -141,7 +155,6 @@ public class EditInventoryActivity extends AppCompatActivity implements
         if (inventoryItemStatus != null) { //item is not newly made
 
             dynamicMessage.setText("Edit Item");
-
             //load previously recorded item data if item already exists
             getLoaderManager().initLoader(PRODUCT_EXISTS, null, this);
 
@@ -246,10 +259,88 @@ public class EditInventoryActivity extends AppCompatActivity implements
                 }
             }
         });
+
+        addImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //https://stackoverflow.com/questions/39866869/how-to-ask-permission-to-access-gallery-on-android-m
+
+                if (ActivityCompat.checkSelfPermission(EditInventoryActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(EditInventoryActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PICK_FROM_GALLERY);
+                }
+                else {
+                    Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(galleryIntent, PICK_FROM_GALLERY);
+                    }
+
+            }
+        });
+    }
+
+    //https://stackoverflow.com/questions/39866869/how-to-ask-permission-to-access-gallery-on-android-m
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PICK_FROM_GALLERY:
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(galleryIntent, PICK_FROM_GALLERY);
+                } else {
+                    permissionsDenied();
+                }
+                break;
+        }
+    }
+
+    private void permissionsDenied() {
+        //Alert dialog sequence
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(getString(R.string.deniedPer));
+
+        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
 
-    //FIXME: THIS FEELS SO DIRTY AND WRONG (Izzy to Carolyn)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            /*case CAMERA_REQUEST:
+                if (resultCode == RESULT_OK) {
+                    imageBitmap = (Bitmap) data.getExtras().get("data");
+                    productImageView.setImageBitmap(imageBitmap);
+                }
+                break;*/
+            case PICK_FROM_GALLERY:
+                if (resultCode == RESULT_OK && data != null) {
+                    Uri imageUri = data.getData();
+                    try {
+                        imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                    } catch (IOException ie) {
+                        ie.printStackTrace();
+                    }
+                    addImageButton.setImageBitmap(imageBitmap);
+                }
+                break;
+        }
+    }
+
+
+    /////////////////////////////////////
+    //For imcrementing and decrementing
     private Double decrementQuantity(Double itemQuantity) {
 
         itemQuantity -= 1;
@@ -257,13 +348,13 @@ public class EditInventoryActivity extends AppCompatActivity implements
         return itemQuantity;
     }
 
-    //FIXME: THIS FEELS SO DIRTY AND WRONG (Izzy to Carolyn)
     private Double incrementQuantity(Double itemQuantity) {
 
         itemQuantity += 1;
 
         return itemQuantity;
     }
+    //////////////////////////////////////
 
     /**
      * Method confirms user really wants to delete item.
@@ -384,7 +475,6 @@ public class EditInventoryActivity extends AppCompatActivity implements
             //SO LEAVE IT <3
             isLow.setChecked(false);
         }
-
     }
 
     /**
@@ -405,24 +495,20 @@ public class EditInventoryActivity extends AppCompatActivity implements
         String stringPriority = new Boolean(isPriority.isChecked()).toString();
         String stringLow = new Boolean(isLow.isChecked()).toString();
 
-
-        //FIXME: DO IMAGE STUFF (Izzy)
-        //byte[] imageByte = getBytes(imageBitmap);
+        byte[] imageByte = getBytes(imageBitmap);
 
         //add item fields to single ContentValues variable
         ContentValues values = new ContentValues();
+
+        if (imageByte != null) {
+            values.put(MainInventoryItem.ITEM_IMAGE, imageByte);
+        }
         values.put(MainInventoryItem.ITEM_NAME, stringProductName);
         values.put(MainInventoryItem.ITEM_QUANTITY, stringQuantity);
         values.put(MainInventoryItem.ITEM_DESCRIPTION, stringDescription);
         values.put(MainInventoryItem.ITEM_LOW_THRESHOLD, stringThreshold);
         values.put(MainInventoryItem.ITEM_ISPRIORITY, stringPriority);
         values.put(MainInventoryItem.ITEM_ISLOW, stringLow);
-
-        //FIXME: add image stuff
-        /*
-        if (imageByte != null) {
-            values.put(ProductEntry.IMAGE, imageByte);
-        } */
 
 
         //checks if item is new or edited
@@ -453,6 +539,15 @@ public class EditInventoryActivity extends AppCompatActivity implements
         }
     }
 
+    public static byte[] getBytes(Bitmap bitmap) {
+        if (bitmap != null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+            return stream.toByteArray();
+        } else {
+            return null;
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -559,10 +654,8 @@ public class EditInventoryActivity extends AppCompatActivity implements
                         MainInventoryItem.ITEM_DESCRIPTION,
                         MainInventoryItem.ITEM_LOW_THRESHOLD,
                         MainInventoryItem.ITEM_ISPRIORITY,
-                        MainInventoryItem.ITEM_ISLOW
-
-                        //FIXME: add image (Izzy)
-                        //MainInventoryItem.ITEM_IMAGE
+                        MainInventoryItem.ITEM_ISLOW,
+                        MainInventoryItem.ITEM_IMAGE
                 };
 
         return new CursorLoader(this,
@@ -594,9 +687,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
                 int thresholdIndex = cursor.getColumnIndex(MainInventoryItem.ITEM_LOW_THRESHOLD);
                 int priorityIndex = cursor.getColumnIndex(MainInventoryItem.ITEM_ISPRIORITY);
                 int lowIndex = cursor.getColumnIndex(MainInventoryItem.ITEM_ISLOW);
-
-                //FIXME: add image (Izzy)
-                //int imageIndex = cursor.getColumnIndex(ProductEntry.IMAGE);
+                int imageIndex = cursor.getColumnIndex(MainInventoryItem.ITEM_IMAGE);
 
 
                 String productNameString = cursor.getString(productNameIndex);
@@ -610,15 +701,16 @@ public class EditInventoryActivity extends AppCompatActivity implements
                 Boolean priorityBool = Boolean.parseBoolean(isPriorityString);
                 Boolean lowBool = Boolean.parseBoolean(isLowString);
 
-                //FIXME: add image (Izzy)
-                /*byte[] b = cursor.getBlob(imageIndex);
 
-                if (b == null) {
-                    productImageView.setImageResource(R.drawable.no_image);
-                } else {
+                byte[] b = cursor.getBlob(imageIndex);
+
+                if (b != null) {
                     Bitmap image = BitmapFactory.decodeByteArray(b, 0, b.length);
-                    productImageView.setImageBitmap(image);
-                }*/
+                    addImageButton.setImageBitmap(image);
+                } else {
+
+                    addImageButton.setImageResource(R.drawable.greyimage);
+                }
 
                 itemName.setText(productNameString);
                 itemQuantity.setText(String.valueOf(quantityDouble));
@@ -640,8 +732,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
 
-        //FIXME: add image (Izzy)
-        //productImageView.setImageResource(R.drawable.no_image);
+        addImageButton.setImageResource(R.drawable.greyimage);
         itemName.setText("");
         itemQuantity.setText("");
         itemThreshold.setText("");

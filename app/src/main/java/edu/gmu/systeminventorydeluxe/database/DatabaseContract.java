@@ -127,6 +127,8 @@ public class DatabaseContract {
 
         public final static String ITEM_DESCRIPTION = "description";
 
+        public final static String ITEM_IMAGE = "imageuri";
+
         public final static String ITEM_LOW_THRESHOLD = "threshold";
 
         public final static String ITEM_ISPRIORITY = "isPriority";

@@ -124,8 +124,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         + MainInventoryItem.ITEM_DESCRIPTION + " TEXT NOT NULL, "
                         + MainInventoryItem.ITEM_ISPRIORITY + " TEXT NOT NULL, "
                         + MainInventoryItem.ITEM_ISLOW + " TEXT NOT NULL, "
+                        + MainInventoryItem.ITEM_IMAGE + " BLOB, "
                         + MainInventoryItem.ITEM_LOW_THRESHOLD + " REAL DEFAULT 0);";
-                        /*+ MainInventoryItem.ITEM_IMAGE + " TEXT);";*/
+
 
         //DON'T ADD ANY EXTRA COLUMNS TO THE ABOVE UNLESS YOU CAN CHANGE EVERY OTHER BIT OF CODE
         //IN THE REST OF THE APP TO REFLECT THAT

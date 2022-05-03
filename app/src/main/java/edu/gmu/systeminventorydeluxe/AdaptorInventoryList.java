@@ -3,10 +3,13 @@ package edu.gmu.systeminventorydeluxe;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import edu.gmu.systeminventorydeluxe.database.DatabaseContract.MainInventoryItem;
@@ -46,7 +49,7 @@ public class AdaptorInventoryList extends CursorAdapter {
 
     //Izzy wants images, Izzy will handle said images.
     //FIXME: add photo (Izzy)
-    //private ImageView itemImage;
+     private ImageView itemImage;
 
 
     /**
@@ -92,21 +95,28 @@ public class AdaptorInventoryList extends CursorAdapter {
         //These will get the id's of the fields/views in the item_view_list.xml
         productName = (TextView) view.findViewById(R.id.name_product);
         itemQuantity = (TextView) view.findViewById(R.id.quant_product);
-
-        //FIXME: add photo (Izzy)
-        //itemImage = (ImageView) view.findViewById(R.id.image_of_product);
+        itemImage = (ImageView) view.findViewById(R.id.image_of_product);
 
         //will get the column index of the any information that will be
         //added by this adaptor class
         int nameIndex = cursor.getColumnIndex(MainInventoryItem.ITEM_NAME);
         int quantityIndex = cursor.getColumnIndex(MainInventoryItem.ITEM_QUANTITY);
+        int imageIndex = cursor.getColumnIndex(MainInventoryItem.ITEM_IMAGE);
 
         //Will get the string item at that index
         String nameString = cursor.getString(nameIndex);
         String quantString = cursor.getString(quantityIndex);
 
-        ///FIXME: add photo (Izzy)
 
+        byte[] bitmap = cursor.getBlob(imageIndex);
+
+        if (bitmap != null) {
+            Bitmap image = BitmapFactory.decodeByteArray(bitmap, 0, bitmap.length);
+            itemImage.setImageBitmap(image);
+        } else {
+
+            itemImage.setImageResource(R.drawable.greyimage);
+        }
 
         //will be setting those views in item_view_list.xml
         productName.setText(nameString);
