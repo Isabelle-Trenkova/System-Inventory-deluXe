@@ -72,7 +72,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
     private static final int PRODUCT_EXISTS = 1;
     //To denote which permission to ask for
     private static final int PICK_FROM_GALLERY = 101;
-    private static final int TAKE_PHOTO = 102;
+    //private static final int TAKE_PHOTO = 102;
 
 
     //dynamic header for edit/add page (reads "Add Item" or "Edit Item)

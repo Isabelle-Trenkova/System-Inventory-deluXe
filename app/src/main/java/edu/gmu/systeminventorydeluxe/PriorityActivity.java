@@ -58,53 +58,18 @@ public class PriorityActivity extends AppCompatActivity implements
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                //when item in ListView is clicked, starts EditInventoryActivity to edit that item
                 Intent intent = new Intent(PriorityActivity.this, EditInventoryActivity.class);
 
-                //populates item edit page (activity_edit_inventory_view) with existing item data
                 Uri uri = ContentUris.withAppendedId(MainInventoryItem.CONTENT_URI, l);
                 intent.setData(uri);
 
-                //start new activity (EditInventoryActivity)
                 startActivity(intent);
-
-                //FIXME: Try having another call to the load manager here too???
             }
         });
-
-    }
-
-
-    private void priorityLoader() {
-
-
-        Cursor likeItems = cursorReturner("true");
-
-        if (likeItems == null ) {
-
-            Toast.makeText(PriorityActivity.this, "Not found, try again!", Toast.LENGTH_LONG).show();
-
-
-        }
-        else {
-            String[] tableColumns = {MainInventoryItem.ITEM_NAME,
-                    MainInventoryItem.ITEM_QUANTITY};
-
-            //FIXME: ADD IMAGES
-            SimpleCursorAdapter simpleAdapter = new SimpleCursorAdapter(PriorityActivity.this,
-                    R.layout.item_view_list,
-                    likeItems,
-                    tableColumns,
-                    new int[]{R.id.name_product, R.id.quant_product/*, R.id.image_of_item*/},
-                    0);
-
-            priorityList.setAdapter(simpleAdapter);
-        }
-
     }
 
     /**
-     * Returns a cursor from a database
+     * Returns cursor from a database of like items
      * @param string
      * @return
      */
@@ -117,15 +82,29 @@ public class PriorityActivity extends AppCompatActivity implements
         String[] tableColumns = {MainInventoryItem._ID,
                 MainInventoryItem.ITEM_NAME,
                 MainInventoryItem.ITEM_QUANTITY,
-                MainInventoryItem.ITEM_ISPRIORITY};
-
+                MainInventoryItem.ITEM_IMAGE};
 
         Cursor likeItems = contentResolver.query(MainInventoryItem.CONTENT_URI, tableColumns,
                 MainInventoryItem.ITEM_ISPRIORITY + " Like ?",
                 new String[] {"%"+string+"%"}, null);
 
         return likeItems;
+    }
 
+    private void priorityLoader() {
+
+        Cursor likeItems = cursorReturner("true");
+
+        if (likeItems == null ) {
+
+            Toast.makeText(PriorityActivity.this, "Not found, try again!", Toast.LENGTH_LONG).show();
+        }
+        else {
+
+            AdaptorInventoryList searchAdapter = new AdaptorInventoryList(PriorityActivity.this, likeItems, 1);
+
+            priorityList.setAdapter(searchAdapter);
+        }
     }
 
     /**
@@ -142,10 +121,8 @@ public class PriorityActivity extends AppCompatActivity implements
         String[] projection = {
                 MainInventoryItem._ID,
                 MainInventoryItem.ITEM_NAME,
-                MainInventoryItem.ITEM_QUANTITY
-
-                //FIXME: add photo (Izzy)
-                //MainInventoryItem.ITEM_PHOTO
+                MainInventoryItem.ITEM_QUANTITY,
+                MainInventoryItem.ITEM_IMAGE
         };
 
         return new CursorLoader(this,

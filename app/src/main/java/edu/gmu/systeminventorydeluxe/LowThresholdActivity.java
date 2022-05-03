@@ -25,7 +25,6 @@ import edu.gmu.systeminventorydeluxe.database.DatabaseContract.MainInventoryItem
 public class LowThresholdActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>{
 
-
     private ListView lowList;
     private AdaptorInventoryList listAdaptor;
 
@@ -40,7 +39,6 @@ public class LowThresholdActivity extends AppCompatActivity implements
         buttonHandler(); //instantiate buttons
 
         lowLoader();
-
     }
 
     private void define() {
@@ -61,49 +59,14 @@ public class LowThresholdActivity extends AppCompatActivity implements
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                //when item in ListView is clicked, starts EditInventoryActivity to edit that item
                 Intent intent = new Intent(LowThresholdActivity.this, EditInventoryActivity.class);
 
-                //populates item edit page (activity_edit_inventory_view) with existing item data
                 Uri uri = ContentUris.withAppendedId(MainInventoryItem.CONTENT_URI, l);
                 intent.setData(uri);
 
-                //start new activity (EditInventoryActivity)
                 startActivity(intent);
-
             }
         });
-
-    }
-
-
-
-    private void lowLoader() {
-
-
-        Cursor likeItems = cursorReturner("true");
-
-        if (likeItems == null ) {
-
-            Toast.makeText(LowThresholdActivity.this, "Not found, try again!", Toast.LENGTH_LONG).show();
-
-
-        }
-        else {
-            String[] tableColumns = {MainInventoryItem.ITEM_NAME,
-                    MainInventoryItem.ITEM_QUANTITY};
-
-            //FIXME: ADD IMAGES
-            SimpleCursorAdapter simpleAdapter = new SimpleCursorAdapter(LowThresholdActivity.this,
-                    R.layout.item_view_list,
-                    likeItems,
-                    tableColumns,
-                    new int[]{R.id.name_product, R.id.quant_product/*, R.id.image_of_item*/},
-                    0);
-
-            lowList.setAdapter(simpleAdapter);
-        }
-
     }
 
     /**
@@ -120,7 +83,7 @@ public class LowThresholdActivity extends AppCompatActivity implements
         String[] tableColumns = {MainInventoryItem._ID,
                 MainInventoryItem.ITEM_NAME,
                 MainInventoryItem.ITEM_QUANTITY,
-                MainInventoryItem.ITEM_ISLOW};
+                MainInventoryItem.ITEM_IMAGE};
 
 
         Cursor likeItems = contentResolver.query(MainInventoryItem.CONTENT_URI, tableColumns,
@@ -128,7 +91,22 @@ public class LowThresholdActivity extends AppCompatActivity implements
                 new String[] {"%"+string+"%"}, null);
 
         return likeItems;
+    }
 
+    private void lowLoader() {
+
+        Cursor likeItems = cursorReturner("true");
+
+        if (likeItems == null ) {
+
+            Toast.makeText(LowThresholdActivity.this, "Not found, try again!", Toast.LENGTH_LONG).show();
+        }
+        else {
+
+            AdaptorInventoryList searchAdapter = new AdaptorInventoryList(LowThresholdActivity.this, likeItems, 1);
+
+            lowList.setAdapter(searchAdapter);
+        }
     }
 
     /**
@@ -145,10 +123,9 @@ public class LowThresholdActivity extends AppCompatActivity implements
         String[] projection = {
                 MainInventoryItem._ID,
                 MainInventoryItem.ITEM_NAME,
-                MainInventoryItem.ITEM_QUANTITY
+                MainInventoryItem.ITEM_QUANTITY,
+                MainInventoryItem.ITEM_IMAGE
 
-                //FIXME: add photo (Izzy)
-                //MainInventoryItem.ITEM_PHOTO
         };
 
         return new CursorLoader(this,

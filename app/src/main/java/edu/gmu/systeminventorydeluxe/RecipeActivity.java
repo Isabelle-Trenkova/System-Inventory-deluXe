@@ -1,5 +1,6 @@
 package edu.gmu.systeminventorydeluxe;
 
+import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -35,7 +36,6 @@ public class RecipeActivity extends AppCompatActivity implements
 
     private AdaptorRecipeList recipeAdaptor;
 
-
     /**
      * Runs upon each new instance of InventoryMainActivity
      *
@@ -69,9 +69,7 @@ public class RecipeActivity extends AppCompatActivity implements
             public void onClick(View view) {
 
                 Intent intent = new Intent(RecipeActivity.this, EditRecipeActivity.class);
-
                 startActivity(intent);
-
             }
         });
 
@@ -90,7 +88,6 @@ public class RecipeActivity extends AppCompatActivity implements
             }
         });
     }
-
 
     /**
      * Returns a cursor from a database
@@ -111,9 +108,7 @@ public class RecipeActivity extends AppCompatActivity implements
                 new String[] {"%"+string+"%"}, null);
 
         return likeItems;
-
     }
-
 
     /**
      * Inflates menu view and handles searching function
@@ -142,16 +137,10 @@ public class RecipeActivity extends AppCompatActivity implements
                     Toast.makeText(RecipeActivity.this, "Not found, try again!", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    String[] tableColumns = {ItemRecipes.RECIPE_NAME};
 
-                    SimpleCursorAdapter simpleAdapter = new SimpleCursorAdapter(RecipeActivity.this,
-                            R.layout.recipe_view_list,
-                            likeItems,
-                            tableColumns,
-                            new int[]{R.id.recipe_name},
-                            0);
+                    AdaptorRecipeList searchAdapter = new AdaptorRecipeList(RecipeActivity.this, likeItems, 1);
 
-                    recipesList.setAdapter(simpleAdapter);
+                    recipesList.setAdapter(searchAdapter);
                 }
 
                 return true;
@@ -180,15 +169,9 @@ public class RecipeActivity extends AppCompatActivity implements
             case R.id.add_an_item:
 
                 Intent intent = new Intent(RecipeActivity.this, EditRecipeActivity.class);
-
                 startActivity(intent);
 
                 break;
-
-            //will delete all items from table ( may get rid of later)
-            //case R.id.delete_all_items:
-                //FIXME:Have a way to drop all item tables;
-
         }
 
         return super.onOptionsItemSelected(item);
@@ -209,7 +192,6 @@ public class RecipeActivity extends AppCompatActivity implements
                 null,
                 null,
                 null);
-
     }
 
     @Override

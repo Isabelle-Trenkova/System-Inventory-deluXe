@@ -148,7 +148,6 @@ public class InventoryMainActivity extends AppCompatActivity implements
                 MainInventoryItem.ITEM_NAME,
                 MainInventoryItem.ITEM_QUANTITY,
                 MainInventoryItem.ITEM_IMAGE};
-        //FIXME:addimage stuff??
 
         //public Cursor query(@NonNull Uri uri, @Nullable String[] projection,
         //                        @Nullable String selection, @Nullable String[] selectionArgs,
@@ -186,18 +185,10 @@ public class InventoryMainActivity extends AppCompatActivity implements
                     Toast.makeText(InventoryMainActivity.this, "Not found, try again!", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    String[] tableColumns = {MainInventoryItem.ITEM_NAME,
-                            MainInventoryItem.ITEM_QUANTITY,
-                            MainInventoryItem.ITEM_IMAGE};
 
-                    SimpleCursorAdapter simpleAdapter = new SimpleCursorAdapter(InventoryMainActivity.this,
-                            R.layout.item_view_list,
-                            likeItems,
-                            tableColumns,
-                            new int[]{R.id.name_product, R.id.quant_product, R.id.image_of_product},
-                            0);
+                    AdaptorInventoryList searchAdapter = new AdaptorInventoryList(InventoryMainActivity.this, likeItems, 1);
 
-                    inventoryList.setAdapter(simpleAdapter);
+                    inventoryList.setAdapter(searchAdapter);
                 }
 
                 return true;
@@ -211,7 +202,7 @@ public class InventoryMainActivity extends AppCompatActivity implements
         });
 
 
-        searchview.setOnCloseListener(new SearchView.OnCloseListener() {
+        /*searchview.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
 
@@ -221,7 +212,7 @@ public class InventoryMainActivity extends AppCompatActivity implements
                 finish();
                 return true;
             }
-        });
+        });*/
 
         return true;
     }
