@@ -26,10 +26,9 @@ public class HelpActivity extends AppCompatActivity {
         addingtext.setText(getString(R.string.addItem));
 
         //////////////////
-        lowtext = (ExpandableTextView)
-                findViewById(R.id.expand_text_view2).findViewById(R.id.expand_text_view);
+        //lowtext = (ExpandableTextView) findViewById(R.id.expand_text_view2).findViewById(R.id.expand_text_view);
 
-        lowtext.setText(getString(R.string.lowItem));
+        //lowtext.setText(getString(R.string.lowItem));
     }
 
 }
