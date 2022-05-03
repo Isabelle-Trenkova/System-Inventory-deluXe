@@ -43,4 +43,5 @@ Basic Features of the app:
 * Can view 'priority' and 'low-stock' in seperate pages, segregated from the rest of the inventory
 * Ease of view items in multiple ways/places, and any changes to items will be reflected everywhere else in the app
 * Can add images from gallery and camera to display with the item icon
+* Menu bar options to add, save, and delete an item and to return to previous page 
 * Help menu with expandable text
