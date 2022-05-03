@@ -56,5 +56,10 @@
         be automatically marked as "low stock".\n Once the item quantity is above the threshold,
         the item will be automatically unmarked as "low stock".\n
         "Low stock" items can be viewed by clicking the "low stock" button in the main menu.</string>
+    <string name="priorityItem">Priority Items: \n \t When adding an item to
+        your inventory, at the bottom of the page there is a checkbox for making an
+        item as a priority item.\n If this box is checked then the item will be marked as
+        priority and can be viewed separately in the "priority items" page
+        of the app.</string>
 
 </resources>
