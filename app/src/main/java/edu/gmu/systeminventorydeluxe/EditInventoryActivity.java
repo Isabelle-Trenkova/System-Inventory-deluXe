@@ -272,7 +272,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
                 else {
                     Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                         startActivityForResult(galleryIntent, PICK_FROM_GALLERY);
-                    }
+                }
 
             }
         });

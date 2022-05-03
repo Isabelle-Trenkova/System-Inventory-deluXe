@@ -49,10 +49,9 @@ import edu.gmu.systeminventorydeluxe.database.DatabaseContract.MainInventoryItem
 public class InventoryMainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>{
 
-    //FIXME: handle image stuff (Izzy)
-
     private ListView inventoryList; //the GUI list view itself
     private AdaptorInventoryList listAdaptor; //the adaptor to be used to populate the GUI list
+
     private static final int INVENTORY_LOADER = 0;//loader is a param of the loader manager
 
     private FloatingActionButton fab;
@@ -201,18 +200,17 @@ public class InventoryMainActivity extends AppCompatActivity implements
             }
         });
 
-
-        /*searchview.setOnCloseListener(new SearchView.OnCloseListener() {
+        //refreshes page when searching is ended
+        searchview.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
 
-                //getLoaderManager().initLoader(INVENTORY_LOADER,null,InventoryMainActivity.this);
-
-                System.out.println("I AM EXISTING");
                 finish();
+                startActivity(getIntent());
+
                 return true;
             }
-        });*/
+        });
 
         return true;
     }

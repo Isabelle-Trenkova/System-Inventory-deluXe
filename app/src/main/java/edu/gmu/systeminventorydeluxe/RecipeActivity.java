@@ -153,6 +153,19 @@ public class RecipeActivity extends AppCompatActivity implements
             }
         });
 
+
+        //refreshes page when searching is ended
+        searchview.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+
+                finish();
+                startActivity(getIntent());
+
+                return true;
+            }
+        });
+
         return true;
     }
 

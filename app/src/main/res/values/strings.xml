@@ -44,12 +44,15 @@
     <string name="name_of_recipe">Name of Recipe!</string>
 
     <!--Help view-->
-    <string name="addItem">Adding an item: \n\t To add an item, go to the "Full Inventory"\n
-        page by clicking on the button in the main page.\n Next, click on either "+"
+    <string name="helpmenu">Help Menu</string>
+    <string name="helpinstruct">\t Click on the item you want to learn more about!\n</string>
+
+    <string name="addItem">Adding an Item: \n\t To add an item, go to the "Full Inventory"\n
+        page by clicking on the button in the main page.\n Next, click on "+"
         button on the bottom right side of the page to add an item.\n Alternatively,
         click on the three dots on the top right side of the menu bar, then click
         the \'add item\' button.</string>
-    <string name="lowItem">How to use Low Stock items: \n\t When inputting information
+    <string name="lowItem">Low Stock Items: \n\t When inputting information
         for the item you will be asked for a \'low item threshold\', this determines
         when an item will be marked as a low stock item.\n If the inputted, or updated,
         quantity of the item is every below or equal to the threshold, the item will
@@ -61,5 +64,19 @@
         item as a priority item.\n If this box is checked then the item will be marked as
         priority and can be viewed separately in the "priority items" page
         of the app.</string>
+    <string name="imageItem">Adding an Image:\n\t
+        To add an image to an item, click on the grey box towards the bottom of them add/edit
+        item page. Make sure to allow camera permissions, otherwise you will not be able to
+        add an image. The image will automatically be adapted to the item icon.</string>
+    <string name="searchItem">Searching Items and Recipes: \n\t
+        At the top of the respective recipe and inventory pages, there is a search icon.
+        The menu bar will expand and then you can type in the item you are looking for and then
+        hit enter. Your searches will appear! Make sure to close the search bar by clicking
+        the \'x\' mark</string>
+    <string name="recipeItem">Adding an Recipe: \n\t To add an item, go to the "Recipes List"\n
+        page by clicking on the button in the main page.\n Next, click on "+"
+        button on the bottom right side of the page to add an item.\n Alternatively,
+        click on the three dots on the top right side of the menu bar, then click
+        the \'add item\' button.</string>
 
 </resources>
