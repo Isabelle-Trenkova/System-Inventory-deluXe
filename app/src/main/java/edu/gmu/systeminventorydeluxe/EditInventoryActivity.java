@@ -738,7 +738,7 @@ public class EditInventoryActivity extends AppCompatActivity implements
         }
 
         if (cursor.moveToFirst()) {
-            do {
+
                 int productNameIndex = cursor.getColumnIndex(MainInventoryItem.ITEM_NAME);
                 int quantityIndex = cursor.getColumnIndex(MainInventoryItem.ITEM_QUANTITY);
                 int descriptionIndex = cursor.getColumnIndex(MainInventoryItem.ITEM_DESCRIPTION);
@@ -777,8 +777,6 @@ public class EditInventoryActivity extends AppCompatActivity implements
 
                 isPriority.setChecked(priorityBool);
                 isLow.setChecked(lowBool);
-            }
-            while (cursor.moveToNext());
         }
     }
 

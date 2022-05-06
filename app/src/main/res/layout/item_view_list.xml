@@ -9,12 +9,6 @@
     android:layout_height="match_parent"
     android:focusable="false"
     android:descendantFocusability="blocksDescendants" >
-    <!--I HATE THIS, damn the lack of the previous line broke everything
-    I <3 stack overflow for niche things like this
-    https://stackoverflow.com/questions/5526198/onitemclicklistener-not-firing-on-custom-arrayadapter
-
-    Literally the comment that saved me was from 2012 - IZZ^^^^ -->
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
