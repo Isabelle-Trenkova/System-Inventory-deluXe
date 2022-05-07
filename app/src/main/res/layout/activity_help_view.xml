@@ -1,99 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".MainActivity">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp"
-        expandableTextView:layout_constraintBottom_toBottomOf="parent"
-        expandableTextView:layout_constraintEnd_toEndOf="parent"
-        expandableTextView:layout_constraintStart_toStartOf="parent"
-        expandableTextView:layout_constraintTop_toTopOf="parent">
+        android:padding="14dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/help_text"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="@string/helpmenu"
+            android:layout_marginTop="14dp"
+            android:textColor="#2196F3"
+            android:textSize="34sp"
+            expandableTextView:layout_constraintEnd_toEndOf="parent"
+            expandableTextView:layout_constraintStart_toStartOf="parent"
+            expandableTextView:layout_constraintTop_toTopOf="parent"/>
 
+        <TextView
+            android:id="@+id/help_text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/helpinstruct"
+            android:layout_marginTop="14dp"
+            android:textColor="#5627AA"
+            android:textSize="24sp"
+            expandableTextView:layout_constraintEnd_toEndOf="parent"
+            expandableTextView:layout_constraintStart_toStartOf="parent"
+            expandableTextView:layout_constraintTop_toBottomOf="@+id/help_text"/>
 
-            <TextView
-                android:id="@+id/help_text"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="center"
-                android:text="@string/helpmenu"
-                android:layout_marginTop="14dp"
-                android:textColor="#2196F3"
-                android:textSize="34sp"
-                expandableTextView:layout_constraintEnd_toEndOf="parent"
-                expandableTextView:layout_constraintStart_toStartOf="parent"
-                expandableTextView:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:id="@+id/linear1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            expandableTextView:layout_constraintEnd_toEndOf="parent"
+            expandableTextView:layout_constraintStart_toStartOf="parent"
+            expandableTextView:layout_constraintTop_toBottomOf="@+id/help_text2">
 
-
-            </TextView>
-
-            <TextView
-                android:id="@+id/help_text2"
+            <com.ms.square.android.expandabletextview.ExpandableTextView
+                android:id="@+id/expand_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/helpinstruct"
-                android:layout_marginTop="14dp"
-                android:textColor="#5627AA"
-                android:textSize="24sp"
-                expandableTextView:layout_constraintEnd_toEndOf="parent"
-                expandableTextView:layout_constraintStart_toStartOf="parent"
-                expandableTextView:layout_constraintTop_toBottomOf="@+id/help_text">
+                expandableTextView:animDuration="100"
+                expandableTextView:maxCollapsedLines="1">
 
-            </TextView>
-
-            <LinearLayout
-                android:id="@+id/linear1"
-                android:layout_width="413dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                expandableTextView:layout_constraintEnd_toEndOf="parent"
-                expandableTextView:layout_constraintStart_toStartOf="parent"
-                expandableTextView:layout_constraintTop_toBottomOf="@+id/help_text2">
-
-                <com.ms.square.android.expandabletextview.ExpandableTextView
-                    android:id="@+id/expand_text_view"
+                <TextView
+                    android:id="@id/expandable_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    expandableTextView:animDuration="100"
-                    expandableTextView:maxCollapsedLines="1">
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="#B699EA"
+                    android:textSize="24sp" />
 
-                    <TextView
-                        android:id="@id/expandable_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:textColor="#5627AA"
-                        android:textSize="24sp" />
+                <ImageButton
+                    android:id="@id/expand_collapse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|bottom"
+                    android:background="@android:color/transparent" />
 
-                    <ImageButton
-                        android:id="@id/expand_collapse"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|bottom"
-                        android:background="@android:color/transparent" />
-
-                </com.ms.square.android.expandabletextview.ExpandableTextView>
-            </LinearLayout>
+            </com.ms.square.android.expandabletextview.ExpandableTextView>
+        </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linear2"
-                android:layout_width="413dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp"
                 expandableTextView:layout_constraintEnd_toEndOf="parent"
                 expandableTextView:layout_constraintStart_toStartOf="parent"
                 expandableTextView:layout_constraintTop_toBottomOf="@+id/linear1">
@@ -111,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:textColor="#5627AA"
+                        android:textColor="#B699EA"
                         android:textSize="24sp" />
 
                     <ImageButton
@@ -127,10 +111,9 @@
 
             <LinearLayout
                 android:id="@+id/linear3"
-                android:layout_width="413dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp"
                 expandableTextView:layout_constraintEnd_toEndOf="parent"
                 expandableTextView:layout_constraintStart_toStartOf="parent"
                 expandableTextView:layout_constraintTop_toBottomOf="@+id/linear2">
@@ -148,7 +131,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:textColor="#5627AA"
+                        android:textColor="#B699EA"
                         android:textSize="24sp" />
 
                     <ImageButton
@@ -164,10 +147,9 @@
 
             <LinearLayout
                 android:id="@+id/linear4"
-                android:layout_width="413dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp"
                 expandableTextView:layout_constraintEnd_toEndOf="parent"
                 expandableTextView:layout_constraintStart_toStartOf="parent"
                 expandableTextView:layout_constraintTop_toBottomOf="@+id/linear3">
@@ -185,7 +167,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:textColor="#5627AA"
+                        android:textColor="#B699EA"
                         android:textSize="24sp" />
 
                     <ImageButton
@@ -201,10 +183,9 @@
 
             <LinearLayout
                 android:id="@+id/linear5"
-                android:layout_width="413dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp"
                 expandableTextView:layout_constraintEnd_toEndOf="parent"
                 expandableTextView:layout_constraintStart_toStartOf="parent"
                 expandableTextView:layout_constraintTop_toBottomOf="@+id/linear4">
@@ -222,7 +203,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:textColor="#5627AA"
+                        android:textColor="#B699EA"
                         android:textSize="24sp" />
 
                     <ImageButton
@@ -238,10 +219,9 @@
 
             <LinearLayout
                 android:id="@+id/linear6"
-                android:layout_width="413dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp"
                 expandableTextView:layout_constraintEnd_toEndOf="parent"
                 expandableTextView:layout_constraintStart_toStartOf="parent"
                 expandableTextView:layout_constraintTop_toBottomOf="@+id/linear5">
@@ -259,7 +239,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:textColor="#5627AA"
+                        android:textColor="#B699EA"
                         android:textSize="24sp" />
 
                     <ImageButton
@@ -275,6 +255,5 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

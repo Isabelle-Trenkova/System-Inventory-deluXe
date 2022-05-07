@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,71 +8,82 @@
     android:background="#4EEDDE"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:text="@string/main_menu_title"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="14dp">>
 
-    <Button
-        android:id="@+id/button_full_inventory"
-        android:layout_width="0dp"
-        android:layout_height="88dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/full_inventory"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/button_priority_inventory"
-        app:layout_constraintStart_toStartOf="@+id/button_priority_inventory"
-        app:layout_constraintTop_toBottomOf="@+id/textView"/>
-    <Button
-        android:id="@+id/button_priority_inventory"
-        android:layout_width="0dp"
-        android:layout_height="88dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/priority_inventory"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/button_low_inventory"
-        app:layout_constraintStart_toStartOf="@+id/button_low_inventory"
-        app:layout_constraintTop_toBottomOf="@+id/button_full_inventory" />
 
-    <Button
-        android:id="@+id/button_low_inventory"
-        android:layout_width="wrap_content"
-        android:layout_height="88dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="33dp"
-        android:text="@string/low_inventory"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_priority_inventory" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="@string/main_menu_title"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_full_recipes"
-        android:layout_width="0dp"
-        android:layout_height="88dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/recipe_button"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@id/button_low_inventory"
-        app:layout_constraintStart_toStartOf="@id/button_low_inventory"
-        app:layout_constraintTop_toBottomOf="@+id/button_low_inventory" />
+        <Button
+            android:id="@+id/button_full_inventory"
+            android:layout_width="0dp"
+            android:layout_height="88dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/full_inventory"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/button_priority_inventory"
+            app:layout_constraintStart_toStartOf="@+id/button_priority_inventory"
+            app:layout_constraintTop_toBottomOf="@+id/textView"/>
+        <Button
+            android:id="@+id/button_priority_inventory"
+            android:layout_width="0dp"
+            android:layout_height="88dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/priority_inventory"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/button_low_inventory"
+            app:layout_constraintStart_toStartOf="@+id/button_low_inventory"
+            app:layout_constraintTop_toBottomOf="@+id/button_full_inventory" />
 
-    <Button
-        android:id="@+id/help_button"
-        android:layout_width="0dp"
-        android:layout_height="88dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/Help_button"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/button_full_recipes"
-        app:layout_constraintStart_toStartOf="@+id/button_full_recipes"
-        app:layout_constraintTop_toBottomOf="@+id/button_full_recipes" />
+        <Button
+            android:id="@+id/button_low_inventory"
+            android:layout_width="wrap_content"
+            android:layout_height="88dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="33dp"
+            android:text="@string/low_inventory"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_priority_inventory" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/button_full_recipes"
+            android:layout_width="0dp"
+            android:layout_height="88dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/recipe_button"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="@id/button_low_inventory"
+            app:layout_constraintStart_toStartOf="@id/button_low_inventory"
+            app:layout_constraintTop_toBottomOf="@+id/button_low_inventory" />
+
+        <Button
+            android:id="@+id/help_button"
+            android:layout_width="0dp"
+            android:layout_height="88dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/Help_button"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/button_full_recipes"
+            app:layout_constraintStart_toStartOf="@+id/button_full_recipes"
+            app:layout_constraintTop_toBottomOf="@+id/button_full_recipes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
